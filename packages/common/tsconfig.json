@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "composite": true,
+    "declaration": true
+  },
+  "include": ["src/**/*", "src/**/*.spec.js", "src/**/*.json"]
+}
