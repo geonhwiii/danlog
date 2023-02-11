@@ -1,0 +1,8 @@
+{
+  "name": "danlog",
+  "packageManager": "yarn@3.4.1",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}
