@@ -14,16 +14,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       {\
         "name": "danlog",\
         "reference": "workspace:."\
-      },\
-      {\
-        "name": "@danlog/common",\
-        "reference": "workspace:packages/common"\
       }\
     ],\
     "enableTopLevelFallback": true,\
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
-      ["@danlog/common", ["workspace:packages/common"]],\
       ["danlog", ["workspace:."]]\
     ],\
     "fallbackPool": [\
@@ -37,56 +32,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["typescript", "patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"]\
           ],\
           "linkType": "SOFT"\
-        }]\
-      ]],\
-      ["@danlog/common", [\
-        ["workspace:packages/common", {\
-          "packageLocation": "./packages/common/",\
-          "packageDependencies": [\
-            ["@danlog/common", "workspace:packages/common"],\
-            ["@types/react", "npm:18.0.28"],\
-            ["typescript", "patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"]\
-          ],\
-          "linkType": "SOFT"\
-        }]\
-      ]],\
-      ["@types/prop-types", [\
-        ["npm:15.7.5", {\
-          "packageLocation": "./.yarn/cache/@types-prop-types-npm-15.7.5-2aa48aa177-5b43b8b154.zip/node_modules/@types/prop-types/",\
-          "packageDependencies": [\
-            ["@types/prop-types", "npm:15.7.5"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@types/react", [\
-        ["npm:18.0.28", {\
-          "packageLocation": "./.yarn/cache/@types-react-npm-18.0.28-c6157151cc-e752df9611.zip/node_modules/@types/react/",\
-          "packageDependencies": [\
-            ["@types/react", "npm:18.0.28"],\
-            ["@types/prop-types", "npm:15.7.5"],\
-            ["@types/scheduler", "npm:0.16.2"],\
-            ["csstype", "npm:3.1.1"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@types/scheduler", [\
-        ["npm:0.16.2", {\
-          "packageLocation": "./.yarn/cache/@types-scheduler-npm-0.16.2-ba3a7d8c68-b6b4dcfeae.zip/node_modules/@types/scheduler/",\
-          "packageDependencies": [\
-            ["@types/scheduler", "npm:0.16.2"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["csstype", [\
-        ["npm:3.1.1", {\
-          "packageLocation": "./.yarn/cache/csstype-npm-3.1.1-3857baf48b-1f7b4f5fdd.zip/node_modules/csstype/",\
-          "packageDependencies": [\
-            ["csstype", "npm:3.1.1"]\
-          ],\
-          "linkType": "HARD"\
         }]\
       ]],\
       ["danlog", [\
