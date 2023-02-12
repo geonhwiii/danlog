@@ -16,6 +16,9 @@
   "references": [
     {
       "path": "packages/common"
+    },
+    {
+      "path": "packages/client"
     }
   ],
   "exclude": ["packages/**/dist/**"],

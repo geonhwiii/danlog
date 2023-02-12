@@ -6,7 +6,8 @@
     "packages/*"
   ],
   "scripts": {
-    "common": "yarn workspace @danlog/common"
+    "common": "yarn workspace @danlog/common",
+    "client": "yarn workspace @danlog/client"
   },
   "devDependencies": {
     "prettier": "^2.8.4",
