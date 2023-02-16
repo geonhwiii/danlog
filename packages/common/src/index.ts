@@ -1,4 +1,3 @@
-import type { ButtonProps as TypeButtonProps } from './Button';
+const log = (log: string) => console.log(log);
 
-export type ButtonProps = TypeButtonProps;
-export { default as Button } from './Button';
+export default log;
