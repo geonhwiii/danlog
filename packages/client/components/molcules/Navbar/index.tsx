@@ -1,3 +1,5 @@
+import NavLink from '@/components/atomics/NavLink';
+import { Routes } from '@/constants/routes';
 import tw from 'twin.macro';
 
 const Navbar = () => {
@@ -7,8 +9,14 @@ const Navbar = () => {
         css={tw`fixed top-0 left-0 right-0 border-b border-b-gray-100 dark:border-b-gray-700 h-[60px] bg-white dark:bg-black`}
       >
         <div css={tw`flex items-center justify-between h-full px-4`}>
-          <div css={tw`dark:text-white`}>로고</div>
-          <div css={tw`dark:text-white`}>메뉴가 들어갈 부분</div>
+          <NavLink to={Routes.HOME}>
+            <div css={tw`font-bold dark:text-white`}>로고</div>
+          </NavLink>
+
+          <div css={tw`flex dark:text-white`}>
+            <NavLink to={Routes.POST}>개발</NavLink>
+            <NavLink to={Routes.DAILY}>일상</NavLink>
+          </div>
         </div>
       </header>
     </div>
