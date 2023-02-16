@@ -543,6 +543,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next", "virtual:a599e63423a436b9fffc09a63dabc95ed2c737afdd4e69ae9026351ee5d31f79ec52eccd35e5e7d5e2761cbd886e73b5065ff7ceace8279aceea940ac02cafa0#npm:13.1.6"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:c1fce6d3648c3d42be28fd4185cd75f08132f3ba0592985097ee1f0465f2ff04819faf900f76817ebcdb704fad32f34bad23cc5d62150a8fab729791fba74a4f#npm:18.2.0"],\
+            ["react-icons", "virtual:a599e63423a436b9fffc09a63dabc95ed2c737afdd4e69ae9026351ee5d31f79ec52eccd35e5e7d5e2761cbd886e73b5065ff7ceace8279aceea940ac02cafa0#npm:4.7.1"],\
             ["tailwindcss", "virtual:a599e63423a436b9fffc09a63dabc95ed2c737afdd4e69ae9026351ee5d31f79ec52eccd35e5e7d5e2761cbd886e73b5065ff7ceace8279aceea940ac02cafa0#npm:3.2.6"],\
             ["twin.macro", "virtual:a599e63423a436b9fffc09a63dabc95ed2c737afdd4e69ae9026351ee5d31f79ec52eccd35e5e7d5e2761cbd886e73b5065ff7ceace8279aceea940ac02cafa0#npm:3.1.0"],\
             ["typescript", "patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"]\
@@ -5026,6 +5027,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["loose-envify", "npm:1.4.0"],\
             ["react", "npm:18.2.0"],\
             ["scheduler", "npm:0.23.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-icons", [\
+        ["npm:4.7.1", {\
+          "packageLocation": "./.yarn/cache/react-icons-npm-4.7.1-27c284b383-ed3cbdc5fc.zip/node_modules/react-icons/",\
+          "packageDependencies": [\
+            ["react-icons", "npm:4.7.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:a599e63423a436b9fffc09a63dabc95ed2c737afdd4e69ae9026351ee5d31f79ec52eccd35e5e7d5e2761cbd886e73b5065ff7ceace8279aceea940ac02cafa0#npm:4.7.1", {\
+          "packageLocation": "./.yarn/__virtual__/react-icons-virtual-eb77011ad5/0/cache/react-icons-npm-4.7.1-27c284b383-ed3cbdc5fc.zip/node_modules/react-icons/",\
+          "packageDependencies": [\
+            ["react-icons", "virtual:a599e63423a436b9fffc09a63dabc95ed2c737afdd4e69ae9026351ee5d31f79ec52eccd35e5e7d5e2761cbd886e73b5065ff7ceace8279aceea940ac02cafa0#npm:4.7.1"],\
+            ["@types/react", "npm:18.0.28"],\
+            ["react", "npm:18.2.0"]\
           ],\
           "packagePeers": [\
             "@types/react",\
