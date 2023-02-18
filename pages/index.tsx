@@ -1,7 +1,10 @@
+import { allPosts, Post } from '@/contentlayer/generated';
 import RecentPosts from '@/components/templates/RecentPosts';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 
-export default function Home() {
+export default function Home({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
+  console.log({ posts });
   return (
     <>
       <Head>
@@ -10,7 +13,15 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <RecentPosts />
+      <RecentPosts posts={posts} />
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps<{ posts: Post[] }> = () => {
+  return {
+    props: {
+      posts: allPosts,
+    },
+  };
+};

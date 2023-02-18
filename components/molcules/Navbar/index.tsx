@@ -11,8 +11,8 @@ const Navbar = () => {
       >
         <div css={tw`flex items-center justify-between h-full px-4`}>
           <NavLink to={Routes.HOME}>
-            <div css={tw`font-bold dark:text-white`}>
-              <Image src={'/logo.png'} width={100} height={50} alt="logo" />
+            <div css={tw`relative w-20 h-6 font-bold dark:text-white`}>
+              <Image src={'/logo.png'} fill alt="logo" />
             </div>
           </NavLink>
 

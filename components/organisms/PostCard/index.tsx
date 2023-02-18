@@ -4,10 +4,18 @@ import TempImage from '@/assets/images/temp.png';
 import tw from 'twin.macro';
 import Typography from '@/components/atomics/Typography';
 import { Routes } from '@/constants/routes';
+import { Post } from '@/.contentlayer/generated';
+import { useRouter } from 'next/router';
 
-const PostCard = () => {
+type Props = {
+  readonly post: Post;
+};
+
+const PostCard = ({ post }: Props) => {
+  const router = useRouter();
+  const goPostDetail = () => router.push(post._raw.flattenedPath);
   return (
-    <div css={tw`px-4 md:w-1/4`}>
+    <div css={tw`px-4 md:w-1/4`} onClick={goPostDetail}>
       <div>
         <div css={tw`overflow-hidden rounded-md md:mb-4`}>
           <Link href={'#'}>
