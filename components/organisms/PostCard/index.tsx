@@ -19,7 +19,7 @@ const PostCard = ({ post }: Props) => {
       <div>
         <div css={tw`overflow-hidden rounded-md md:mb-4`}>
           <Link href={'#'}>
-            <Image src={TempImage} alt="post-cover" />
+            <Image src={TempImage} alt="post-cover" priority />
           </Link>
         </div>
         <div css={tw`flex flex-col items-center text-center`}>

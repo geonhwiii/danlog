@@ -12,7 +12,14 @@ const Navbar = () => {
         <div css={tw`flex items-center justify-between h-full px-4`}>
           <NavLink to={Routes.HOME}>
             <div css={tw`relative w-20 h-6 font-bold dark:text-white`}>
-              <Image src={'/logo.png'} fill alt="logo" />
+              <Image
+                src={'/logo.png'}
+                fill
+                alt="logo"
+                sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+              />
             </div>
           </NavLink>
 

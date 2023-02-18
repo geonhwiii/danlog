@@ -1,9 +1,15 @@
 import { allPosts, Post } from '@/.contentlayer/generated';
+import MdxLayout from '@/components/templates/MdxLayout';
 import { InferGetStaticPropsType } from 'next';
 
+const DEFAULT_LAYOUT = 'PostLayout';
+
 export default function PostLayout({ post }: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log(post);
-  return <div>{'posts'}</div>;
+  return (
+    <div>
+      <MdxLayout layout={DEFAULT_LAYOUT} content={post} {...post} />
+    </div>
+  );
 }
 
 export const getStaticProps = ({ params }: { params: { slug: string[] } }) => {
