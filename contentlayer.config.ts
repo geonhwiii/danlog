@@ -1,4 +1,9 @@
 import { ComputedFields, defineDocumentType, makeSource } from 'contentlayer/source-files';
+import rehypeSlug from 'rehype-slug';
+import rehypePresetMinify from 'rehype-preset-minify';
+import rehypePrismPlus from 'rehype-prism-plus';
+import { rehypeAccessibleEmojis } from 'rehype-accessible-emojis';
+import remarkGfm from 'remark-gfm';
 
 const computedFields: ComputedFields = {
   slug: {
@@ -48,4 +53,8 @@ export const Daily = defineDocumentType(() => ({
 export default makeSource({
   contentDirPath: 'data',
   documentTypes: [Post, Daily],
+  mdx: {
+    remarkPlugins: [remarkGfm],
+    rehypePlugins: [rehypeSlug, rehypePresetMinify, [rehypePrismPlus, { ignoreMissing: true }], rehypeAccessibleEmojis],
+  },
 });
