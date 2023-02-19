@@ -1,6 +1,8 @@
 import NavLink from '@/components/atomics/NavLink';
 import { Routes } from '@/constants/routes';
-import Image from 'next/image';
+import NextImage from 'next/image';
+import LightLogo from '@/assets/icons/logo-light.svg';
+import DarkLogo from '@/assets/icons/logo-dark.svg';
 import tw from 'twin.macro';
 
 const Navbar = () => {
@@ -11,15 +13,8 @@ const Navbar = () => {
       >
         <div css={tw`flex items-center justify-between h-full px-4`}>
           <NavLink to={Routes.HOME}>
-            <div css={tw`relative w-20 h-6 font-bold dark:text-white`}>
-              <Image
-                src={'/logo.png'}
-                fill
-                alt="logo"
-                sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-              />
+            <div css={tw`relative font-bold w-28 dark:text-white`}>
+              <NextImage src={DarkLogo} alt="logo" />
             </div>
           </NavLink>
 

@@ -4,7 +4,6 @@ import { allPosts, Post } from '@/contentlayer/generated';
 import PostCard from '@/components/organisms/PostCard';
 
 export default function PostHomeLayout({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log(posts);
   return (
     <div css={tw`py-4`}>
       {posts.map(post => (
