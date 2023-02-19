@@ -19,3 +19,5 @@ const NavLink = forwardRef<HTMLAnchorElement, LinkProps>(({ children, to = '#' }
 });
 
 export default NavLink;
+
+NavLink.displayName = 'NavLink';
