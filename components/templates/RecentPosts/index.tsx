@@ -11,7 +11,7 @@ const RecentPosts = ({ posts }: Props) => {
   return (
     <div css={tw`py-4`}>
       <div css={tw`flex items-center justify-between px-4 mb-4`}>
-        <Typography css={tw`text-xl font-bold`}>최근 포스트</Typography>
+        <Typography css={tw`text-xl font-bold dark:text-white`}>최근 포스트</Typography>
       </div>
       <div css={tw`flex flex-wrap`}>
         {posts.map(post => (

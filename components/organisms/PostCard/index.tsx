@@ -16,7 +16,7 @@ const PostCard = ({ post }: Props) => {
   const { _raw, title, images, description } = post;
   const goPostDetail = () => router.push(_raw.flattenedPath);
   return (
-    <div css={tw`relative px-4 md:w-1/4`} onClick={goPostDetail}>
+    <div css={tw`relative px-4 cursor-pointer md:w-1/4`} onClick={goPostDetail}>
       <div>
         <div css={tw`relative overflow-hidden rounded-md md:mb-4`}>
           <Link href={'#'}>

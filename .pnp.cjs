@@ -49,6 +49,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-next", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:13.1.6"],\
             ["next", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:13.1.6"],\
             ["next-contentlayer", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:0.3.0"],\
+            ["next-themes", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:0.2.1"],\
             ["prettier", "npm:2.8.4"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:18.2.0"],\
@@ -3497,6 +3498,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-next", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:13.1.6"],\
             ["next", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:13.1.6"],\
             ["next-contentlayer", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:0.3.0"],\
+            ["next-themes", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:0.2.1"],\
             ["prettier", "npm:2.8.4"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:18.2.0"],\
@@ -7387,6 +7389,36 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next-contentlayer", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:0.3.0"],\
             ["@contentlayer/core", "virtual:ba2a65a21a3608d1298da7dbe66305067dd5136fc565add52d81a8e3b4581d6ac25c8e2ab0290337dde53815ee59567f0a386628204af9bab57b174c0a002126#npm:0.3.0"],\
             ["@contentlayer/utils", "virtual:ba2a65a21a3608d1298da7dbe66305067dd5136fc565add52d81a8e3b4581d6ac25c8e2ab0290337dde53815ee59567f0a386628204af9bab57b174c0a002126#npm:0.3.0"],\
+            ["@types/next", null],\
+            ["@types/react", "npm:18.0.28"],\
+            ["@types/react-dom", "npm:18.0.10"],\
+            ["next", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:13.1.6"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/next",\
+            "@types/react-dom",\
+            "@types/react",\
+            "next",\
+            "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["next-themes", [\
+        ["npm:0.2.1", {\
+          "packageLocation": "./.yarn/cache/next-themes-npm-0.2.1-16a440cf6e-ebc248b956.zip/node_modules/next-themes/",\
+          "packageDependencies": [\
+            ["next-themes", "npm:0.2.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:0.2.1", {\
+          "packageLocation": "./.yarn/__virtual__/next-themes-virtual-4e39a3f24f/0/cache/next-themes-npm-0.2.1-16a440cf6e-ebc248b956.zip/node_modules/next-themes/",\
+          "packageDependencies": [\
+            ["next-themes", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:0.2.1"],\
             ["@types/next", null],\
             ["@types/react", "npm:18.0.28"],\
             ["@types/react-dom", "npm:18.0.10"],\
