@@ -7,7 +7,8 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['var(--font-pretendard)', ...fontFamily.sans],
-      },
+        firamono: ['var(--font-firamono)']
+      }
     },
   },
   plugins: [],

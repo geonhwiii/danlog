@@ -16,16 +16,12 @@ var Post = defineDocumentType(() => ({
   filePathPattern: `post/**/*.mdx`,
   contentType: "mdx",
   fields: {
-    title: {
-      type: "string",
-      description: "The title of the post",
-      required: true
-    },
-    date: {
-      type: "date",
-      description: "The date of the post",
-      required: true
-    }
+    title: { type: "string", required: true },
+    description: { type: "string", required: true },
+    date: { type: "date", required: true },
+    tags: { type: "list", of: { type: "string" } },
+    draft: { type: "boolean" },
+    images: { type: "list", of: { type: "string" }, required: true }
   },
   computedFields
 }));
@@ -60,4 +56,4 @@ export {
   Post,
   contentlayer_config_default as default
 };
-//# sourceMappingURL=compiled-contentlayer-config-AOF3RU6W.mjs.map
+//# sourceMappingURL=compiled-contentlayer-config-53QFDRJT.mjs.map

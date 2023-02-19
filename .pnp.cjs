@@ -43,6 +43,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.0.10"],\
             ["babel-loader", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:9.1.2"],\
             ["babel-plugin-macros", "npm:3.1.0"],\
+            ["classnames", "npm:2.3.2"],\
             ["contentlayer", "npm:0.3.0"],\
             ["eslint", "npm:8.34.0"],\
             ["eslint-config-next", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:13.1.6"],\
@@ -3211,6 +3212,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["classnames", [\
+        ["npm:2.3.2", {\
+          "packageLocation": "./.yarn/cache/classnames-npm-2.3.2-d2fdae468d-2c62199789.zip/node_modules/classnames/",\
+          "packageDependencies": [\
+            ["classnames", "npm:2.3.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["clean-css", [\
         ["npm:5.3.2", {\
           "packageLocation": "./.yarn/cache/clean-css-npm-5.3.2-8946cefff9-8787b281ac.zip/node_modules/clean-css/",\
@@ -3481,6 +3491,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.0.10"],\
             ["babel-loader", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:9.1.2"],\
             ["babel-plugin-macros", "npm:3.1.0"],\
+            ["classnames", "npm:2.3.2"],\
             ["contentlayer", "npm:0.3.0"],\
             ["eslint", "npm:8.34.0"],\
             ["eslint-config-next", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:13.1.6"],\

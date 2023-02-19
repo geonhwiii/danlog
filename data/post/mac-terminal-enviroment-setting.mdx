@@ -1,0 +1,139 @@
+---
+title: Mac Terminal 개발환경 세팅 (zsh, brew, node, npm, yarn, ... 등등)
+description: 기본적인 맥북의 개발환경을 다룹니다.
+date: 2022-12-06
+tags: ['터미널', '개발환경']
+draft: false
+images: [https://i.imgur.com/IMN1oYl.png]
+---
+
+![](https://i.imgur.com/IMN1oYl.png)
+
+> 퇴사하고 맥북 노드 버전을 올리려다보니 세팅이 이상해서 새로 올리는 김에...시작하는 블로그
+
+## 1. oh-my-zsh 🌈
+
+기본 맥 터미널은 현재 브랜치나 키워드 가이드 등 추가 기능이 부족합니다.
+가장 유명한 `oh-my-zsh`로 세팅하겠습니다.
+
+```shell
+# 터미널
+$ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+기본 테마 수정을 위해 `.zshrc`를 수정해줍니다.
+`vi` 에서 수정을 하고싶으면 `i`키를 누르면 `insert` 모드로 변경됩니다.
+이후 저장은 `ESC` 키를 누르고 `:wq` 를 입력해주면 됩니다.
+
+```shell
+# root 폴더로 이동
+$ cd
+🌈
+# .zshrc를 수정
+$ vi ./.zshrc
+
+# .zshrc에서 테마를 robbyrussell -> agnoster 로 변경해줍니다.
+ZSH_THEME="agnoster" # 기존엔 "robbyrussell"
+
+# 저장하고 나온 뒤 source로 변경사항을 적용해줍니다.
+$ source ~/.zshrc
+```
+
+(선택) 아래는 추가적인 테마 변경입니다.
+
+```shell
+# agnoster 테마 변경
+$ vi ~/.oh-my-zsh/themes/agnoster.zsh-theme
+```
+
+- 터미널 사용자 이름 제거
+
+```shell
+# prompt_context 함수의 내용을 변경해줍니다.
+prompt_context() {
+  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+    prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
+  fi
+}
+```
+
+- D2coding 폰트 변경
+  테마 적용 이후 폰트가 깨질 경우 터미널 폰트를 `D2coding` 또는 다른 코딩 폰트로 변경해주세요.
+  > D2coding : https://github.com/naver/d2codingfont
+
+적용 후에 아래와 같은 화면이 됩니다.
+![](https://velog.velcdn.com/images/gun_w/post/d0b214fb-877f-42e9-9a29-51b6a29b6383/image.png)
+
+---
+
+## 2. Homebrew 🍺
+
+`홈브루`는 MacOS용 패키지 관리 툴입니다. 👉🏻 [Homebrew](https://brew.sh/index_ko)
+설치에 앞서 `xcode`를 설치 및 실행하여 기본적인 관리도구를 설치해줘야 합니다. (첫 실행 시 자동 설치)
+
+```shell
+# 터미널
+$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+---
+
+## 3. nvm & node & yarn & pnpm
+
+홈브루를 설치완료했다면 드디어 패키지 매니저를 설치해줍니다...!
+
+1.  `nvm` 및 `node` 설치
+    nvm은 node를 버전별로 쉽게 관리할 수 있게 도와주는 툴입니다.
+
+```shell
+# nvm
+brew install nvm
+
+# 루트 이동
+$ cd
+
+# .zshrc 수정
+$ vi ~/.zshrc
+
+# 맨 아래 값 추가
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+# 변경사항 적용
+$ source ~/.zshrc
+
+# nvm 버전확인
+$ nvm -v
+0.36.0
+
+#  node 설치 (LTS)
+$ nvm install --lts
+Installing latest LTS version.
+Now using node v18.12.1 (npm v8.19.2)
+
+# node 버전 확인
+$ node -v
+v18.12.1
+
+# yarn 설치
+$ brew install yarn
+...install
+
+# yarn 버전 확인
+$ yarn -v
+1.22.19
+
+# pnpm 설치
+$ brew install pnpm
+...install
+
+# pnpm 버전확인
+$ pnpm -v
+7.18.0
+```
+
+노드 및 패키지 매니저가 궁금하다면 아래 공식 홈페이지에서 확인해보세요.
+
+> - node : https://nodejs.org/en/
+> - yarn : https://yarnpkg.com/
+> - pnpm : https://pnpm.io/ko/

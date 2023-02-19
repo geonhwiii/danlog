@@ -5,11 +5,7 @@ import { InferGetStaticPropsType } from 'next';
 const DEFAULT_LAYOUT = 'PostLayout';
 
 export default function PostLayout({ post }: InferGetStaticPropsType<typeof getStaticProps>) {
-  return (
-    <div>
-      <MdxLayout layout={DEFAULT_LAYOUT} content={post} {...post} />
-    </div>
-  );
+  return <MdxLayout layout={DEFAULT_LAYOUT} content={post} {...post} />;
 }
 
 export const getStaticProps = ({ params }: { params: { slug: string[] } }) => {

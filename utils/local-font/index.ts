@@ -23,4 +23,5 @@ export const localFont = nextLocalFont({
       weight: '600',
     },
   ],
+  variable: '--font-pretendard',
 });
