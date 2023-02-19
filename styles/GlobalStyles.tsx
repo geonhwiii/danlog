@@ -6,10 +6,10 @@ const customStyles = css({
     ...tw`box-border p-0 m-0`,
   },
   ['html,body']: {
-    ...tw`max-w-full overflow-x-hidden font-sans [font-size: 18px]`,
+    ...tw`max-w-full overflow-x-hidden font-sans`,
   },
   html: {
-    ...tw`dark:[color-scheme: dark]`,
+    ...tw`dark:[color-scheme: dark] text-gray-50 dark:text-black`,
   },
   body: {
     ...tw`antialiased`,
@@ -24,7 +24,19 @@ const customStyles = css({
     ...tw`mt-4 mb-1 text-xl font-semibold md:text-2xl [line-height: 1.4] [margin-block-start: 0.83rem] [margin-block-end: 0.83rem] [margin-inline-start: 0] [margin-inline-end: 0]`,
   },
   p: {
-    ...tw`mx-0 my-4 [margin-block-start: 1rem] [margin-block-end: 1rem] [margin-inline-start: 0px] [margin-inline-end: 0px] [font-size: 18px] [line-height: 1.7] [word-break: keep-all] break-words`,
+    ...tw`mx-0 my-4 [margin-block-start: 1rem] [margin-block-end: 1rem] [margin-inline-start: 0px] [margin-inline-end: 0px] text-base md:[font-size: 18px] [line-height: 1.7] [word-break: keep-all] break-words`,
+  },
+  li: {
+    wordBreak: 'break-all',
+  },
+  ['ol li::marker']: {
+    ...tw`font-semibold text-gray-500`,
+  },
+  ['ul li::marker']: {
+    ...tw`bg-gray-500`,
+  },
+  strong: {
+    ...tw`font-bold text-gray-600`,
   },
   pre: {
     ...tw`overflow-x-auto font-firamono rounded-xl`,
@@ -38,6 +50,12 @@ const customStyles = css({
   code: {
     ...tw`text-blue-600 bg-gray-100 dark:text-blue-400 dark:bg-gray-800 px-1 py-0.5 mr-0.5 rounded-sm break-all before:content-none after:content-none`,
   },
+  ['::-webkit-scrollbar']: {
+    ...tw`w-3 bg-gray-300 dark:bg-gray-700`,
+  },
+  ['::-webkit-scrollbar-thumb']: {
+    ...tw`[background-clip: padding-box] [border: 2px solid transparent] bg-gray-500 dark:bg-gray-300 rounded-lg`,
+  },
   ['p > img']: {
     ...tw`block h-auto max-w-full mx-auto my-12`,
   },
@@ -48,7 +66,7 @@ const customStyles = css({
     content: 'none',
   },
   ['.code-highlight']: {
-    ...tw`float-left min-w-full`,
+    // ...tw`float-left min-w-full`,
   },
   ['.code-line']: {
     ...tw`block px-4 -mx-4 border-l-4 border-transparent`,

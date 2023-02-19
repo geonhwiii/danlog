@@ -19,9 +19,7 @@ const PostCard = ({ post }: Props) => {
     <div css={tw`relative px-4 cursor-pointer md:w-1/4`} onClick={goPostDetail}>
       <div>
         <div css={tw`relative overflow-hidden rounded-md md:mb-4`}>
-          <Link href={'#'}>
-            <Image src={images[0]} width={1000} height={1000} alt="post-cover" priority />
-          </Link>
+          <Image src={images[0]} width={1000} height={1000} alt="post-cover" priority />
         </div>
         <div css={tw`flex flex-col items-center text-center`}>
           <Typography css={tw`mb-2 font-bold text-gray-800 dark:text-white`}>{title}</Typography>
