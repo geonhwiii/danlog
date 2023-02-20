@@ -32,16 +32,11 @@ export const Daily = defineDocumentType(() => ({
   filePathPattern: `daily/**/*.mdx`,
   contentType: 'mdx',
   fields: {
-    title: {
-      type: 'string',
-      description: 'The title of the daily',
-      required: true,
-    },
-    date: {
-      type: 'date',
-      description: 'The date of the daily',
-      required: true,
-    },
+    title: { type: 'string', required: true },
+    description: { type: 'string', required: true },
+    date: { type: 'date', required: true },
+    draft: { type: 'boolean' },
+    images: { type: 'list', of: { type: 'string' }, required: true },
   },
   computedFields,
 }));

@@ -45,6 +45,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["babel-plugin-macros", "npm:3.1.0"],\
             ["classnames", "npm:2.3.2"],\
             ["contentlayer", "npm:0.3.0"],\
+            ["dayjs", "npm:1.11.7"],\
             ["eslint", "npm:8.34.0"],\
             ["eslint-config-next", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:13.1.6"],\
             ["next", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:13.1.6"],\
@@ -3494,6 +3495,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["babel-plugin-macros", "npm:3.1.0"],\
             ["classnames", "npm:2.3.2"],\
             ["contentlayer", "npm:0.3.0"],\
+            ["dayjs", "npm:1.11.7"],\
             ["eslint", "npm:8.34.0"],\
             ["eslint-config-next", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:13.1.6"],\
             ["next", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:13.1.6"],\
@@ -3522,6 +3524,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/data-uri-to-buffer-npm-4.0.1-5c66a78beb-0d0790b67f.zip/node_modules/data-uri-to-buffer/",\
           "packageDependencies": [\
             ["data-uri-to-buffer", "npm:4.0.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["dayjs", [\
+        ["npm:1.11.7", {\
+          "packageLocation": "./.yarn/cache/dayjs-npm-1.11.7-d5cd5b2919-5003a7c1dd.zip/node_modules/dayjs/",\
+          "packageDependencies": [\
+            ["dayjs", "npm:1.11.7"]\
           ],\
           "linkType": "HARD"\
         }]\

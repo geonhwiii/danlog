@@ -2614,6 +2614,7 @@ __metadata:
     babel-plugin-macros: ^3.1.0
     classnames: ^2.3.2
     contentlayer: ^0.3.0
+    dayjs: ^1.11.7
     eslint: 8.34.0
     eslint-config-next: 13.1.6
     next: 13.1.6
@@ -2640,6 +2641,13 @@ __metadata:
   version: 4.0.1
   resolution: "data-uri-to-buffer@npm:4.0.1"
   checksum: 0d0790b67ffec5302f204c2ccca4494f70b4e2d940fea3d36b09f0bb2b8539c2e86690429eb1f1dc4bcc9e4df0644193073e63d9ee48ac9fce79ec1506e4aa4c
+  languageName: node
+  linkType: hard
+
+"dayjs@npm:^1.11.7":
+  version: 1.11.7
+  resolution: "dayjs@npm:1.11.7"
+  checksum: 5003a7c1dd9ed51385beb658231c3548700b82d3548c0cfbe549d85f2d08e90e972510282b7506941452c58d32136d6362f009c77ca55381a09c704e9f177ebb
   languageName: node
   linkType: hard
 
