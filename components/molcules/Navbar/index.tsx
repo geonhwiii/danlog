@@ -12,7 +12,7 @@ const Navbar = () => {
   return (
     <div css={tw`h-[60px]`}>
       <header
-        css={tw`fixed top-0 left-0 right-0 border-b border-b-gray-100 dark:border-b-gray-700 h-[60px] bg-white dark:bg-black`}
+        css={tw`fixed top-0 left-0 right-0 border-b border-b-gray-100 dark:border-b-gray-700 h-[60px] z-50 bg-white dark:bg-black`}
       >
         <div css={tw`flex items-center justify-between h-full px-4`}>
           <Link href={Routes.HOME}>

@@ -13,7 +13,7 @@ const MdxLayout = ({ layout, content, ...props }: Props) => {
   const Mdx = useMDXComponent(content.body.code);
   const { title, date, images } = props;
   return (
-    <div css={tw`max-w-4xl pt-4 pb-20 mx-auto`}>
+    <div css={tw`max-w-4xl px-4 pt-4 pb-20 mx-auto`}>
       <MdxHeader title={title as string} images={images as string[]} date={date as Date} />
       <Mdx layout={layout} components={[]} {...props} />
     </div>

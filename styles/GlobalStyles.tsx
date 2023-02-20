@@ -26,6 +26,9 @@ const customStyles = css({
   p: {
     ...tw`mx-0 my-4 [margin-block-start: 1rem] [margin-block-end: 1rem] [margin-inline-start: 0px] [margin-inline-end: 0px] text-base md:[font-size: 18px] [line-height: 1.7] [word-break: keep-all] break-words`,
   },
+  ['p > a']: {
+    ...tw`text-blue-500`,
+  },
   li: {
     wordBreak: 'break-all',
   },
@@ -49,12 +52,6 @@ const customStyles = css({
   },
   code: {
     ...tw`text-blue-600 bg-gray-100 dark:text-blue-400 dark:bg-gray-800 px-1 py-0.5 mr-0.5 rounded-sm break-all before:content-none after:content-none`,
-  },
-  ['::-webkit-scrollbar']: {
-    ...tw`w-3 bg-gray-300 dark:bg-gray-700`,
-  },
-  ['::-webkit-scrollbar-thumb']: {
-    ...tw`[background-clip: padding-box] [border: 2px solid transparent] bg-gray-500 dark:bg-gray-300 rounded-lg`,
   },
   ['p > img']: {
     ...tw`block h-auto max-w-full mx-auto my-12`,

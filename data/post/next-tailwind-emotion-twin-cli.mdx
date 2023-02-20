@@ -1,0 +1,51 @@
+---
+title: NextJS + Emotion + Tailwindcss + Twin.macro CLI 만들어 배포하기
+description: 주로 사용하는 NextJS와 UI 라이브러리들을 custom cli로 만들어 빠르게 사이드 프로젝트를 진행해보자
+date: 2023-02-20
+tags: ['NextJS', 'Emotion', 'Tailwindcss']
+draft: false
+images: [https://i.imgur.com/ZRVJmoC.png]
+---
+
+> `emotion`과 `tailwind`를 같이 사용하기 위해 `twin.macro`을 사용합니다. `twin.macro`를 사용하기 위해서는 추가적인 바벨 설정이 필요하고
+> 이는 `NextJS`의 `SWC` 컴파일러를 사용할 수 없게 합니다. 이를 위해 twin에서 제공하는 세팅을 추가하여 cli에 적용해봅니다.
+
+👉🏻 참고 링크 : <a target="_blank" href="https://github.com/ben-rogerson/twin.examples/tree/master/next-emotion-typescript">twin.JS</a>
+
+<br />
+
+## 1. Intro 🔥
+
+NextJS 프로젝트를 실행합니다.
+
+```shell
+# 터미널
+yarn create next-app %PROJECT_NAME%
+
+# ...Typescript - Yes
+# ...Eslint - Yes
+# ...src/ directory - No
+# ...app/ directory - No
+```
+
+`tsconfig.json`을 열어보면 `baseUrl`과 `path` 설정이 기본적으로 되어있는 것을 볼 수 있습니다.
+
+매번 세팅해줘야 해서 번거로웠는데 굉장히 편해졌네요.
+
+```json
+// tsconfig.json
+{
+  ...
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+    }
+}
+```
+
+이는 프로젝트에서 다음과 같이 컴포넌트를 절대경로로 불러올 수 있게 해줍니다.
+
+```ts
+import SomeComponent from '@/components/SomeComponent';
+import SomeStyle from '@/styles/SomeStyle';
+```
