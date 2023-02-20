@@ -12,7 +12,7 @@ const customStyles = css({
     ...tw`dark:[color-scheme: dark] text-gray-50 dark:text-black`,
   },
   body: {
-    ...tw`antialiased`,
+    ...tw`antialiased bg-white dark:bg-black`,
   },
   a: {
     ...tw`no-underline text-inherit`,
