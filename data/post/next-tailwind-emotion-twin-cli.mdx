@@ -49,3 +49,256 @@ yarn create next-app %PROJECT_NAME%
 import SomeComponent from '@/components/SomeComponent';
 import SomeStyle from '@/styles/SomeStyle';
 ```
+
+<br />
+
+## 2. Install Packages 📚
+
+사용할 라이브러리들을 설치합니다.
+프로젝트에서 사용할 원하는 라이브러리를 추가로 설치해주세요.
+
+```shell
+# emotion
+yarn add @emotion/react @emotion/server @emotion/styled @emotion/css
+
+# tailwindcss
+yarn add -D tailwindcss
+
+# twin
+yarn add -D twin.macro
+
+# babel
+yarn add -D @babel/core babel-loader @emotion/babel-plugin @babel/plugin-syntax-typescript @babel/preset-react @babel/preset-typescript babel-plugin-macros
+```
+
+<br />
+
+## 3. `twin.macro` 세팅하기 🏄‍♂️
+
+twin.macro 사용을 위해 먼저 root에 `withTwin.js`를 생성합니다.
+
+필요한 패키지들은 2번에서 미리 설치하였습니다.
+
+```js
+// withTwin.js
+
+/**
+ * * https://github.com/ben-rogerson/twin.examples
+ */
+const path = require('path');
+
+// The folders containing files importing twin.macro
+const includedDirs = [
+  path.resolve(__dirname, 'components'),
+  path.resolve(__dirname, 'pages'),
+  path.resolve(__dirname, 'styles'),
+];
+
+module.exports = function withTwin(nextConfig) {
+  return {
+    ...nextConfig,
+    webpack(config, options) {
+      const { dev, isServer } = options;
+      config.module = config.module || {};
+      config.module.rules = config.module.rules || [];
+      config.module.rules.push({
+        test: /\.(tsx|ts)$/,
+        include: includedDirs,
+        use: [
+          options.defaultLoaders.babel,
+          {
+            loader: 'babel-loader',
+            options: {
+              sourceMaps: dev,
+              presets: [['@babel/preset-react', { runtime: 'automatic', importSource: '@emotion/react' }]],
+              plugins: [
+                require.resolve('babel-plugin-macros'),
+                require.resolve('@emotion/babel-plugin'),
+                [require.resolve('@babel/plugin-syntax-typescript'), { isTSX: true }],
+              ],
+            },
+          },
+        ],
+      });
+
+      if (!isServer) {
+        config.resolve.fallback = {
+          ...(config.resolve.fallback || {}),
+          fs: false,
+          module: false,
+          path: false,
+          os: false,
+          crypto: false,
+        };
+      }
+
+      if (typeof nextConfig.webpack === 'function') {
+        return nextConfig.webpack(config, options);
+      } else {
+        return config;
+      }
+    },
+  };
+};
+```
+
+`next.config.js` 파일을 열고 `withTwin.js` 를 감싸서 적용해줍니다.
+
+```js
+const withTwin = require('./withTwin.js');
+/** @type {import('next').NextConfig} */
+const nextConfig = withTwin({
+  reactStrictMode: true,
+});
+
+module.exports = nextConfig;
+```
+
+이후 `package.json` 파일을 열고 아래와 같이 수정해줍니다.
+
+```json
+// package.json
+{
+  ...
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "babelMacros": {
+    "twin": {
+      "preset": "emotion"
+    }
+  },
+  "dependencies": {
+    ...
+  }
+}
+
+```
+
+이제 root에 `types` 폴더를 생성하고, `twin.d.ts` 파일을 생성해줍니다.
+
+```ts
+import 'twin.macro';
+import { css as cssImport } from '@emotion/react';
+import styledImport from '@emotion/styled';
+import { CSSInterpolation } from '@emotion/serialize';
+
+declare module 'twin.macro' {
+  const styled: typeof styledImport;
+  const css: typeof cssImport;
+}
+
+declare module 'react' {
+  interface DOMAttributes<T> {
+    tw?: string;
+    css?: CSSInterpolation;
+  }
+}
+```
+
+그럼 스타일링 시 아래와 같이 `emotion`과 `tailwind`를 이용하여 인라인 스타일링을 적용할 수 있습니다.
+
+```tsx
+import tw from 'twin.macro';
+
+const HelloWorld = () => <div css={tw`text-center font-bold`}>HELLO WORLD</div>;
+```
+
+<br />
+
+## 4. 글로벌 스타일 적용
+
+`styles` 폴더에 `GlobalStyles.tsx`파일을 생성하고 글로벌 스타일을 생성합니다.
+사용자의 입맛에 맞게 수정해주세요.
+
+```tsx
+import { Global } from '@emotion/react';
+import tw, { css, GlobalStyles as TwinStyles } from 'twin.macro';
+
+const customStyles = css({
+  ['*']: {
+    ...tw`box-border p-0 m-0`,
+  },
+  ['html,body']: {
+    ...tw`max-w-full overflow-x-hidden`,
+  },
+  html: {
+    ...tw`dark:[color-scheme: dark]`,
+  },
+  body: {
+    ...tw`antialiased`,
+  },
+  a: {
+    ...tw`no-underline text-inherit`,
+  },
+});
+
+const GlobalStyles = () => (
+  <>
+    <TwinStyles />
+    <Global styles={customStyles} />
+  </>
+);
+
+export default GlobalStyles;
+```
+
+이제 `_app.tsx`파일을 열고 글로벌 스타일을 적용해주세요.
+
+```tsx
+// _app.tsx
+import type { AppProps } from 'next/app';
+import { cache } from '@emotion/css';
+import { CacheProvider } from '@emotion/react';
+import GlobalStyles from '@/styles/GlobalStyles';
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <CacheProvider value={cache}>
+      <GlobalStyles />
+      <Component {...pageProps} />
+    </CacheProvider>
+  );
+}
+```
+
+## 5. 스타일링 확인 및 vscode extension 설치
+
+`Home.tsx`파일을 열고 아래의 예시처럼 스타일링을 적용해줍니다.
+
+```tsx
+import Head from 'next/head';
+import tw from 'twin.macro';
+
+export default function Home() {
+  return (
+    <>
+      <Head>
+        <title>Create Next App With Tailwind & Emotion</title>
+        <meta name="description" content="Generated by create next app with tailwind & emotion" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <main css={tw`flex flex-col justify-center items-center p-1.5 min-h-screen`}>
+        <div css={tw`text-center font-bold`}>Create Next App With Emotion & Tailwind & Typescript</div>
+      </main>
+    </>
+  );
+}
+```
+
+`yarn dev` 로 실행을 하여 문제가 없는지 확인해보면, 아래와 같이 스타일링이 적용된 것을 확인할 수 있습니다.
+
+추가적으로 tailwind와 twin을 함께 사용하기 위해 vscode extension 설치해주면 좋습니다.
+
+> 👉🏻 tailwind 스타일링 :
+> `bradlc.vscode-tailwindcss`
+>
+> 👉🏻 tailwind + twin 스타일링 :
+> `lightyen.tailwindcss-intellisense-twin`
+>
+> 👉🏻 tailwind 스타일 정렬 :
+> `heybourn.headwind`

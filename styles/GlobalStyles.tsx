@@ -18,13 +18,13 @@ const customStyles = css({
     ...tw`no-underline text-inherit`,
   },
   h1: {
-    ...tw`font-bold [letter-spacing:-0.025em] md:text-5xl text-4xl [line-height: 1.25] [word-break: keep-all] break-words`,
+    ...tw`font-bold text-black dark:text-white [letter-spacing:-0.025em] md:text-5xl text-4xl [line-height: 1.25] [word-break: keep-all] break-words`,
   },
   h2: {
-    ...tw`mt-4 mb-1 text-xl font-semibold md:text-2xl [line-height: 1.4] [margin-block-start: 0.83rem] [margin-block-end: 0.83rem] [margin-inline-start: 0] [margin-inline-end: 0]`,
+    ...tw`mt-4 mb-1 text-black dark:text-white text-xl font-semibold md:text-2xl [line-height: 1.4] [margin-block-start: 0.83rem] [margin-block-end: 0.83rem] [margin-inline-start: 0] [margin-inline-end: 0]`,
   },
   p: {
-    ...tw`mx-0 my-4 [margin-block-start: 1rem] [margin-block-end: 1rem] [margin-inline-start: 0px] [margin-inline-end: 0px] text-base md:[font-size: 18px] [line-height: 1.7] [word-break: keep-all] break-words`,
+    ...tw`mx-0 my-4 text-gray-900 dark:text-gray-100 [margin-block-start: 1rem] [margin-block-end: 1rem] [margin-inline-start: 0px] [margin-inline-end: 0px] text-base md:[font-size: 18px] [line-height: 1.7] [word-break: keep-all] break-words`,
   },
   ['p > a']: {
     ...tw`text-blue-500`,
