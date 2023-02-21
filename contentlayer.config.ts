@@ -36,6 +36,7 @@ export const Daily = defineDocumentType(() => ({
     description: { type: 'string', required: true },
     date: { type: 'date', required: true },
     draft: { type: 'boolean' },
+    tags: { type: 'list', of: { type: 'string' } },
     images: { type: 'list', of: { type: 'string' }, required: true },
   },
   computedFields,
