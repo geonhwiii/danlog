@@ -54,3 +54,10 @@ next-env.d.ts
 
 # Prisma
 generated
+
+# Sitemap file
+sitemap.xml
+sitemap-0.xml
+
+# Robots.txt
+robots.txt
