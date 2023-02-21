@@ -2619,6 +2619,7 @@ __metadata:
     eslint-config-next: 13.1.6
     next: 13.1.6
     next-contentlayer: ^0.3.0
+    next-seo: ^5.15.0
     next-themes: ^0.2.1
     prettier: ^2.8.4
     react: 18.2.0
@@ -5998,6 +5999,17 @@ __metadata:
     react: "*"
     react-dom: "*"
   checksum: e5ee2f98e43f6314c9923e6ec925cc19503d7e54004a12e0dc6c7e373882bda6a33fccaa13364deaadc3eeefc7edf81fd04c15a60216bb2c0f6f93977e431d76
+  languageName: node
+  linkType: hard
+
+"next-seo@npm:^5.15.0":
+  version: 5.15.0
+  resolution: "next-seo@npm:5.15.0"
+  peerDependencies:
+    next: ^8.1.1-canary.54 || >=9.0.0
+    react: ">=16.0.0"
+    react-dom: ">=16.0.0"
+  checksum: 05b0769d9c9abcc6a0179e5d724e87b1a3a7591a9c2caa4ef5b791769fcf868cb97fbcd90264106101cf7fbc073b0375ab90026aa519d2e899fbabea12cafbfb
   languageName: node
   linkType: hard
 
