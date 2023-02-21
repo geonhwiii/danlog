@@ -37,6 +37,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@emotion/react", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:11.10.5"],\
             ["@emotion/server", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:11.10.0"],\
             ["@emotion/styled", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:11.10.5"],\
+            ["@next/env", "npm:13.1.6"],\
             ["@next/font", "npm:13.1.6"],\
             ["@types/node", "npm:18.13.0"],\
             ["@types/react", "npm:18.0.28"],\
@@ -51,6 +52,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:13.1.6"],\
             ["next-contentlayer", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:0.3.0"],\
             ["next-seo", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:5.15.0"],\
+            ["next-sitemap", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:3.1.52"],\
             ["next-themes", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:0.2.1"],\
             ["prettier", "npm:2.8.4"],\
             ["react", "npm:18.2.0"],\
@@ -676,6 +678,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "@types/effect-ts__core",\
             "@types/effect-ts__otel-node",\
             "@types/effect-ts__otel"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@corex/deepmerge", [\
+        ["npm:4.0.37", {\
+          "packageLocation": "./.yarn/cache/@corex-deepmerge-npm-4.0.37-de6245d411-f6f5daf297.zip/node_modules/@corex/deepmerge/",\
+          "packageDependencies": [\
+            ["@corex/deepmerge", "npm:4.0.37"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -3488,6 +3499,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@emotion/react", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:11.10.5"],\
             ["@emotion/server", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:11.10.0"],\
             ["@emotion/styled", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:11.10.5"],\
+            ["@next/env", "npm:13.1.6"],\
             ["@next/font", "npm:13.1.6"],\
             ["@types/node", "npm:18.13.0"],\
             ["@types/react", "npm:18.0.28"],\
@@ -3502,6 +3514,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:13.1.6"],\
             ["next-contentlayer", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:0.3.0"],\
             ["next-seo", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:5.15.0"],\
+            ["next-sitemap", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:3.1.52"],\
             ["next-themes", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:0.2.1"],\
             ["prettier", "npm:2.8.4"],\
             ["react", "npm:18.2.0"],\
@@ -7446,6 +7459,34 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "next",\
             "react-dom",\
             "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["next-sitemap", [\
+        ["npm:3.1.52", {\
+          "packageLocation": "./.yarn/cache/next-sitemap-npm-3.1.52-60ab1cb664-e82ae8652f.zip/node_modules/next-sitemap/",\
+          "packageDependencies": [\
+            ["next-sitemap", "npm:3.1.52"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:3.1.52", {\
+          "packageLocation": "./.yarn/__virtual__/next-sitemap-virtual-7517aaf2a7/0/cache/next-sitemap-npm-3.1.52-60ab1cb664-e82ae8652f.zip/node_modules/next-sitemap/",\
+          "packageDependencies": [\
+            ["next-sitemap", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:3.1.52"],\
+            ["@corex/deepmerge", "npm:4.0.37"],\
+            ["@next/env", "npm:13.1.6"],\
+            ["@types/next", null],\
+            ["@types/next__env", null],\
+            ["minimist", "npm:1.2.8"],\
+            ["next", "virtual:9f0cbb8c87bed5f891a11bed9d7aa6acd7022fc40050896fbb05f7fe6e16d9741e4d98f0629a7e9e44f8dd51b8e2106b23f74f7045e8cc3e13af34137560e496#npm:13.1.6"]\
+          ],\
+          "packagePeers": [\
+            "@next/env",\
+            "@types/next",\
+            "@types/next__env",\
+            "next"\
           ],\
           "linkType": "HARD"\
         }]\
