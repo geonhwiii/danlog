@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://danlog.vercel.app
-
-# Sitemaps
-Sitemap: https://danlog.vercel.app/sitemap.xml
