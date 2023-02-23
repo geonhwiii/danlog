@@ -2,16 +2,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import tw from 'twin.macro';
 import Typography from '@/components/atomics/Typography';
-import { Post } from '@/.contentlayer/generated';
+import { Routes } from '@/constants/routes';
 
-type Props = {
-  readonly post: Post;
+export type PostCardProps = {
+  readonly slug: string;
+  readonly title: string;
+  readonly images: string[];
+  readonly description: string;
 };
 
-const PostCard = ({ post }: Props) => {
-  const { _raw, title, images, description } = post;
+const PostCard = ({ slug, title, images, description }: PostCardProps) => {
   return (
-    <Link href={_raw.flattenedPath} css={tw`relative px-4 mb-8 cursor-pointer md:w-1/4 md:mb-0`} prefetch={false}>
+    <Link href={`${Routes.POST}/${slug}`} css={tw`relative px-4 mb-8 cursor-pointer md:w-1/4 md:mb-0`} prefetch={false}>
       <div>
         <div css={tw`relative mb-4 overflow-hidden rounded-md`}>
           <Image src={images[0]} css={tw`aspect-video`} width={1000} height={1000} alt="post-cover" priority />

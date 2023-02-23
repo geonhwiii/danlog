@@ -1,10 +1,9 @@
-import { Post } from '@/contentlayer/generated';
 import Typography from '@/components/atomics/Typography';
-import PostCard from '@/components/organisms/PostCard';
+import PostCard, { PostCardProps } from '@/components/organisms/PostCard';
 import tw from 'twin.macro';
 
 type Props = {
-  readonly posts: Post[];
+  readonly posts: PostCardProps[];
 };
 
 const RecentPosts = ({ posts }: Props) => {
@@ -15,7 +14,7 @@ const RecentPosts = ({ posts }: Props) => {
       </div>
       <div css={tw`flex flex-wrap`}>
         {posts.map(post => (
-          <PostCard key={post._id} post={post} />
+          <PostCard key={post.slug} {...post} />
         ))}
       </div>
     </div>

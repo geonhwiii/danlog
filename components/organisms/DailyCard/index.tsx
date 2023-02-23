@@ -1,17 +1,19 @@
 import Typography from '@/components/atomics/Typography';
-import { Daily } from '@/contentlayer/generated';
+import { Routes } from '@/constants/routes';
 import Image from 'next/image';
 import Link from 'next/link';
 import tw from 'twin.macro';
 
-type Props = {
-  readonly daily: Daily;
+export type DailyCardProps = {
+  readonly slug: string;
+  readonly title: string;
+  readonly images: string[];
+  readonly description: string;
 };
 
-const DailyCard = ({ daily }: Props) => {
-  const { _raw, title, description, images } = daily;
+const DailyCard = ({ title, slug, description, images }: DailyCardProps) => {
   return (
-    <Link href={_raw.flattenedPath} css={tw`relative px-4 cursor-pointer md:w-1/4`} prefetch={false}>
+    <Link href={`${Routes.DAILY}/${slug}`} css={tw`relative px-4 cursor-pointer md:w-1/4`} prefetch={false}>
       <div>
         <div css={tw`relative overflow-hidden rounded-md aspect-square md:mb-4`}>
           <Image src={images[0]} css={tw`h-full`} width={1000} height={1000} alt="post-cover" priority />

@@ -1,10 +1,9 @@
-import { Daily } from '@/contentlayer/generated';
 import Typography from '@/components/atomics/Typography';
+import DailyCard, { DailyCardProps } from '@/components/organisms/DailyCard';
 import tw from 'twin.macro';
-import DailyCard from '@/components/organisms/DailyCard';
 
 type Props = {
-  readonly dailies: Daily[];
+  readonly dailies: DailyCardProps[];
 };
 
 const RecentDailies = ({ dailies }: Props) => {
@@ -15,7 +14,7 @@ const RecentDailies = ({ dailies }: Props) => {
       </div>
       <div css={tw`flex flex-wrap`}>
         {dailies.map(daily => (
-          <DailyCard key={daily._id} daily={daily} />
+          <DailyCard key={daily.slug} {...daily} />
         ))}
       </div>
     </div>
