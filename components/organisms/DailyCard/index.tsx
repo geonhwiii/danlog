@@ -11,7 +11,7 @@ type Props = {
 const DailyCard = ({ daily }: Props) => {
   const { _raw, title, description, images } = daily;
   return (
-    <Link href={_raw.flattenedPath} css={tw`relative px-4 cursor-pointer md:w-1/4`}>
+    <Link href={_raw.flattenedPath} css={tw`relative px-4 cursor-pointer md:w-1/4`} prefetch={false}>
       <div>
         <div css={tw`relative overflow-hidden rounded-md aspect-square md:mb-4`}>
           <Image src={images[0]} css={tw`h-full`} width={1000} height={1000} alt="post-cover" priority />

@@ -11,7 +11,7 @@ type Props = {
 const PostCard = ({ post }: Props) => {
   const { _raw, title, images, description } = post;
   return (
-    <Link href={_raw.flattenedPath} css={tw`relative px-4 mb-8 cursor-pointer md:w-1/4 md:mb-0`}>
+    <Link href={_raw.flattenedPath} css={tw`relative px-4 mb-8 cursor-pointer md:w-1/4 md:mb-0`} prefetch={false}>
       <div>
         <div css={tw`relative mb-4 overflow-hidden rounded-md`}>
           <Image src={images[0]} css={tw`aspect-video`} width={1000} height={1000} alt="post-cover" priority />

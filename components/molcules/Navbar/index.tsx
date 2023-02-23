@@ -17,7 +17,11 @@ const Navbar = () => {
         <div css={tw`flex items-center justify-between h-full px-4`}>
           <Link href={Routes.HOME}>
             <div css={tw`relative font-bold w-28 dark:text-white`}>
-              <NextImage src={theme === 'dark' || resolvedTheme === 'dark' ? DarkLogo : LightLogo} alt="logo" />
+              <NextImage
+                src={theme === 'dark' || resolvedTheme === 'dark' ? DarkLogo : LightLogo}
+                alt="logo"
+                priority
+              />
             </div>
           </Link>
 

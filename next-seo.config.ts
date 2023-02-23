@@ -7,7 +7,10 @@ const defaultSeoConfig: DefaultSeoProps = {
   description: configs.meta.description,
   canonical: configs.meta.url,
   additionalLinkTags: [{ rel: 'icon', href: '/favicon.ico' }],
-  additionalMetaTags: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }],
+  additionalMetaTags: [
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { name: 'google-site-verification', content: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION! },
+  ],
   openGraph: {
     type: 'website',
     locale: 'ko_KR',
