@@ -1,0 +1,55 @@
+---
+title: CommonJS (CJS)와 ECNAScript Modules (ESM). 정확히 무엇이고 뭐가 다른데?
+description: 개발 직무 면접을 하던 중, 자주 사용하지만 쉽사리 대답을 할 수 없었던 주제인데요, 이번 기회에 정확하게 파악해보려고 합니다. CJS와 ESM의 뜻과 차이.
+date: 2022-02-23
+tags: ['CJS', 'ESM']
+draft: false
+images: [https://i.imgur.com/Mcm8WQl.png]
+---
+
+개발 직무 면접을 하던 중, 자주 사용하지만 쉽사리 대답을 할 수 없었던 주제인데요, 이번 기회에 정확하게 파악해보려고 합니다.
+
+`Node.js`는 12버전 이전에 사용하던 `CommonJS` 모듈 시스템, 이후에 출시된 `EcmaScript Modules(ESM)` 이 새로운 모듈 시스템으로 추가되면서, 두 가지의 모듈 시스템으로 사용되고 있습니다.
+
+<br />
+
+## 1. CommonJS (CJS)
+
+`CJS`는 아래와 같이 `module.exports` 를 통해 모듈을 내보내고, `require`을 통해 모듈을 불러옵니다.
+
+```tsx
+// something.js
+const something = () => console.log('something...');
+
+// index.js
+const { something } = require('./something');
+something(); // something...
+```
+
+<br />
+
+## 2. ECMAScript Modules (ESM)
+
+반면에 `ESM`은 `export`를 통해 모듈을 내보내고, `import`를 통해 모듈을 불러옵니다.
+
+```tsx
+// something.js
+const something = (): void => console.log('something...');
+
+// index.js
+import { something } from './something';
+something(); // something...
+```
+
+CJS는 Top-Level Await을 지원하지 않아 동기적으로 동작하고, ESM은 지원을 하기 때문에 비동기적으로 동작합니다.
+
+이 차이때문에 CJS에서 ESM을 불러올 수 없고, ESM에서 CJS모듈을 불러올 수 있습니다.
+
+## 3. ESM이 CJS보다 좋은 이유
+
+...
+
+<br />
+## 🔗 Reference
+
+👉🏻 [Node Modules at War: Why CommonJS and ES Modules Can’t Get Along](https://redfin.engineering/node-modules-at-war-why-commonjs-and-es-modules-cant-get-along-9617135eeca1)
