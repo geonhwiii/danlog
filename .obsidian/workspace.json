@@ -8,14 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "50cb8b32ea9a9c58",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {}
-            }
-          },
-          {
             "id": "cbaa7db745af4321",
             "type": "leaf",
             "state": {
@@ -27,8 +19,7 @@
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -78,7 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 206.5
   },
   "right": {
     "id": "bb5266077dde2cdd",
@@ -155,7 +146,7 @@
       "command-palette:명령어 팔레트 열기": false
     }
   },
-  "active": "cbaa7db745af4321",
+  "active": "268b49a0447ba2f8",
   "lastOpenFiles": [
     "React",
     "React/clsx + tailwindcss 함께 사용하기.md"
