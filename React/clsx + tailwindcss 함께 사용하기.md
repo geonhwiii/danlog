@@ -30,3 +30,4 @@ export function ChatMessage({ message: { role, content } }: Props) {
 	)
 }
 ```
+

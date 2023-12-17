@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "React/clsx + tailwindcss 함께 사용하기.md",
+                "file": "React/ES2022 - array.at() 도 사용해주세요.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,13 +85,13 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "React/clsx + tailwindcss 함께 사용하기.md",
+                "file": "React/ES2022 - array.at() 도 사용해주세요.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
-                "backlinkCollapsed": false,
+                "backlinkCollapsed": true,
                 "unlinkedCollapsed": true
               }
             }
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "React/clsx + tailwindcss 함께 사용하기.md",
+                "file": "React/ES2022 - array.at() 도 사용해주세요.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "React/clsx + tailwindcss 함께 사용하기.md"
+                "file": "React/ES2022 - array.at() 도 사용해주세요.md"
               }
             }
           }
@@ -133,7 +133,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
+    "width": 200,
     "collapsed": true
   },
   "left-ribbon": {
@@ -146,9 +146,12 @@
       "command-palette:명령어 팔레트 열기": false
     }
   },
-  "active": "268b49a0447ba2f8",
+  "active": "cbaa7db745af4321",
   "lastOpenFiles": [
-    "React",
-    "React/clsx + tailwindcss 함께 사용하기.md"
+    "Docs/번역 - Understanding React Server Components.md",
+    "React/ES2022 - array.at() 도 사용해주세요.md",
+    "React/clsx + tailwindcss 함께 사용하기.md",
+    "Docs",
+    "React"
   ]
 }
