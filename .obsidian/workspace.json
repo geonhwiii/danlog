@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "React/ES2022 - array.at() 도 사용해주세요.md",
+                "file": "Javascript/ES2022 - array.at() 도 사용해주세요.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "React/ES2022 - array.at() 도 사용해주세요.md",
+                "file": "Javascript/ES2022 - array.at() 도 사용해주세요.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "React/ES2022 - array.at() 도 사용해주세요.md",
+                "file": "Javascript/ES2022 - array.at() 도 사용해주세요.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "React/ES2022 - array.at() 도 사용해주세요.md"
+                "file": "Javascript/ES2022 - array.at() 도 사용해주세요.md"
               }
             }
           }
@@ -146,10 +146,11 @@
       "command-palette:명령어 팔레트 열기": false
     }
   },
-  "active": "cbaa7db745af4321",
+  "active": "268b49a0447ba2f8",
   "lastOpenFiles": [
+    "Javascript",
     "Docs/번역 - Understanding React Server Components.md",
-    "React/ES2022 - array.at() 도 사용해주세요.md",
+    "Javascript/ES2022 - array.at() 도 사용해주세요.md",
     "React/clsx + tailwindcss 함께 사용하기.md",
     "Docs",
     "React"
