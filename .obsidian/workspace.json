@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Javascript/ES2022 - array.at() 도 사용해주세요.md",
+                "file": "Docs/번역 - Why Fetch Promise Doesn't Reject on Error Responses.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,7 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 206.5
+    "width": 253.5
   },
   "right": {
     "id": "bb5266077dde2cdd",
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Javascript/ES2022 - array.at() 도 사용해주세요.md",
+                "file": "Docs/번역 - Why Fetch Promise Doesn't Reject on Error Responses.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Javascript/ES2022 - array.at() 도 사용해주세요.md",
+                "file": "Docs/번역 - Why Fetch Promise Doesn't Reject on Error Responses.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Javascript/ES2022 - array.at() 도 사용해주세요.md"
+                "file": "Docs/번역 - Why Fetch Promise Doesn't Reject on Error Responses.md"
               }
             }
           }
@@ -146,12 +146,14 @@
       "command-palette:명령어 팔레트 열기": false
     }
   },
-  "active": "268b49a0447ba2f8",
+  "active": "cbaa7db745af4321",
   "lastOpenFiles": [
-    "Javascript",
     "Docs/번역 - Understanding React Server Components.md",
-    "Javascript/ES2022 - array.at() 도 사용해주세요.md",
+    "Docs/번역 - Why Fetch Promise Doesn't Reject on Error Responses.md",
     "React/clsx + tailwindcss 함께 사용하기.md",
+    "Javascript/ES2022 - array.at() 도 사용해주세요.md",
+    "Javascript/Array.with().md",
+    "Javascript",
     "Docs",
     "React"
   ]

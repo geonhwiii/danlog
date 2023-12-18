@@ -1,5 +1,5 @@
 
-`clsx`와 `tailwindcss`  + `tailwind-merge` 를 사용하여 개발을 진행중이다.
+`clsx`와 `tailwindcss`  + `tailwind-merge` 를 사용하여 개발을 진행중입니다.
 
 ```tsx
 // @/utils/clsx/index.ts
@@ -12,14 +12,13 @@ export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 ```
 
 
-실제 사용은 아래와 같이 사용한다.
+실제 사용은 아래와 같이 사용합니다.
 
 ```tsx  
 type Props = {
 	message: Message
 }
 
-  
 export function ChatMessage({ message: { role, content } }: Props) {
 	return (
 		<div className={cn([
