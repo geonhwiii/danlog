@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Docs/번역 - Why Fetch Promise Doesn't Reject on Error Responses.md",
+                "file": "Javascript/Array.with().md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Docs/번역 - Why Fetch Promise Doesn't Reject on Error Responses.md",
+                "file": "Javascript/Array.with().md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Docs/번역 - Why Fetch Promise Doesn't Reject on Error Responses.md",
+                "file": "Javascript/Array.with().md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Docs/번역 - Why Fetch Promise Doesn't Reject on Error Responses.md"
+                "file": "Javascript/Array.with().md"
               }
             }
           }
@@ -148,11 +148,11 @@
   },
   "active": "cbaa7db745af4321",
   "lastOpenFiles": [
-    "Docs/번역 - Understanding React Server Components.md",
-    "Docs/번역 - Why Fetch Promise Doesn't Reject on Error Responses.md",
-    "React/clsx + tailwindcss 함께 사용하기.md",
     "Javascript/ES2022 - array.at() 도 사용해주세요.md",
     "Javascript/Array.with().md",
+    "Docs/번역 - Why Fetch Promise Doesn't Reject on Error Responses.md",
+    "Docs/번역 - Understanding React Server Components.md",
+    "React/clsx + tailwindcss 함께 사용하기.md",
     "Javascript",
     "Docs",
     "React"
