@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Javascript/Array.with().md",
+                "file": "Javascript/array.with() ... 가 뭘까?.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Javascript/Array.with().md",
+                "file": "Javascript/array.with() ... 가 뭘까?.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Javascript/Array.with().md",
+                "file": "Javascript/array.with() ... 가 뭘까?.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Javascript/Array.with().md"
+                "file": "Javascript/array.with() ... 가 뭘까?.md"
               }
             }
           }
@@ -148,8 +148,8 @@
   },
   "active": "cbaa7db745af4321",
   "lastOpenFiles": [
-    "Javascript/ES2022 - array.at() 도 사용해주세요.md",
-    "Javascript/Array.with().md",
+    "Javascript/array.at() 도 사용해주세요 (ES2022).md",
+    "Javascript/array.with() ... 가 뭘까?.md",
     "Docs/번역 - Why Fetch Promise Doesn't Reject on Error Responses.md",
     "Docs/번역 - Understanding React Server Components.md",
     "React/clsx + tailwindcss 함께 사용하기.md",
