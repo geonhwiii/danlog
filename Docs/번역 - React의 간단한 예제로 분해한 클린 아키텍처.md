@@ -144,3 +144,50 @@ export function createIbanValidationApiAdapter(
 
 
 ```
+
+
+
+### 5. Service functional layer
+
+- 비즈니스 로직을 담당합니다.
+
+```ts
+export function createIbanValidationViewModel(
+	validation?: ValidationResponse,
+	error?: unknown,
+) {
+	const validationError = getValidationError(error);
+
+	if (!validation) {
+		return {
+			validationError,
+			validationResults: [],
+			isValidationAvailable: false
+		};
+	};
+
+	const results = ['Valid IBAN'];
+	const { bank, flags } = validation;
+
+	if (hasTrustedBank(bank)) {
+		results.push('Trusted bank');
+	}
+
+	if (flags.includes('INSTANT')) {
+		results.push('Accepts instant payments');
+	}
+
+	if (flags.includes('POSITIVE HISTORY')) {
+		results.push('Positive operation history');
+	}
+
+	if (!flags.includes('SECURITY_CLAIMS')) {
+		results.push('No Security claims');
+	}
+
+	return {
+		validationError,
+		validationResults: results
+	}
+}
+```
