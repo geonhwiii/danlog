@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Docs/번역 - React의 간단한 예제로 분해한 클린 아키텍처.md",
+                "file": "React/firebase auth로 간단하게 로그인 구현하기.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Docs/번역 - React의 간단한 예제로 분해한 클린 아키텍처.md",
+                "file": "React/firebase auth로 간단하게 로그인 구현하기.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Docs/번역 - React의 간단한 예제로 분해한 클린 아키텍처.md",
+                "file": "React/firebase auth로 간단하게 로그인 구현하기.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Docs/번역 - React의 간단한 예제로 분해한 클린 아키텍처.md"
+                "file": "React/firebase auth로 간단하게 로그인 구현하기.md"
               }
             }
           }
@@ -148,9 +148,10 @@
   },
   "active": "cbaa7db745af4321",
   "lastOpenFiles": [
+    "Docs/번역 - React의 간단한 예제로 분해한 클린 아키텍처.md",
+    "React/firebase auth로 간단하게 로그인 구현하기.md",
     "Docs/번역 - Understanding React Server Components.md",
     "Docs/번역 - Why Fetch Promise Doesn't Reject on Error Responses.md",
-    "Docs/번역 - React의 간단한 예제로 분해한 클린 아키텍처.md",
     "React/clsx + tailwindcss 함께 사용하기.md",
     "Javascript/array.with() ... 가 뭘까?.md",
     "Javascript/array.at() 도 사용해주세요 (ES2022).md",
