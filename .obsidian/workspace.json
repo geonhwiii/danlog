@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "React/firebase auth로 간단하게 로그인 구현하기.md",
+                "file": "React/Supabase vs Firebase.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "React/firebase auth로 간단하게 로그인 구현하기.md",
+                "file": "React/Supabase vs Firebase.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "React/firebase auth로 간단하게 로그인 구현하기.md",
+                "file": "React/Supabase vs Firebase.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "React/firebase auth로 간단하게 로그인 구현하기.md"
+                "file": "React/Supabase vs Firebase.md"
               }
             }
           }
@@ -148,8 +148,9 @@
   },
   "active": "cbaa7db745af4321",
   "lastOpenFiles": [
-    "Docs/번역 - React의 간단한 예제로 분해한 클린 아키텍처.md",
     "React/firebase auth로 간단하게 로그인 구현하기.md",
+    "React/Supabase vs Firebase.md",
+    "Docs/번역 - React의 간단한 예제로 분해한 클린 아키텍처.md",
     "Docs/번역 - Understanding React Server Components.md",
     "Docs/번역 - Why Fetch Promise Doesn't Reject on Error Responses.md",
     "React/clsx + tailwindcss 함께 사용하기.md",
