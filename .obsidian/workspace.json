@@ -18,8 +18,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "21ee7eae50a236c9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "React/shadcn-ui로 만드는 빠른 템플릿.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "React/Supabase vs Firebase.md",
+                "file": "React/shadcn-ui로 만드는 빠른 템플릿.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "React/Supabase vs Firebase.md",
+                "file": "React/shadcn-ui로 만드는 빠른 템플릿.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "React/Supabase vs Firebase.md"
+                "file": "React/shadcn-ui로 만드는 빠른 템플릿.md"
               }
             }
           }
@@ -146,14 +159,15 @@
       "command-palette:명령어 팔레트 열기": false
     }
   },
-  "active": "cbaa7db745af4321",
+  "active": "21ee7eae50a236c9",
   "lastOpenFiles": [
     "React/firebase auth로 간단하게 로그인 구현하기.md",
+    "React/clsx + tailwindcss 함께 사용하기.md",
+    "React/shadcn-ui로 만드는 빠른 템플릿.md",
     "React/Supabase vs Firebase.md",
     "Docs/번역 - React의 간단한 예제로 분해한 클린 아키텍처.md",
     "Docs/번역 - Understanding React Server Components.md",
     "Docs/번역 - Why Fetch Promise Doesn't Reject on Error Responses.md",
-    "React/clsx + tailwindcss 함께 사용하기.md",
     "Javascript/array.with() ... 가 뭘까?.md",
     "Javascript/array.at() 도 사용해주세요 (ES2022).md",
     "Javascript",
