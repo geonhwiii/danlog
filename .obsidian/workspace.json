@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Docs/번역 - Next.js 앱 라우터의 일반적인 실수 및 해결 방법.md",
+                "file": "Docs/번역 - Next.js 앱 라우터의 일반적인 실수 및 해결 방법 (2).md",
                 "mode": "source",
                 "source": false
               }
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Docs/번역 - Next.js 앱 라우터의 일반적인 실수 및 해결 방법.md",
+                "file": "Docs/번역 - Next.js 앱 라우터의 일반적인 실수 및 해결 방법 (2).md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Docs/번역 - Next.js 앱 라우터의 일반적인 실수 및 해결 방법.md",
+                "file": "Docs/번역 - Next.js 앱 라우터의 일반적인 실수 및 해결 방법 (2).md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Docs/번역 - Next.js 앱 라우터의 일반적인 실수 및 해결 방법.md"
+                "file": "Docs/번역 - Next.js 앱 라우터의 일반적인 실수 및 해결 방법 (2).md"
               }
             }
           }
@@ -173,8 +173,9 @@
   },
   "active": "25a98656f9eca1f9",
   "lastOpenFiles": [
+    "Docs/번역 - Next.js 앱 라우터의 일반적인 실수 및 해결 방법 (1).md",
+    "Docs/번역 - Next.js 앱 라우터의 일반적인 실수 및 해결 방법 (2).md",
     "Docs/번역 - React의 간단한 예제로 분해한 클린 아키텍처.md",
-    "Docs/번역 - Next.js 앱 라우터의 일반적인 실수 및 해결 방법.md",
     "Docs/번역 - Why Fetch Promise Doesn't Reject on Error Responses.md",
     "Docs/번역 - Understanding React Server Components.md",
     "React/shadcn-ui로 만드는 빠른 템플릿.md",
