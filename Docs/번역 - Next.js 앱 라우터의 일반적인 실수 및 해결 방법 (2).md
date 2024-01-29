@@ -1,4 +1,4 @@
-> 원문 : https://vercel.com/blog/common-mistakes-with-the-next-js-app-router-and-how-to-fix-them
+ > 원문 : https://vercel.com/blog/common-mistakes-with-the-next-js-app-router-and-how-to-fix-them
 
 
 ## 7. 서버 및 클라이언트 컴포넌트 함께 사용하기

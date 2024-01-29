@@ -42,9 +42,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "9294eee4f8976ae0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Docs/번역 - How React 18 Improves Application Performance (1).md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -94,7 +106,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 253.5
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "bb5266077dde2cdd",
@@ -110,7 +123,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Docs/번역 - Next.js 앱 라우터의 일반적인 실수 및 해결 방법 (2).md",
+                "file": "Docs/번역 - How React 18 Improves Application Performance (1).md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +140,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Docs/번역 - Next.js 앱 라우터의 일반적인 실수 및 해결 방법 (2).md",
+                "file": "Docs/번역 - How React 18 Improves Application Performance (1).md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +163,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Docs/번역 - Next.js 앱 라우터의 일반적인 실수 및 해결 방법 (2).md"
+                "file": "Docs/번역 - How React 18 Improves Application Performance (1).md"
               }
             }
           }
@@ -171,13 +184,14 @@
       "command-palette:명령어 팔레트 열기": false
     }
   },
-  "active": "25a98656f9eca1f9",
+  "active": "9294eee4f8976ae0",
   "lastOpenFiles": [
+    "Docs/번역 - Understanding React Server Components.md",
+    "Docs/번역 - React의 간단한 예제로 분해한 클린 아키텍처.md",
     "Docs/번역 - Next.js 앱 라우터의 일반적인 실수 및 해결 방법 (1).md",
     "Docs/번역 - Next.js 앱 라우터의 일반적인 실수 및 해결 방법 (2).md",
-    "Docs/번역 - React의 간단한 예제로 분해한 클린 아키텍처.md",
     "Docs/번역 - Why Fetch Promise Doesn't Reject on Error Responses.md",
-    "Docs/번역 - Understanding React Server Components.md",
+    "Docs/번역 - How React 18 Improves Application Performance (1).md",
     "React/shadcn-ui로 만드는 빠른 템플릿.md",
     "React/firebase auth로 간단하게 로그인 구현하기.md",
     "React/clsx + tailwindcss 함께 사용하기.md",
