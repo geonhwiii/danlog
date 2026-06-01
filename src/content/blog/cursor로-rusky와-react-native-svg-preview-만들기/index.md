@@ -1,7 +1,7 @@
 ---
-title: "Cursor로 rusky와 react-native-svg-preview 만들기"
-description: "Rust 언어를 모르는 상태에서 rusky를 만들고, vsCode 익스텐션 react-native-svg-preview 개발하기"
-date: "05 27 2025"
+title: 'Cursor로 rusky와 react-native-svg-preview 만들기'
+description: 'Rust 언어를 모르는 상태에서 rusky를 만들고, vsCode 익스텐션 react-native-svg-preview 개발하기'
+date: '05 27 2025'
 tags:
   - React Native
 ---

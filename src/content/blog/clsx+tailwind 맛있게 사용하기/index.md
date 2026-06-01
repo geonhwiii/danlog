@@ -1,7 +1,7 @@
 ---
-title: "clsx + tailwind 맛있게 사용하기"
-description: "clsx + tailwind-merge 사용법"
-date: "04 12 2024"
+title: 'clsx + tailwind 맛있게 사용하기'
+description: 'clsx + tailwind-merge 사용법'
+date: '04 12 2024'
 tags:
   - React
   - CSS
@@ -13,9 +13,9 @@ tags:
 
 ```tsx
 // @/utils/clsx/index.ts
-import { clsx, type ClassValue } from "clsx";
+import { clsx, type ClassValue } from 'clsx';
 
-import { twMerge } from "tailwind-merge";
+import { twMerge } from 'tailwind-merge';
 
 export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 ```
@@ -28,14 +28,7 @@ type Props = {
 };
 
 export function ChatMessage({ message: { role, content } }: Props) {
-  return (
-    <div
-      className={cn([
-        "flex items-center",
-        role === "user" ? "justify-end" : "justify-start",
-      ])}
-    ></div>
-  );
+  return <div className={cn(['flex items-center', role === 'user' ? 'justify-end' : 'justify-start'])}></div>;
 }
 ```
 

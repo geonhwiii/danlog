@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export type NavItem = { label: string; href: string };
 
@@ -8,17 +8,17 @@ type Props = {
 };
 
 function isActive(href: string, currentPath: string) {
-  if (href === "/") return currentPath === "/";
-  return currentPath === href || currentPath.startsWith(href + "/");
+  if (href === '/') return currentPath === '/';
+  return currentPath === href || currentPath.startsWith(href + '/');
 }
 
 export default function MobileNav({ items, currentPath }: Props) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    document.body.style.overflow = open ? 'hidden' : '';
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = '';
     };
   }, [open]);
 
@@ -27,7 +27,7 @@ export default function MobileNav({ items, currentPath }: Props) {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
+        aria-label={open ? '메뉴 닫기' : '메뉴 열기'}
         aria-expanded={open}
         className="grid h-9 w-9 place-items-center rounded-md text-ink transition-colors hover:bg-surface-strong"
       >
@@ -42,8 +42,8 @@ export default function MobileNav({ items, currentPath }: Props) {
                 key={item.href}
                 href={item.href}
                 className={
-                  "nav-link-type rounded-md px-3 py-3 transition-colors hover:bg-surface-strong " +
-                  (isActive(item.href, currentPath) ? "text-ink" : "text-muted")
+                  'nav-link-type rounded-md px-3 py-3 transition-colors hover:bg-surface-strong ' +
+                  (isActive(item.href, currentPath) ? 'text-ink' : 'text-muted')
                 }
               >
                 {item.label}

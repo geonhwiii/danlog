@@ -1,15 +1,16 @@
 {
   "name": "danlog",
-  "type": "module",
   "version": "0.0.1",
-  "engines": {
-    "node": ">=22.12.0"
-  },
+  "type": "module",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "oxlint src",
+    "lint:fix": "oxlint --fix src",
+    "fmt": "oxfmt --check src",
+    "fmt:fix": "oxfmt src"
   },
   "dependencies": {
     "@astrojs/mdx": "^6.0.1",
@@ -26,7 +27,24 @@
     "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
+    "nano-staged": "^1.0.2",
+    "oxfmt": "^0.52.0",
+    "oxlint": "^1.67.0",
     "rehype-pretty-code": "^0.14.3",
-    "shiki": "^4.1.0"
+    "shiki": "^4.1.0",
+    "simple-git-hooks": "^2.13.1"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "bunx nano-staged"
+  },
+  "nano-staged": {
+    "*.{ts,tsx,js,jsx,mjs,cjs}": [
+      "oxlint --fix",
+      "oxfmt"
+    ],
+    "*.{json,md,mdx,astro,css,html}": "oxfmt"
+  },
+  "engines": {
+    "node": ">=24.16.0"
   }
 }

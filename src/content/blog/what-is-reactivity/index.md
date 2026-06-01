@@ -1,8 +1,8 @@
 ---
-title: "[번역] What is Reactivity?"
-description: "React Beyond the Render - What is Reactivity?"
-date: "07 24 2024"
-image: "https://playfulprogramming.com/generated/what-is-reactivity.twitter-preview.jpg"
+title: '[번역] What is Reactivity?'
+description: 'React Beyond the Render - What is Reactivity?'
+date: '07 24 2024'
+image: 'https://playfulprogramming.com/generated/what-is-reactivity.twitter-preview.jpg'
 tags:
   - 번역
   - React
@@ -55,8 +55,8 @@ tags:
 <script>
   let count = 0;
 
-  const addBtn = document.querySelector("#add-button");
-  addBtn.addEventListener("click", () => {
+  const addBtn = document.querySelector('#add-button');
+  addBtn.addEventListener('click', () => {
     count++;
     addBtn.innerText = `Count: ${count}`;
   });
@@ -79,14 +79,14 @@ tags:
 </main>
 <script>
   let count = 0;
-  const listEl = document.querySelector("#list");
+  const listEl = document.querySelector('#list');
   function makeListItem(innerText) {
-    const li = document.createElement("li");
+    const li = document.createElement('li');
     li.innerText = innerText;
     listEl.append(li);
   }
-  const addBtn = document.querySelector("#add-button");
-  addBtn.addEventListener("click", () => {
+  const addBtn = document.querySelector('#add-button');
+  addBtn.addEventListener('click', () => {
     count++;
     addBtn.innerText = `Count: ${count}`;
     makeListItem(`List item: ${count}`);
@@ -110,9 +110,9 @@ tags:
 
 <script>
   let count = 0;
-  const listEl = document.querySelector("#list");
+  const listEl = document.querySelector('#list');
   function makeListItem(innerText) {
-    const li = document.createElement("li");
+    const li = document.createElement('li');
     li.innerText = innerText;
     listEl.append(li);
   }
@@ -120,19 +120,19 @@ tags:
     listEl.lastChild.remove();
   }
 
-  const addBtn = document.querySelector("#add-button");
-  const removeBtn = document.querySelector("#remove-button");
+  const addBtn = document.querySelector('#add-button');
+  const removeBtn = document.querySelector('#remove-button');
 
   function updateBtnTexts() {
     addBtn.innerText = `Add one to: ${count}`;
     removeBtn.innerText = `Remove one from: ${count}`;
   }
-  addBtn.addEventListener("click", () => {
+  addBtn.addEventListener('click', () => {
     count++;
     updateBtnTexts();
     makeListItem(`List item: ${count}`);
   });
-  removeBtn.addEventListener("click", () => {
+  removeBtn.addEventListener('click', () => {
     count--;
     updateBtnTexts();
     removeListItem();
@@ -162,10 +162,10 @@ tags:
 <script>
   // 'count'가 변경되면 DOM이 자동 업데이트되는 마법의 지역
   let count = 0;
-  addBtn.addEventListener("click", () => {
+  addBtn.addEventListener('click', () => {
     count++;
   });
-  removeBtn.addEventListener("click", () => {
+  removeBtn.addEventListener('click', () => {
     count--;
   });
 </script>
@@ -188,10 +188,7 @@ const App = () => {
   return (
     <div>
       <button onClick={() => setCount(count + 1)}>Add one to: {count}</button>
-      <button onClick={() => setCount(count - 1)}>
-        {" "}
-        Remove one from: {count}{" "}
-      </button>
+      <button onClick={() => setCount(count - 1)}> Remove one from: {count} </button>
       <ul>
         {Array.from({ length: count }).map((_, i) => (
           <li>List item {i}</li>

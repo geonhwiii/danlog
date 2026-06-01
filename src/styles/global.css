@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* ──────────────────────────────────────────────────────────────
    Self-hosted fonts (files in /public/fonts):
@@ -7,50 +7,50 @@
    - IoskeleyMono → code surfaces (Regular only)
    ────────────────────────────────────────────────────────────── */
 @font-face {
-  font-family: "Geist";
-  src: url("/fonts/Geist-Regular.woff2") format("woff2");
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Geist";
-  src: url("/fonts/Geist-Medium.woff2") format("woff2");
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Geist";
-  src: url("/fonts/Geist-SemiBold.woff2") format("woff2");
+  font-family: 'Geist';
+  src: url('/fonts/Geist-SemiBold.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Pretendard";
-  src: url("/fonts/Pretendard-Regular.otf") format("opentype");
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Pretendard";
-  src: url("/fonts/Pretendard-Medium.otf") format("opentype");
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Pretendard";
-  src: url("/fonts/Pretendard-SemiBold.otf") format("opentype");
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-SemiBold.otf') format('opentype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "IoskeleyMono";
-  src: url("/fonts/IoskeleyMonoNerdFont-Regular.ttf") format("truetype");
+  font-family: 'IoskeleyMono';
+  src: url('/fonts/IoskeleyMonoNerdFont-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -99,7 +99,7 @@
   color-scheme: light;
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   /* Warm brown dark tone, matching cursor.com blog:
      canvas #14120b, card #1b1913 (user-specified anchors). */
   --color-canvas: #14120b;
@@ -154,8 +154,8 @@
 
   /* Font families. Geist carries Latin; Korean glyphs (absent in Geist)
      fall through to Pretendard automatically. */
-  --font-sans: "Geist", "Pretendard", system-ui, sans-serif;
-  --font-mono: "IoskeleyMono", "Pretendard", ui-monospace, monospace;
+  --font-sans: 'Geist', 'Pretendard', system-ui, sans-serif;
+  --font-mono: 'IoskeleyMono', 'Pretendard', ui-monospace, monospace;
 
   /* Border radius scale (DESIGN.md) */
   --radius-xs: 4px;
@@ -411,11 +411,11 @@ pre[data-theme] span {
 }
 
 /* Dark theme colors under [data-theme="dark"] */
-[data-theme="dark"] pre[data-theme] {
+[data-theme='dark'] pre[data-theme] {
   background-color: var(--shiki-dark-bg) !important;
 }
-[data-theme="dark"] pre[data-theme],
-[data-theme="dark"] pre[data-theme] span {
+[data-theme='dark'] pre[data-theme],
+[data-theme='dark'] pre[data-theme] span {
   color: var(--shiki-dark) !important;
   font-style: var(--shiki-dark-font-style) !important;
   font-weight: var(--shiki-dark-font-weight) !important;

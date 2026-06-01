@@ -1,8 +1,8 @@
 ---
-title: "Toss Frontend Accelerator 5기 회고"
-description: "Toss Frontend Accelerator 5기가 끝나고, 저의 생각을 정리합니다."
-date: "03 01 2026"
-image: "https://i.imgur.com/SahCDVr.png"
+title: 'Toss Frontend Accelerator 5기 회고'
+description: 'Toss Frontend Accelerator 5기가 끝나고, 저의 생각을 정리합니다.'
+date: '03 01 2026'
+image: 'https://i.imgur.com/SahCDVr.png'
 tags:
   - 회고
 ---

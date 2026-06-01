@@ -1,7 +1,7 @@
 ---
-title: "Javascript heap out of memory & V8 메모리 구조"
-description: "Javascript heap out of memory & V8 메모리 구조"
-date: "06 23 2024"
+title: 'Javascript heap out of memory & V8 메모리 구조'
+description: 'Javascript heap out of memory & V8 메모리 구조'
+date: '06 23 2024'
 tags:
   - JavaScript
 ---

@@ -1,7 +1,7 @@
 ---
-title: "[JS] array.at()도 사용해주세요"
-description: "javascript array.at()의 정의와 사용 예시"
-date: "12 24 2023"
+title: '[JS] array.at()도 사용해주세요'
+description: 'javascript array.at()의 정의와 사용 예시'
+date: '12 24 2023'
 tags:
   - JavaScript
 ---
@@ -15,7 +15,7 @@ tags:
 **index** : 반환할 배열 요소의 0부터 시작하는 인덱스로, [정수로 변환](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Number#%EC%A0%95%EC%88%98_%EB%B3%80%ED%99%98)됩니다. 음수 인덱스는 배열 끝부터 거슬러 셉니다. `index < 0`인 경우, `index + array.length`로 접근합니다.
 
 ```typescript
-const fruits = ["사과", "바나나", "키위"];
+const fruits = ['사과', '바나나', '키위'];
 
 fruits.at(1); // '사과'
 

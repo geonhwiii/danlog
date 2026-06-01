@@ -1,8 +1,8 @@
 ---
-title: "AI 시대, knip으로 Dead Code 말끔히 정리하기"
-description: "AI가 코드를 쏟아내는 만큼 Dead Code도 빠르게 쌓입니다. 프로젝트에 knip을 도입하고 CI에 통합하는 과정을 설명합니다"
-date: "05 29 2026"
-image: "https://knip.dev/og/docs.webp"
+title: 'AI 시대, knip으로 Dead Code 말끔히 정리하기'
+description: 'AI가 코드를 쏟아내는 만큼 Dead Code도 빠르게 쌓입니다. 프로젝트에 knip을 도입하고 CI에 통합하는 과정을 설명합니다'
+date: '05 29 2026'
+image: 'https://knip.dev/og/docs.webp'
 tags:
   - Frontend
   - CI
@@ -122,19 +122,19 @@ npx @knip/mcp
 제가 적용한 `knip.config.ts`중 주요 내용만 살펴보겠습니다.
 
 ```ts title="knip.config.ts"
-import type { KnipConfig } from "knip";
+import type { KnipConfig } from 'knip';
 
 const config: KnipConfig = {
   entry: [
-    "src/main.tsx",
-    "sentry.server.config.ts",
-    "e2e/**/*.ts", // 테스트 진입점
+    'src/main.tsx',
+    'sentry.server.config.ts',
+    'e2e/**/*.ts', // 테스트 진입점
   ],
-  project: ["src/**/*.{ts,tsx}"],
+  project: ['src/**/*.{ts,tsx}'],
   // 설정에 문자열로만 등장해 그래프에 안 잡히는 의존성
-  ignoreDependencies: ["tailwindcss", "@storybook/addon-a11y"],
+  ignoreDependencies: ['tailwindcss', '@storybook/addon-a11y'],
   // 분석 대상에서 제외 (API 타입 생성 파일 등)
-  ignore: ["src/types/*-service.ts"],
+  ignore: ['src/types/*-service.ts'],
 };
 
 export default config;
@@ -230,7 +230,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: oven-sh/setup-bun@v2
-        with: { bun-version: "1.3.5" }
+        with: { bun-version: '1.3.5' }
       - uses: actions/cache@v4
         with:
           path: ~/.bun/install/cache

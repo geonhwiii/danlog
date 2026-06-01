@@ -1,7 +1,7 @@
 ---
-title: "[번역] How Vercel adopted microfrontends"
-description: "Vercel이 마이크로프론트엔드를 도입한 방법"
-date: "01 18 2025"
+title: '[번역] How Vercel adopted microfrontends'
+description: 'Vercel이 마이크로프론트엔드를 도입한 방법'
+date: '01 18 2025'
 tags:
   - 번역
   - Architecture

@@ -1,7 +1,7 @@
 ---
-title: "React 동시성(Concurrency) 이해하기 — 3편: React Server Components"
-description: "2편에 이어 React Server Components가 어떻게 동작하는지, 그리고 우리는 언제 RSC를 도입해야 하는지 알아봅니다."
-date: "04 30 2026"
+title: 'React 동시성(Concurrency) 이해하기 — 3편: React Server Components'
+description: '2편에 이어 React Server Components가 어떻게 동작하는지, 그리고 우리는 언제 RSC를 도입해야 하는지 알아봅니다.'
+date: '04 30 2026'
 tags:
   - React
 ---
@@ -110,9 +110,9 @@ Server Component의 특징은 다음과 같습니다.
 상호작용이 필요한 부분은 [`'use client'`](https://ko.react.dev/reference/rsc/use-client) 지시어로 명시합니다.
 
 ```tsx
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function LikeButton({ likes }: { likes: number }) {
   const [count, setCount] = useState(likes);
@@ -132,8 +132,8 @@ App Router에서 페이지가 요청됐을 때 일어나는 일을 처음부터 
 
 ```tsx
 // app/post/[id]/page.tsx — Server Component
-import LikeButton from "./LikeButton";
-import { getPost } from "@/lib/data";
+import LikeButton from './LikeButton';
+import { getPost } from '@/lib/data';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const post = await getPost(params.id);
@@ -150,9 +150,9 @@ export default async function Page({ params }: { params: { id: string } }) {
 
 ```tsx
 // app/post/[id]/LikeButton.tsx — Client Component
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function LikeButton({ likes }: { likes: number }) {
   const [count, setCount] = useState(likes);
@@ -227,11 +227,11 @@ RSC의 가장 큰 제약은 **Server Component가 Client Component를 import할 
 ```tsx
 // ✅ 가능: Server Component → Client Component
 // page.tsx (Server)
-import LikeButton from "./LikeButton"; // Client
+import LikeButton from './LikeButton'; // Client
 
 // ❌ 불가능: Client Component → Server Component (직접 import)
 // LikeButton.tsx ('use client')
-import ServerOnlyThing from "./ServerOnlyThing"; // 불가
+import ServerOnlyThing from './ServerOnlyThing'; // 불가
 ```
 
 이유는 단순합니다. Client Component는 클라이언트 번들에 포함되는데, Server Component를 import하면 서버 전용 코드(DB 클라이언트, API 키 등)까지 번들에 끌려 들어가기 때문입니다.
@@ -240,7 +240,7 @@ import ServerOnlyThing from "./ServerOnlyThing"; // 불가
 
 ```tsx
 // Modal.tsx — Client Component
-"use client";
+'use client';
 
 export default function Modal({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -250,8 +250,8 @@ export default function Modal({ children }: { children: React.ReactNode }) {
 
 ```tsx
 // page.tsx — Server Component
-import Modal from "./Modal";
-import Cart from "./Cart"; // Server Component
+import Modal from './Modal';
+import Cart from './Cart'; // Server Component
 
 export default function Page() {
   return (
@@ -287,30 +287,22 @@ Page (Server)
 
 ```tsx
 // theme-provider.tsx — Client Component
-"use client";
+'use client';
 
-import { createContext } from "react";
+import { createContext } from 'react';
 
 export const ThemeContext = createContext({});
 
-export default function ThemeProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function ThemeProvider({ children }: { children: React.ReactNode }) {
   return <ThemeContext.Provider value="dark">{children}</ThemeContext.Provider>;
 }
 ```
 
 ```tsx
 // app/layout.tsx — Server Component
-import ThemeProvider from "./theme-provider";
+import ThemeProvider from './theme-provider';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html>
       <body>
@@ -343,7 +335,7 @@ Server Component에서 Client Component로 props를 넘길 때, 그 값은 **RSC
 
 ```tsx
 // Server Component
-import { Suspense } from "react";
+import { Suspense } from 'react';
 
 async function Page({ id }: { id: string }) {
   const note = await db.notes.get(id); // 중요한 데이터는 await
@@ -364,14 +356,10 @@ async function Page({ id }: { id: string }) {
 
 ```tsx
 // Client Component
-"use client";
-import { use } from "react";
+'use client';
+import { use } from 'react';
 
-function Comments({
-  commentsPromise,
-}: {
-  commentsPromise: Promise<Comment[]>;
-}) {
+function Comments({ commentsPromise }: { commentsPromise: Promise<Comment[]> }) {
   const comments = use(commentsPromise); // 클라이언트에서 resolve
   return comments.map((c) => <p key={c.id}>{c.text}</p>);
 }

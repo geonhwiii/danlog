@@ -1,8 +1,8 @@
 ---
-title: "tailwind3.4 활용하기"
-description: "tailwindcss v3.4 기능 활용하기"
-date: "05 01 2024"
-image: "https://tailwindcss.com/_next/static/media/card.a1cd9cff.jpg"
+title: 'tailwind3.4 활용하기'
+description: 'tailwindcss v3.4 기능 활용하기'
+date: '05 01 2024'
+image: 'https://tailwindcss.com/_next/static/media/card.a1cd9cff.jpg'
 tags:
   - CSS
 ---

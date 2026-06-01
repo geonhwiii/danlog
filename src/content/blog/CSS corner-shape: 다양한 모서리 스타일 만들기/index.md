@@ -1,7 +1,7 @@
 ---
-title: "CSS corner-shape: 다양한 모서리 스타일 만들기"
-description: "CSS corner-shape 속성을 사용해 squircle, bevel, notch 등 다양한 모서리 효과를 만들고 Tailwind CSS 플러그인으로 통합하는 방법을 알아봅니다."
-date: "11 20 2025"
+title: 'CSS corner-shape: 다양한 모서리 스타일 만들기'
+description: 'CSS corner-shape 속성을 사용해 squircle, bevel, notch 등 다양한 모서리 효과를 만들고 Tailwind CSS 플러그인으로 통합하는 방법을 알아봅니다.'
+date: '11 20 2025'
 tags:
   - CSS
 ---

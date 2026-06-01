@@ -1,5 +1,5 @@
-import { cn } from "@lib/utils";
-import { AlertCircleIcon } from "lucide-react";
+import { cn } from '@lib/utils';
+import { AlertCircleIcon } from 'lucide-react';
 
 type Props = {
   className?: string;
@@ -11,7 +11,7 @@ export default function Alert({ title, description, className }: Props) {
   return (
     <div
       className={cn(
-        "flex flex-col gap-1 rounded-md border border-hairline bg-canvas-soft p-3 leading-normal",
+        'flex flex-col gap-1 rounded-md border border-hairline bg-canvas-soft p-3 leading-normal',
         className,
       )}
     >

@@ -1,18 +1,15 @@
 ---
-title: "React 동시성(Concurrency) 이해하기 — 1편: Fiber 아키텍처"
-description: "리액트에서 Fiber 아키텍처를 통해 동시성이 실행되는 과정을 순서대로 이해해봅니다."
-date: "04 07 2026"
+title: 'React 동시성(Concurrency) 이해하기 — 1편: Fiber 아키텍처'
+description: '리액트에서 Fiber 아키텍처를 통해 동시성이 실행되는 과정을 순서대로 이해해봅니다.'
+date: '04 07 2026'
 image: https://i.imgur.com/bogFZkO.png
 tags:
   - React
 ---
 
-import Video from "@components/react/Video";
+import Video from '@components/react/Video';
 
-<Video
-  src="https://sepubya4pufkda5b.public.blob.vercel-storage.com/video/fiber-concurrency.mp4"
-  client:visible
-/>
+<Video src="https://sepubya4pufkda5b.public.blob.vercel-storage.com/video/fiber-concurrency.mp4" client:visible />
 
 > 이해를 돕기 위한 `remotion`으로 제작된 가이드 영상입니다.
 
@@ -21,7 +18,7 @@ import Video from "@components/react/Video";
 React는 `createRoot()`를 통해 root 엘리먼트 하위에 JSX를 렌더링하는 UI 프레임워크입니다.
 
 ```tsx
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
 ```
 
@@ -176,7 +173,7 @@ React 18
 `startTransition`을 사용하면 어떤 업데이트가 긴급하고, 어떤 게 전환인지 React에 알려줄 수 있습니다.
 
 ```tsx
-import { startTransition } from "react";
+import { startTransition } from 'react';
 
 // 긴급한 업데이트 — 즉시 반영
 setInputValue(input);

@@ -1,7 +1,7 @@
 ---
-title: "React19 beta와 그 외 변경점"
-description: "React 19 beta 변경점"
-date: "05 20 2024"
+title: 'React19 beta와 그 외 변경점'
+description: 'React 19 beta 변경점'
+date: '05 20 2024'
 tags:
   - React
 ---
@@ -16,7 +16,7 @@ tags:
 
 ```tsx
 function updateNameWithUseTransition({}) {
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const [error, setError] = useState(null);
   const [isPending, startTransition] = useTransition();
 
@@ -28,7 +28,7 @@ function updateNameWithUseTransition({}) {
         setError(error);
         return;
       }
-      redirect("/path");
+      redirect('/path');
     });
   };
   // ...이하 생략
@@ -72,7 +72,7 @@ function ChangeNameWithUseActionState({ name, setName }) {
 컴포넌트 깊숙이 전달해야하는 `form` 상태를 관리하기 위해 `useFormStatus`도 추가되었습니다.
 
 ```tsx
-import { useFormStatus } from "react-dom";
+import { useFormStatus } from 'react-dom';
 
 function DesignButton() {
   const { pending } = useFormStatus();
@@ -93,7 +93,7 @@ function DesignButton() {
 특이한 점은, `use`는 조건부 렌더링에서도 호출 가능합니다.
 
 ```tsx
-import { use } from "react";
+import { use } from 'react';
 
 function Comments({ commentsPromise }) {
   // `use`로 promise를 전달합니다.
@@ -126,12 +126,12 @@ function Page({ commentsPromise }) {
 ```tsx
 // Server Component
 
-import Button from "./Button";
+import Button from './Button';
 
 function EmptyNote() {
   async function createNoteAction() {
     // 서버 액션
-    "use server";
+    'use server';
     await db.notes.create();
   }
   return <Button onClick={createNoteAction} />;
@@ -171,7 +171,7 @@ function MyInput({ placeholder, ref }) {
 향후 버전에서는`<Context.Provider>`는 `deprecated`될 예정입니다.
 
 ```tsx
-const ThemeContext = createContext("");
+const ThemeContext = createContext('');
 
 function App({ children }) {
   return <ThemeContext value="dark">{children}</ThemeContext>;

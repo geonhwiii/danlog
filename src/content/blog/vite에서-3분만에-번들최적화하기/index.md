@@ -131,8 +131,8 @@ export default defineConfig(({ mode }) => {
 
 ```ts
 // vite.config.ts
-import { defineConfig } from "vite";
-import { tanstackRouter } from "@tanstack/router-plugin/vite";
+import { defineConfig } from 'vite';
+import { tanstackRouter } from '@tanstack/router-plugin/vite';
 
 export default defineConfig({
   plugins: [
@@ -147,16 +147,16 @@ export default defineConfig({
 
 ```tsx
 // route.ts
-import { lazy } from "react";
+import { lazy } from 'react';
 
-const Home = lazy(() => import("./pages/Home"));
-const About = lazy(() => import("./pages/About"));
-const Contact = lazy(() => import("./pages/Contact"));
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
 
 const routes = [
-  { path: "/", component: Home },
-  { path: "/about", component: About },
-  { path: "/contact", component: Contact },
+  { path: '/', component: Home },
+  { path: '/about', component: About },
+  { path: '/contact', component: Contact },
 ];
 ```
 
@@ -166,10 +166,10 @@ form에 사용되는 각 컴포넌트를 `lazy loading`으로 불러옵니다.
 
 ```ts
 // form.ts
-import { lazy } from "react";
-import { createFormHook } from "@tanstack/react-form";
+import { lazy } from 'react';
+import { createFormHook } from '@tanstack/react-form';
 
-const TextField = lazy(() => import("../components/text-fields.tsx"));
+const TextField = lazy(() => import('../components/text-fields.tsx'));
 
 const { useAppForm, withForm } = createFormHook({
   fieldContext,
@@ -186,9 +186,9 @@ const { useAppForm, withForm } = createFormHook({
 무거운 차트, 테이블에 적용
 
 ```tsx
-const HeavyChart = lazy(() => import("./components/HeavyChart"));
-const DataTable = lazy(() => import("./components/DataTable"));
-const ImageGallery = lazy(() => import("./components/ImageGallery"));
+const HeavyChart = lazy(() => import('./components/HeavyChart'));
+const DataTable = lazy(() => import('./components/DataTable'));
+const ImageGallery = lazy(() => import('./components/ImageGallery'));
 
 function App() {
   return (
@@ -202,9 +202,9 @@ function App() {
 무거운 차트, 테이블에 적용
 
 ```tsx
-const HeavyChart = lazy(() => import("./components/HeavyChart"));
-const DataTable = lazy(() => import("./components/DataTable"));
-const ImageGallery = lazy(() => import("./components/ImageGallery"));
+const HeavyChart = lazy(() => import('./components/HeavyChart'));
+const DataTable = lazy(() => import('./components/DataTable'));
+const ImageGallery = lazy(() => import('./components/ImageGallery'));
 
 function App() {
   return (

@@ -1,8 +1,8 @@
 ---
-title: "shadcn-ui로 만드는 빠른 템플릿"
-description: "shadcn-ui 시작하기"
-date: "01 15 2024"
-image: "https://i.imgur.com/MhDG4uR.png"
+title: 'shadcn-ui로 만드는 빠른 템플릿'
+description: 'shadcn-ui 시작하기'
+date: '01 15 2024'
+image: 'https://i.imgur.com/MhDG4uR.png'
 tags:
   - React
 ---
@@ -114,8 +114,8 @@ pnpm dlx shadcn-ui@latest init
   body {
     @apply bg-background text-foreground;
     font-feature-settings:
-      "rlig" 1,
-      "calt" 1;
+      'rlig' 1,
+      'calt' 1;
   }
 }
 ```
@@ -129,7 +129,7 @@ npx shadcn-ui@latest add button
 
 ```tsx
 // ui폴더에 button 컴포넌트가 이미 생성되어있습니다.
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
 export default function HomePage() {
   return (
@@ -155,7 +155,7 @@ export default function HomePage() {
 ```tsx
 // @/src/components/tailwind-indicator
 export function TailwindIndicator() {
-  if (process.env.NODE_ENV === "production") return null;
+  if (process.env.NODE_ENV === 'production') return null;
   return (
     <div className="fixed bottom-1 left-1 z-50 flex h-6 w-6 items-center justify-center rounded-full bg-gray-800 p-3 font-mono text-xs text-white">
       <div className="block sm:hidden">xs</div>

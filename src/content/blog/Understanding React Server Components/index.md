@@ -1,8 +1,8 @@
 ---
-title: "[번역] Understanding React Server Components"
-description: "리액트 서버 컴포넌트의 이해"
-date: "01 03 2024"
-image: "https://i.imgur.com/jNkp9AS.png"
+title: '[번역] Understanding React Server Components'
+description: '리액트 서버 컴포넌트의 이해'
+date: '01 03 2024'
+image: 'https://i.imgur.com/jNkp9AS.png'
 tags:
   - 번역
   - React

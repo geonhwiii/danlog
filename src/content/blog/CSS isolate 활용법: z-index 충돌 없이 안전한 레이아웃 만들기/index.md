@@ -1,7 +1,7 @@
 ---
-title: "CSS isolation 활용법: z-index 충돌 없이 안전한 레이아웃 만들기"
-description: "css isolation을 활용해서 z-index 충돌 없이 안전한 레이아웃을 예제를 통해 만들어 봅니다."
-date: "03 12 2025"
+title: 'CSS isolation 활용법: z-index 충돌 없이 안전한 레이아웃 만들기'
+description: 'css isolation을 활용해서 z-index 충돌 없이 안전한 레이아웃을 예제를 통해 만들어 봅니다.'
+date: '03 12 2025'
 tags:
   - CSS
 ---
@@ -46,10 +46,10 @@ isolation: isolate;
 export function App() {
   return (
     <Layout>
-      <Header className="z-[100]">{"z-100"}</Header>
+      <Header className="z-[100]">{'z-100'}</Header>
       <Container>
         <Card>
-          <Button className="z-[120]">{"z-120"}</Button>
+          <Button className="z-[120]">{'z-120'}</Button>
         </Card>
       </Container>
     </Layout>
@@ -67,11 +67,11 @@ export function App() {
 export function App() {
   return (
     <Layout>
-      <Header className="z-[100]">{"z-100"}</Header>
+      <Header className="z-[100]">{'z-100'}</Header>
       <Container>
         {/* isolate를 사용해 쌓임 맥락을 Card컴포넌트에 적용합니다. */}
         <Card className="isolate">
-          <Button className="z-[120]">{"z-120"}</Button>
+          <Button className="z-[120]">{'z-120'}</Button>
         </Card>
       </Container>
     </Layout>

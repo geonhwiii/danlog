@@ -1,7 +1,7 @@
 ---
-title: "직접 구현하며 이해하는 가상 DOM 아키텍처"
-description: "직접 구현하며 이해하는 Virtual DOM의 원리와 실제 코드 구조"
-date: "07 17 2025"
+title: '직접 구현하며 이해하는 가상 DOM 아키텍처'
+description: '직접 구현하며 이해하는 Virtual DOM의 원리와 실제 코드 구조'
+date: '07 17 2025'
 tags:
   - Journal
 ---
@@ -31,13 +31,7 @@ JSX 문법을 `가상 DOM 객체(vNode)`로 변환합니다.
 export function createVNode(type, props, ...children) {
   const flatChildren = children.flat(Infinity);
   const filteredChildren = flatChildren.filter(
-    (child) =>
-      !(
-        child === null ||
-        child === undefined ||
-        child === false ||
-        child === true
-      ),
+    (child) => !(child === null || child === undefined || child === false || child === true),
   );
   return { type, props, children: filteredChildren };
 }
@@ -55,40 +49,26 @@ export function createVNode(type, props, ...children) {
 ```js
 // src/lib/normalizeVNode.js
 export function normalizeVNode(vNode) {
-  if (
-    vNode === null ||
-    vNode === undefined ||
-    vNode === false ||
-    vNode === true
-  )
-    return "";
-  if (typeof vNode === "string" || typeof vNode === "number")
-    return vNode.toString();
-  if (typeof vNode.type === "function") {
+  if (vNode === null || vNode === undefined || vNode === false || vNode === true) return '';
+  if (typeof vNode === 'string' || typeof vNode === 'number') return vNode.toString();
+  if (typeof vNode.type === 'function') {
     const props = vNode.props || {};
     if (vNode.children) props.children = vNode.children;
     return normalizeVNode(vNode.type(props));
   }
-  if (typeof vNode === "object" && vNode !== null && "type" in vNode) {
+  if (typeof vNode === 'object' && vNode !== null && 'type' in vNode) {
     let children = Array.isArray(vNode.children)
       ? vNode.children
           .map(normalizeVNode)
-          .filter(
-            (child) =>
-              child !== "" &&
-              child !== null &&
-              child !== undefined &&
-              child !== false &&
-              child !== true,
-          )
+          .filter((child) => child !== '' && child !== null && child !== undefined && child !== false && child !== true)
       : [];
     if (!Array.isArray(vNode.children) && vNode.children != null) {
       const normalized = normalizeVNode(vNode.children);
-      children = normalized === "" ? [] : [normalized];
+      children = normalized === '' ? [] : [normalized];
     }
     return { ...vNode, children };
   }
-  return "";
+  return '';
 }
 ```
 
@@ -104,33 +84,22 @@ export function normalizeVNode(vNode) {
 ```js
 // src/lib/createElement.js
 export function createElement(vNode) {
-  if (
-    vNode === null ||
-    vNode === undefined ||
-    vNode === false ||
-    vNode === true
-  )
-    return document.createTextNode("");
-  if (typeof vNode === "string" || typeof vNode === "number")
-    return document.createTextNode(vNode.toString());
+  if (vNode === null || vNode === undefined || vNode === false || vNode === true) return document.createTextNode('');
+  if (typeof vNode === 'string' || typeof vNode === 'number') return document.createTextNode(vNode.toString());
   if (Array.isArray(vNode)) {
     const fragment = document.createDocumentFragment();
     vNode.forEach((child) => fragment.appendChild(createElement(child)));
     return fragment;
   }
-  if (typeof vNode === "object" && vNode !== null && "type" in vNode) {
-    if (typeof vNode.type === "function")
-      throw new Error(
-        "컴포넌트는 반드시 normalizeVNode로 정규화 후 createElement로 변환해야 합니다.",
-      );
+  if (typeof vNode === 'object' && vNode !== null && 'type' in vNode) {
+    if (typeof vNode.type === 'function')
+      throw new Error('컴포넌트는 반드시 normalizeVNode로 정규화 후 createElement로 변환해야 합니다.');
     const $el = document.createElement(vNode.type);
     updateAttributes($el, vNode.props);
-    (vNode.children || []).forEach((child) =>
-      $el.appendChild(createElement(child)),
-    );
+    (vNode.children || []).forEach((child) => $el.appendChild(createElement(child)));
     return $el;
   }
-  return document.createTextNode("");
+  return document.createTextNode('');
 }
 ```
 
@@ -150,7 +119,7 @@ export function renderElement(vNode, container) {
   if (container.firstChild && container._vNode) {
     updateElement(container, normalized, container._vNode, 0);
   } else {
-    container.innerHTML = "";
+    container.innerHTML = '';
     const $el = createElement(normalized);
     container.appendChild($el);
   }
@@ -183,7 +152,7 @@ export function updateElement(parentElement, newVNode, oldVNode, index = 0) {
   }
   if (
     typeof newVNode !== typeof oldVNode ||
-    (typeof newVNode === "string" && newVNode !== oldVNode) ||
+    (typeof newVNode === 'string' && newVNode !== oldVNode) ||
     (newVNode && oldVNode && newVNode.type !== oldVNode.type)
   ) {
     const newEl = createElement(newVNode);
@@ -191,7 +160,7 @@ export function updateElement(parentElement, newVNode, oldVNode, index = 0) {
     else parentElement.appendChild(newEl);
     return;
   }
-  if (typeof newVNode === "string" || typeof newVNode === "number") {
+  if (typeof newVNode === 'string' || typeof newVNode === 'number') {
     if ($el && $el.nodeType === Node.TEXT_NODE) {
       if ($el.textContent !== newVNode.toString()) {
         $el.textContent = newVNode.toString();
@@ -199,7 +168,7 @@ export function updateElement(parentElement, newVNode, oldVNode, index = 0) {
     }
     return;
   }
-  if (newVNode && typeof newVNode === "object") {
+  if (newVNode && typeof newVNode === 'object') {
     updateAttributes($el, newVNode.props, oldVNode.props);
     const newChildren = newVNode.children || [];
     const oldChildren = oldVNode.children || [];
@@ -260,17 +229,7 @@ export function removeEvent(element, eventType, handler) {
 export function setupEventListeners(root) {
   if (root.__eventDelegationSetup) return;
   root.__eventDelegationSetup = true;
-  const eventTypes = [
-    "click",
-    "input",
-    "change",
-    "focus",
-    "blur",
-    "keydown",
-    "keyup",
-    "mouseover",
-    "mouseout",
-  ];
+  const eventTypes = ['click', 'input', 'change', 'focus', 'blur', 'keydown', 'keyup', 'mouseover', 'mouseout'];
   eventTypes.forEach((eventType) => {
     root.addEventListener(
       eventType,

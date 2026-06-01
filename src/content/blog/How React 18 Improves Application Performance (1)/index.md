@@ -1,7 +1,7 @@
 ---
-title: "[번역] How React 18 Improves Application Performance (1)"
-description: "React 18은 어떻게 앱 성능을 향상시킬까? (1)"
-date: "02 02 2024"
+title: '[번역] How React 18 Improves Application Performance (1)'
+description: 'React 18은 어떻게 앱 성능을 향상시킬까? (1)'
+date: '02 02 2024'
 tags:
   - 번역
   - React

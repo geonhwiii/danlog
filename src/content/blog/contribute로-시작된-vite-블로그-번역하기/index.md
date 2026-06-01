@@ -1,8 +1,8 @@
 ---
-title: "첫 contribute로 시작된 vite 블로그 번역하기...?"
-description: "nativewind의 웹사이트 contribute로 시작된 vite 블로그 번역하게 된 이야기"
-image: "https://i.imgur.com/3Q5LwBo.png"
-date: "07 02 2025"
+title: '첫 contribute로 시작된 vite 블로그 번역하기...?'
+description: 'nativewind의 웹사이트 contribute로 시작된 vite 블로그 번역하게 된 이야기'
+image: 'https://i.imgur.com/3Q5LwBo.png'
+date: '07 02 2025'
 tags:
   - Journal
 ---

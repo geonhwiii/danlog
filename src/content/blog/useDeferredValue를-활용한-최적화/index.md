@@ -33,10 +33,10 @@ const deferredValue = useDeferredValue(value);
 ### 기본 사용법
 
 ```tsx
-import { useState, useDeferredValue } from "react";
+import { useState, useDeferredValue } from 'react';
 
 function SearchPage() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const deferredQuery = useDeferredValue(query);
 
   // query : 연기하려는 값
@@ -82,19 +82,15 @@ function SearchPage() {
 가장 일반적인 사용 사례는 검색 기능입니다:
 
 ```tsx
-import { useState, useDeferredValue, Suspense } from "react";
+import { useState, useDeferredValue, Suspense } from 'react';
 
 function SearchPage() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const deferredQuery = useDeferredValue(query);
 
   return (
     <>
-      <input
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="검색어를 입력하세요"
-      />
+      <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="검색어를 입력하세요" />
       <Suspense fallback={<div>검색 중...</div>}>
         <SearchResults query={deferredQuery} />
       </Suspense>
@@ -154,13 +150,13 @@ function SearchResults({ query }) {
 다음은 검색 컴포넌트에서 세 가지를 조합한 예시입니다:
 
 ```tsx
-import { useState, useEffect, Suspense, useDeferredValue } from "react";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { ErrorBoundary } from "react-error-boundary";
+import { useState, useEffect, Suspense, useDeferredValue } from 'react';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { ErrorBoundary } from 'react-error-boundary';
 
 function SearchCombobox({ onSelect }) {
-  const [inputValue, setInputValue] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [inputValue, setInputValue] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
   // 1. debounce로 API 요청 횟수 줄이기
   const debouncedQuery = useDebounce(searchQuery, 500);
@@ -179,16 +175,12 @@ function SearchCombobox({ onSelect }) {
 
   return (
     <div>
-      <input
-        placeholder="검색어를 입력하세요"
-        value={inputValue}
-        onChange={handleInputChange}
-      />
+      <input placeholder="검색어를 입력하세요" value={inputValue} onChange={handleInputChange} />
 
       {deferredQuery.length >= 2 && (
         <ErrorBoundary fallback={<div>에러가 발생했습니다</div>}>
           <Suspense fallback={<div>검색 중...</div>}>
-            <div className={isStale ? "opacity-50" : ""}>
+            <div className={isStale ? 'opacity-50' : ''}>
               <SearchResults query={deferredQuery} onSelect={onSelect} />
             </div>
           </Suspense>
@@ -201,7 +193,7 @@ function SearchCombobox({ onSelect }) {
 function SearchResults({ query, onSelect }) {
   // React Query가 자동으로 중복 요청 제거 및 캐싱 처리
   const { data } = useSuspenseQuery({
-    queryKey: ["search", query],
+    queryKey: ['search', query],
     queryFn: () => fetchSearchResults(query),
   });
 

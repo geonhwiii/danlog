@@ -1,7 +1,7 @@
 ---
-title: "Tailwind CSS v4 모노레포 구성: 디자인 시스템을 공유하는 방법"
-description: "Turborepo와 Tailwind CSS v4를 활용해 일관된 디자인 시스템을 모노레포 전체에서 효율적으로 공유하는 방법을 알아봅니다."
-date: "01 09 2026"
+title: 'Tailwind CSS v4 모노레포 구성: 디자인 시스템을 공유하는 방법'
+description: 'Turborepo와 Tailwind CSS v4를 활용해 일관된 디자인 시스템을 모노레포 전체에서 효율적으로 공유하는 방법을 알아봅니다.'
+date: '01 09 2026'
 tags:
   - React
 ---
@@ -207,13 +207,9 @@ UI 컴포넌트 라이브러리에서는 공유 설정을 import하여 사용합
 
 ```tsx
 // apps/web/app/layout.tsx
-import "@acme/ui/styles.css";
+import '@acme/ui/styles.css';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
       <body>{children}</body>

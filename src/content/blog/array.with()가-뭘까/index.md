@@ -1,8 +1,8 @@
 ---
-title: "[JS] array.with()가 뭘까?"
-description: "javascript array.with()의 정의와 사용 예시"
-date: "12 20 2023"
-image: "https://developer.mozilla.org/mdn-social-image.46ac2375.png"
+title: '[JS] array.with()가 뭘까?'
+description: 'javascript array.with()의 정의와 사용 예시'
+date: '12 20 2023'
+image: 'https://developer.mozilla.org/mdn-social-image.46ac2375.png'
 tags:
   - JavaScript
 ---
@@ -35,9 +35,9 @@ console.log(arr.with(0, 2)); // [2, undefined, 3, 4, undefined, 6]
 
 ```tsx title="1. array.slice()"
 const SliceExample = () => {
-  const [items, setItems] = useState(["사과", "바나나", "체리"]);
+  const [items, setItems] = useState(['사과', '바나나', '체리']);
   const replaceItem = () => {
-    const modifiedItems = [...items.slice(0, 1), "포도", ...items.slice(2)];
+    const modifiedItems = [...items.slice(0, 1), '포도', ...items.slice(2)];
     setItems(modifiedItems);
   };
   return (
@@ -55,9 +55,9 @@ const SliceExample = () => {
 
 ```tsx title="2. array.with()"
 const WithExample = () => {
-  const [items, setItems] = useState(["사과", "바나나", "체리"]);
+  const [items, setItems] = useState(['사과', '바나나', '체리']);
   const withItem = () => {
-    const modifiedItems = items.with(1, "포도");
+    const modifiedItems = items.with(1, '포도');
     setItems(modifiedItems);
   };
 

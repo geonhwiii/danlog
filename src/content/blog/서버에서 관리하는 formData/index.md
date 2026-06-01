@@ -1,7 +1,7 @@
 ---
-title: "서버에서 관리하는 formData"
-description: "서버에서 관리하는 formData (feat. react-hook-form)"
-date: "11 10 2024"
+title: '서버에서 관리하는 formData'
+description: '서버에서 관리하는 formData (feat. react-hook-form)'
+date: '11 10 2024'
 tags:
   - React
 ---

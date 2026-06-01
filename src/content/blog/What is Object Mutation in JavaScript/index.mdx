@@ -1,14 +1,14 @@
 ---
-title: "[번역] What is Object Mutation in JavaScript?"
+title: '[번역] What is Object Mutation in JavaScript?'
 description: '객체를 다루다 보면 "mutation(변경)"이라는 용어를 듣게 됩니다. 그것은 무엇이고, 어떻게 동작할까요? let과 const는 실제로 어떻게 다를까요? 이 글에서 자세히 알아봅니다:'
-date: "05 07 2026"
-image: "https://fly.storage.tigris.dev/hoof-storage/post-images/object-mutation.link-preview.png"
+date: '05 07 2026'
+image: 'https://fly.storage.tigris.dev/hoof-storage/post-images/object-mutation.link-preview.png'
 tags:
   - 번역
   - React
 ---
 
-import Video from "../../../components/react/Video.tsx";
+import Video from '../../../components/react/Video.tsx';
 
 ![](https://fly.storage.tigris.dev/hoof-storage/post-images/object-mutation.link-preview.png)
 
@@ -16,10 +16,7 @@ import Video from "../../../components/react/Video.tsx";
 
 최근, 저희는 [Playful Programming의 커뮤니티 블로그](https://playfulprogramming.com/)를 [정적 사이트 생성기 프레임워크인 Astro](https://astro.build/)를 사용하도록 다시 작성했습니다. 이 사이트의 인기 기능 중 하나는 다크 모드 토글로, 다크 모드 순수주의자들이 (저 같은) 라이트 모드 일반인들을 비웃을 수 있게 해줍니다.
 
-<Video
-  src="https://playfulprogramming.com/content/crutchcorn/posts/object-mutation/theme_toggle.mp4"
-  client:visible
-/>
+<Video src="https://playfulprogramming.com/content/crutchcorn/posts/object-mutation/theme_toggle.mp4" client:visible />
 
 > 농담은 그만두고, 사이트에 라이트 모드를 지원하고 그것을 기본 설정으로 만드세요 - [중요한 접근성 문제입니다](https://www.vice.com/en/article/ywyqxw/apple-dark-mode-eye-strain-battery-life).
 
@@ -29,10 +26,9 @@ import Video from "../../../components/react/Video.tsx";
 // ...
 const initialTheme = document.documentElement.className;
 toggleButtonIcon(initialTheme);
-themeToggleBtn.addEventListener("click", () => {
+themeToggleBtn.addEventListener('click', () => {
   const currentTheme = document.documentElement.className;
-  document.documentElement.className =
-    currentTheme === "light" ? "dark" : "light";
+  document.documentElement.className = currentTheme === 'light' ? 'dark' : 'light';
   const newTheme = document.documentElement.className;
   toggleButtonIcon(newTheme);
 });
@@ -46,8 +42,8 @@ themeToggleBtn.addEventListener("click", () => {
 // ...
 let theme = document.documentElement.className;
 toggleButtonIcon(theme);
-themeToggleBtn.addEventListener("click", () => {
-  theme = theme === "light" ? "dark" : "light";
+themeToggleBtn.addEventListener('click', () => {
+  theme = theme === 'light' ? 'dark' : 'light';
   toggleButtonIcon(theme);
 });
 ```
@@ -83,8 +79,8 @@ themeToggleBtn.addEventListener("click", () => {
 두 개의 변수를 초기화하고 싶다고 가정해 봅시다:
 
 ```ts
-var helloMessage = "HELLO";
-var byeMessage = "SEEYA";
+var helloMessage = 'HELLO';
+var byeMessage = 'SEEYA';
 ```
 
 이 코드를 실행하면, 이 값들을 저장하기 위해 두 개의 메모리 "블록"이 [컴퓨터의 단기 기억 장치인 RAM](https://playfulprogramming.com/posts/how-computers-speak#ram)에 생성됩니다. 이는 다음과 같이 시각화할 수 있습니다:
@@ -112,9 +108,9 @@ var byeMessage = "SEEYA";
 `helloMessage` 변수를 `'HEYYO'`로 재할당하고 싶다고 가정해 봅시다:
 
 ```ts
-var helloMessage = "HELLO";
-var byeMessage = "SEEYA";
-helloMessage = "HEYYO";
+var helloMessage = 'HELLO';
+var byeMessage = 'SEEYA';
+helloMessage = 'HEYYO';
 ```
 
 이 코드 샘플의 처음 두 줄은 다음을 수행합니다:
@@ -151,8 +147,8 @@ helloMessage = "HEYYO";
 `HELLO`와 `HEYYO`는 같은 길이이지만, 다음과 같이 시도하면 어떻게 될까요?
 
 ```ts
-var helloMessage = "HELLO";
-helloMessage = "THIS IS A LONG HELLO";
+var helloMessage = 'HELLO';
+helloMessage = 'THIS IS A LONG HELLO';
 ```
 
 이 예제에서는 이전과 같은 값 길이를 갖지 않기 때문에 어쨌든 새 메모리 블록을 생성해야 합니다.
@@ -233,13 +229,13 @@ obj.val = 2;
 메모리 주소가 `0x8f031e0a`인 "name"이라는 문자열 변수가 있습니다.
 
 ```ts
-let name = "Corbin"; // 0x8f031e0a
+let name = 'Corbin'; // 0x8f031e0a
 ```
 
 이 변수를 "Crutchley"로 재할당하면, 앞서 설명한 것처럼 메모리 주소가 변경됩니다:
 
 ```ts
-name = "Crutchley"; // 0x8f031e0b으로 변경됨
+name = 'Crutchley'; // 0x8f031e0b으로 변경됨
 ```
 
 하지만 만약, 그 대신 JavaScript에게 기존 메모리 블록 안의 값을 바꾸도록 지시할 수 있다면 어떨까요?
@@ -273,9 +269,9 @@ obj.a = 345;
 그런데 이 섹션에서 사용한 예제에는 한 가지 작은 문제가 있습니다. 문자열은 변경(mutate)할 수 없습니다.
 
 ```ts
-const name = "Corbin";
+const name = 'Corbin';
 // 이는 동작하지 않으며, 에러를 발생시킵니다
-name = "Crutchley";
+name = 'Crutchley';
 ```
 
 #### 왜 문자열은 변경(mutate)할 수 없을까?
@@ -283,7 +279,7 @@ name = "Crutchley";
 다음 코드를 실행할 때 JavaScript 엔진 내부에서 어떤 일이 일어나는지 생각해 보세요:
 
 ```ts
-const name = "Corbin";
+const name = 'Corbin';
 ```
 
 이 코드에서 우리는 6글자 길이의 변수를 생성합니다. 이 문자들은 메모리 주소(예: `0x8f031e0a`)에 할당됩니다. 컴퓨터는 가능한 한 많은 메모리를 보존하고 싶어하기 때문에, `name`의 메모리 블록 `0x8f031e0a`에 6글자만 저장할 수 있을 만큼만 메모리 주소를 만듭니다.
@@ -326,7 +322,7 @@ const name = "Corbin";
 ```ts
 // 이는 내부적으로 새 변수를 생성합니다
 // 그런 다음 새 변수의 버전을 `user` 필드에 할당합니다
-user.firstName = "Cornbin";
+user.firstName = 'Cornbin';
 ```
 
 이렇게 함으로써, 다른 메모리 크기를 가진 새 변수를 만들면서도 객체 멤버의 위치를 참조적으로 안정되게 유지할 수 있습니다.
@@ -363,10 +359,9 @@ otherArr = [1, 2, 3];
 // ...
 const initialTheme = document.documentElement.className;
 toggleButtonIcon(initialTheme);
-themeToggleBtn.addEventListener("click", () => {
+themeToggleBtn.addEventListener('click', () => {
   const currentTheme = document.documentElement.className;
-  document.documentElement.className =
-    currentTheme === "light" ? "dark" : "light";
+  document.documentElement.className = currentTheme === 'light' ? 'dark' : 'light';
   const newTheme = document.documentElement.className;
   toggleButtonIcon(newTheme);
 });
@@ -378,8 +373,8 @@ themeToggleBtn.addEventListener("click", () => {
 // ...
 let theme = document.documentElement.className;
 toggleButtonIcon(theme);
-themeToggleBtn.addEventListener("click", () => {
-  theme = theme === "light" ? "dark" : "light";
+themeToggleBtn.addEventListener('click', () => {
+  theme = theme === 'light' ? 'dark' : 'light';
   toggleButtonIcon(theme);
 });
 ```
@@ -389,8 +384,7 @@ themeToggleBtn.addEventListener("click", () => {
 원래 코드가 다음을 수행했을 때:
 
 ```ts
-document.documentElement.className =
-  currentTheme === "light" ? "dark" : "light";
+document.documentElement.className = currentTheme === 'light' ? 'dark' : 'light';
 ```
 
 우리는 `document.documentElement` 객체 맵에 `className`의 변수 위치를 변경하라고 명시적으로 지시하고 있었습니다.
@@ -400,7 +394,7 @@ document.documentElement.className =
 ```ts
 let theme = document.documentElement.className;
 // ...
-theme = theme === "light" ? "dark" : "light";
+theme = theme === 'light' ? 'dark' : 'light';
 ```
 
 우리는 `theme`이라는 새 변수를 만들고 새 값을 기반으로 `theme`의 위치를 변경하고 있습니다. `className`은 문자열이며, [JavaScript 원시 타입(primitive)이지 객체가 아니기 때문에](https://developer.mozilla.org/en-US/docs/Glossary/Primitive), `document.documentElement`을 변경(mutate)하지 않으며 따라서 `HTML` 태그의 클래스도 변경되지 않습니다.

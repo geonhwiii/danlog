@@ -61,19 +61,19 @@ _"절차적인 코드는 나쁜 코드일까요?"_
 
 ```tsx
 // /components/ProceduralUserList.tsx
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 interface User {
   id: number;
   name: string;
-  role: "admin" | "user";
+  role: 'admin' | 'user';
   email: string;
 }
 
 const users: User[] = [
-  { id: 1, name: "김철수", role: "admin", email: "kim@example.com" },
-  { id: 2, name: "이영희", role: "user", email: "lee@example.com" },
-  { id: 3, name: "박민수", role: "admin", email: "park@example.com" },
+  { id: 1, name: '김철수', role: 'admin', email: 'kim@example.com' },
+  { id: 2, name: '이영희', role: 'user', email: 'lee@example.com' },
+  { id: 3, name: '박민수', role: 'admin', email: 'park@example.com' },
 ];
 
 export default function ProceduralUserList() {
@@ -87,7 +87,7 @@ export default function ProceduralUserList() {
       const user = users[i];
 
       // 2단계: 관리자인지 확인
-      if (user.role === "admin") {
+      if (user.role === 'admin') {
         result.push(user);
       }
     }
@@ -117,19 +117,19 @@ export default function ProceduralUserList() {
 
 ```tsx
 // /components/DeclarativeUserList.tsx
-import { useState } from "react";
+import { useState } from 'react';
 
 interface User {
   id: number;
   name: string;
-  role: "admin" | "user";
+  role: 'admin' | 'user';
   email: string;
 }
 
 const users: User[] = [
-  { id: 1, name: "탄지로", role: "admin", email: "tan@example.com" },
-  { id: 2, name: "네즈코", role: "user", email: "nae@example.com" },
-  { id: 3, name: "젠이츠", role: "admin", email: "zen@example.com" },
+  { id: 1, name: '탄지로', role: 'admin', email: 'tan@example.com' },
+  { id: 2, name: '네즈코', role: 'user', email: 'nae@example.com' },
+  { id: 3, name: '젠이츠', role: 'admin', email: 'zen@example.com' },
 ];
 
 export default function DeclarativeUserList() {
@@ -139,17 +139,13 @@ export default function DeclarativeUserList() {
     <div>
       <h2>사용자 목록</h2>
       <label>
-        <input
-          type="checkbox"
-          checked={showAdminsOnly}
-          onChange={(e) => setShowAdminsOnly(e.target.checked)}
-        />
+        <input type="checkbox" checked={showAdminsOnly} onChange={(e) => setShowAdminsOnly(e.target.checked)} />
         관리자만 보기
       </label>
       <ul>
         {users
           // 1. 필터링: "관리자만 보기"가 체크되어 있으면 관리자만, 아니면 모든 사용자
-          .filter((user) => !showAdminsOnly || user.role === "admin")
+          .filter((user) => !showAdminsOnly || user.role === 'admin')
           // 2. 변환: 각 사용자 객체를 JSX 요소로 변환
           .map((user) => (
             <li key={user.id}>
@@ -184,14 +180,11 @@ export default function DeclarativeUserList() {
 
 ```ts
 // /lib/listPipeline.ts
-export const filterByKeyword = (keyword: string) => (items: string[]) =>
-  items.filter((item) => item.includes(keyword));
+export const filterByKeyword = (keyword: string) => (items: string[]) => items.filter((item) => item.includes(keyword));
 
-export const normalize = (items: string[]) =>
-  items.map((item) => item.trim().toLowerCase());
+export const normalize = (items: string[]) => items.map((item) => item.trim().toLowerCase());
 
-export const toViewModel = (items: string[]) =>
-  items.map((item) => ({ id: item, label: item }));
+export const toViewModel = (items: string[]) => items.map((item) => ({ id: item, label: item }));
 
 // 파이프 합성 (간단한 compose 구현)
 export const compose =
@@ -199,12 +192,11 @@ export const compose =
   (arg: any) =>
     fns.reduceRight((v, f) => f(v), arg);
 
-export const buildPipeline = (keyword: string) =>
-  compose(toViewModel, normalize, filterByKeyword(keyword));
+export const buildPipeline = (keyword: string) => compose(toViewModel, normalize, filterByKeyword(keyword));
 
 // 사용
-const pipeline = buildPipeline("app");
-const result = pipeline(["apple", "banana", "pineapple"]);
+const pipeline = buildPipeline('app');
+const result = pipeline(['apple', 'banana', 'pineapple']);
 // result => [{id: 'apple', label: 'apple'}, {id: 'pineapple', label: 'pineapple'}]
 ```
 
@@ -234,7 +226,7 @@ const processPayment = (amount: number, paymentMethod: string) => {
     ?.process(amount)
     .catch((error) => {
       // 에러 처리가 애매함 - 어떤 단계에서 실패했는지 모름
-      console.error("결제 실패");
+      console.error('결제 실패');
       throw error;
     });
 };
@@ -245,12 +237,12 @@ const processPayment = async (amount: number, paymentMethod: string) => {
     // 1단계: 결제 수단 검증
     const method = paymentMethods.find((m) => m.type === paymentMethod);
     if (!method) {
-      throw new Error("지원하지 않는 결제 수단입니다");
+      throw new Error('지원하지 않는 결제 수단입니다');
     }
 
     // 2단계: 금액 검증
     if (amount <= 0) {
-      throw new Error("결제 금액이 올바르지 않습니다");
+      throw new Error('결제 금액이 올바르지 않습니다');
     }
 
     // 3단계: 결제 처리
@@ -262,7 +254,7 @@ const processPayment = async (amount: number, paymentMethod: string) => {
     return result;
   } catch (error) {
     // 5단계: 에러 처리 및 복구
-    console.error("결제 실패:", error.message);
+    console.error('결제 실패:', error.message);
 
     // 실패한 결제에 대한 롤백 처리
     await rollbackPayment(amount, paymentMethod);

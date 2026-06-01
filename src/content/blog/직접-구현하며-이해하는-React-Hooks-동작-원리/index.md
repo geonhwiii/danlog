@@ -1,7 +1,7 @@
 ---
-title: "직접 구현하며 이해하는 React Hooks 내부 동작 원리"
-description: "React의 Hooks를 직접 구현해보며 동작 원리와 성능 최적화에 대해 알아봅니다."
-date: "07 25 2025"
+title: '직접 구현하며 이해하는 React Hooks 내부 동작 원리'
+description: 'React의 Hooks를 직접 구현해보며 동작 원리와 성능 최적화에 대해 알아봅니다.'
+date: '07 25 2025'
 tags:
   - React
 ---
@@ -41,7 +41,7 @@ export const shallowEquals = (a: unknown, b: unknown) => {
   }
 
   // 객체의 경우 각 속성값을 === 로 비교
-  if (typeof a === "object" && typeof b === "object") {
+  if (typeof a === 'object' && typeof b === 'object') {
     const keysA = Object.keys(a as Record<string, unknown>);
     const keysB = Object.keys(b as Record<string, unknown>);
     if (keysA.length !== keysB.length) return false;
@@ -69,7 +69,7 @@ export const deepEquals = (a: unknown, b: unknown) => {
     return true;
   }
 
-  if (typeof a === "object" && typeof b === "object") {
+  if (typeof a === 'object' && typeof b === 'object') {
     const keysA = Object.keys(a as Record<string, unknown>);
     const keysB = Object.keys(b as Record<string, unknown>);
     if (keysA.length !== keysB.length) return false;
@@ -112,11 +112,7 @@ type MemoState<T> = {
   deps: DependencyList;
 };
 
-export function useMemo<T>(
-  factory: () => T,
-  _deps: DependencyList,
-  _equals = shallowEquals,
-): T {
+export function useMemo<T>(factory: () => T, _deps: DependencyList, _equals = shallowEquals): T {
   const memoRef = useRef<MemoState<T>>();
 
   // 캐시된 값이 있다면,
@@ -139,10 +135,7 @@ export function useMemo<T>(
 ### useCallback: 함수의 메모이제이션
 
 ```typescript
-export function useCallback<T extends (...args: any[]) => any>(
-  callback: T,
-  deps: DependencyList,
-): T {
+export function useCallback<T extends (...args: any[]) => any>(callback: T, deps: DependencyList): T {
   return useMemo(() => callback, deps);
 }
 ```
@@ -168,17 +161,12 @@ export function useDeepMemo<T>(factory: () => T, deps: DependencyList): T {
 ### useShallowState: 얕은 비교로 최적화된 상태
 
 ```typescript
-export function useShallowState<T>(
-  initialValue: T | (() => T),
-): [T, React.Dispatch<React.SetStateAction<T>>] {
+export function useShallowState<T>(initialValue: T | (() => T)): [T, React.Dispatch<React.SetStateAction<T>>] {
   const [state, setState] = useState(initialValue);
 
   const setShallowState = useCallback((newValue: T | ((prev: T) => T)) => {
     setState((prevState) => {
-      const nextState =
-        typeof newValue === "function"
-          ? (newValue as (prev: T) => T)(prevState)
-          : newValue;
+      const nextState = typeof newValue === 'function' ? (newValue as (prev: T) => T)(prevState) : newValue;
 
       // 얕은 비교 값이 같다면 이전 상태 반환
       if (shallowEquals(nextState, prevState)) {
@@ -243,10 +231,7 @@ export const useAutoCallback = <T extends AnyFunction>(fn: T): T => {
 ### memo 구현
 
 ```typescript
-export function memo<P extends object>(
-  Component: FunctionComponent<P>,
-  equals = shallowEquals,
-) {
+export function memo<P extends object>(Component: FunctionComponent<P>, equals = shallowEquals) {
   return function MemoComponent(props: P) {
     const prevPropsRef = useRef<P>();
     const prevElementRef = useRef<ReactElement>();

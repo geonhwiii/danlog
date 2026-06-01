@@ -1,7 +1,7 @@
 ---
-title: "React Native (Expo) testflight CI/CD 적용하기"
-description: "React Native (Expo) 프로젝트 ios testflight CI/CD 적용하기"
-date: "05 27 2025"
+title: 'React Native (Expo) testflight CI/CD 적용하기'
+description: 'React Native (Expo) 프로젝트 ios testflight CI/CD 적용하기'
+date: '05 27 2025'
 tags:
   - React Native
 ---

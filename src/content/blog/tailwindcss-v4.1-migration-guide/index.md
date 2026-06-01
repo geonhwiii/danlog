@@ -1,8 +1,8 @@
 ---
-title: "tailwindcss v4.1 마이그레이션 진행하기"
-description: "tailwindcss v3.4.3 ~> v4.1.0 마이그레이션 가이드"
-date: "05 07 2025"
-image: "https://tailwindcss.com/_next/static/media/card.09319a01.jpg"
+title: 'tailwindcss v4.1 마이그레이션 진행하기'
+description: 'tailwindcss v3.4.3 ~> v4.1.0 마이그레이션 가이드'
+date: '05 07 2025'
+image: 'https://tailwindcss.com/_next/static/media/card.09319a01.jpg'
 tags:
   - CSS
 ---
@@ -35,7 +35,7 @@ npm install tailwindcss @tailwindcss/postcss postcss
 // postcss.config.mjs
 export default {
   plugins: {
-    "@tailwindcss/postcss": {},
+    '@tailwindcss/postcss': {},
   },
 };
 ```
@@ -44,8 +44,8 @@ export default {
 
 ```ts
 // vite.config.ts
-import { defineConfig } from "vite";
-import tailwindcss from "@tailwindcss/vite";
+import { defineConfig } from 'vite';
+import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   plugins: [tailwindcss()],
 });
@@ -57,7 +57,7 @@ export default defineConfig({
 
 ```css
 /* globals.css */
-@import "tailwindcss";
+@import 'tailwindcss';
 ```
 
 <br />
@@ -141,7 +141,7 @@ export default defineConfig({
 /* globals.css */
 
 @custom-variant theme-blue {
-  &:where([data-theme="blue"] *) {
+  &:where([data-theme='blue'] *) {
     @slot;
   }
 }
@@ -198,8 +198,8 @@ export default defineConfig({
 ```css
 /* globals.css */
 
-@import "tailwindcss";
-@import "@acme/config-tailwind/theme.css";
+@import 'tailwindcss';
+@import '@acme/config-tailwind/theme.css';
 
 @source "../../../../packages/ui";
 

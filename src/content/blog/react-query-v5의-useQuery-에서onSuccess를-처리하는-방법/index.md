@@ -1,7 +1,7 @@
 ---
-title: "react-query v5의 useQuery에서 onSuccess를 깔끔하게 처리하는 방법"
-description: "tanstack/react-query v5에서 onSuccess/onError 등의 콜백을 깔끔하게 처리하는 방법이 무엇인지 알아봅니다."
-date: "03 16 2025"
+title: 'react-query v5의 useQuery에서 onSuccess를 깔끔하게 처리하는 방법'
+description: 'tanstack/react-query v5에서 onSuccess/onError 등의 콜백을 깔끔하게 처리하는 방법이 무엇인지 알아봅니다.'
+date: '03 16 2025'
 image: https://github.com/tanstack/query/raw/main/media/repo-header.png
 tags:
   - React
@@ -13,7 +13,7 @@ tags:
 
 ```tsx
 useQuery({
-  queryKey: ["user"],
+  queryKey: ['user'],
   queryFn: fetchUser,
   onSuccess: (data) => {
     reset(data); // 폼 초기값 설정
@@ -41,9 +41,9 @@ useQuery({
 // ComponentA.tsx
 function ComponentA() {
   const { data } = useQuery({
-    queryKey: ["user"],
+    queryKey: ['user'],
     queryFn: fetchUser,
-    onSuccess: () => console.log("ComponentA onSuccess"), // 호출됨
+    onSuccess: () => console.log('ComponentA onSuccess'), // 호출됨
   });
   return <div>{data?.name}</div>;
 }
@@ -51,9 +51,9 @@ function ComponentA() {
 // ComponentB.tsx
 function ComponentB() {
   const { data } = useQuery({
-    queryKey: ["user"],
+    queryKey: ['user'],
     queryFn: fetchUser,
-    onSuccess: () => console.log("ComponentB onSuccess"), // 이것도 호출됨
+    onSuccess: () => console.log('ComponentB onSuccess'), // 이것도 호출됨
   });
   return <div>{data?.email}</div>;
 }
@@ -83,7 +83,7 @@ function App() {
 // ❌ 비즈니스 로직이 useQuery에 묶여있음
 function UserProfile() {
   const { data } = useQuery({
-    queryKey: ["user"],
+    queryKey: ['user'],
     queryFn: fetchUser,
     onSuccess: (user) => {
       // 전역 상태 업데이트
@@ -114,12 +114,12 @@ Dominic이라는 개발자의 개발 철학을 엿볼수 있는 부분입니다.
 ```tsx
 // onSuccess를 useEffect로 대체
 const query = useQuery({
-  queryKey: ["user"],
+  queryKey: ['user'],
   queryFn: fetchUserData,
 });
 useEffect(() => {
   if (query.data) {
-    console.log("[onSuccess] :", query.data);
+    console.log('[onSuccess] :', query.data);
   }
 }, [query.data]);
 ```
@@ -130,13 +130,13 @@ useEffect(() => {
 // onError를 useEffect로 대체
 export function useTodos() {
   const query = useQuery({
-    queryKey: ["todos", "list"],
+    queryKey: ['todos', 'list'],
     queryFn: fetchTodos,
   });
 
   React.useEffect(() => {
     if (query.error) {
-      console.error("[onError] :", query.error);
+      console.error('[onError] :', query.error);
     }
   }, [query.error]);
 
@@ -153,8 +153,8 @@ export function useTodos() {
 아래는 `useQueryEffects` 훅의 구현입니다.
 
 ```tsx
-import { useEffect, useRef } from "react";
-import type { UseQueryResult } from "@tanstack/react-query";
+import { useEffect, useRef } from 'react';
+import type { UseQueryResult } from '@tanstack/react-query';
 
 type QueryEffectsOptions<TData, TError> = {
   onSuccess?: (data: TData) => void;
@@ -197,25 +197,13 @@ export function useQueryEffects<TData, TError>(
     }
 
     // 완료 상태(성공 또는 에러) 확인 및 콜백 실행 (새로운 완료 상태일 때만)
-    if (
-      (isSuccess || isError) &&
-      onSettled &&
-      !(prevState.isSuccess || prevState.isError)
-    ) {
+    if ((isSuccess || isError) && onSettled && !(prevState.isSuccess || prevState.isError)) {
       onSettled(data, error);
     }
 
     // 현재 상태 저장
     prevStateRef.current = { isSuccess, isError, data, error };
-  }, [
-    query.isSuccess,
-    query.isError,
-    query.data,
-    query.error,
-    onSuccess,
-    onError,
-    onSettled,
-  ]);
+  }, [query.isSuccess, query.isError, query.data, query.error, onSuccess, onError, onSettled]);
 
   return query;
 }
@@ -225,19 +213,19 @@ export function useQueryEffects<TData, TError>(
 
 ```tsx
 const query = useQuery({
-  queryKey: ["user"],
+  queryKey: ['user'],
   queryFn: fetchUserData,
 });
 
 useQueryEffects(query, {
   onSuccess: (data) => {
-    console.log("[onSuccess]:", data);
+    console.log('[onSuccess]:', data);
   },
   onError: (error) => {
-    console.error("[onError]:", error);
+    console.error('[onError]:', error);
   },
   onSettled: (data, error) => {
-    console.log("[onSettled]:", data, error);
+    console.log('[onSettled]:', data, error);
   },
 });
 ```
@@ -256,7 +244,7 @@ useQueryEffects(query, {
 // ❌ useEffect로 폼 초기값 동기화
 function EditProfile() {
   const { data, isLoading } = useQuery({
-    queryKey: ["user"],
+    queryKey: ['user'],
     queryFn: fetchUser,
   });
 
@@ -272,8 +260,8 @@ function EditProfile() {
 
   return (
     <form>
-      <input {...register("name")} />
-      <input {...register("email")} />
+      <input {...register('name')} />
+      <input {...register('email')} />
     </form>
   );
 }
@@ -291,7 +279,7 @@ function EditProfilePage() {
 
 function EditProfile() {
   const { data } = useSuspenseQuery({
-    queryKey: ["user"],
+    queryKey: ['user'],
     queryFn: fetchUser,
   });
 
@@ -302,8 +290,8 @@ function EditProfile() {
 
   return (
     <form>
-      <input {...register("name")} />
-      <input {...register("email")} />
+      <input {...register('name')} />
+      <input {...register('email')} />
     </form>
   );
 }

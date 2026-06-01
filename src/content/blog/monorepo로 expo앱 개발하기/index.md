@@ -1,7 +1,7 @@
 ---
-title: "monorepo로 expo 앱 개발하기"
-description: "monorepo로 expo 앱 개발하기"
-date: "12 30 2024"
+title: 'monorepo로 expo 앱 개발하기'
+description: 'monorepo로 expo 앱 개발하기'
+date: '12 30 2024'
 tags:
   - React Native
 ---
@@ -112,16 +112,16 @@ npx create-expo-app@latest
 ```tsx
 // apps/mobile1/metro.config.js
 
-const { getDefaultConfig } = require("expo/metro-config");
-const { withNativeWind } = require("nativewind/metro");
+const { getDefaultConfig } = require('expo/metro-config');
+const { withNativeWind } = require('nativewind/metro');
 
-const path = require("path");
+const path = require('path');
 
 // 1. 프로젝트 파일 위치를 찾습니다.
 const projectRoot = __dirname;
 
 // 2. 모노레포의 루트 파일 위치를 찾습니다.
-const monorepoRoot = path.resolve(projectRoot, "../..");
+const monorepoRoot = path.resolve(projectRoot, '../..');
 
 /** @type {import('expo/metro-config').MetroConfig} */
 const config = getDefaultConfig(projectRoot);
@@ -131,13 +131,13 @@ config.watchFolders = [monorepoRoot];
 
 // 4. 각 프로젝트의 node_modules를 metro에게 알려줍니다.
 config.resolver.nodeModulesPaths = [
-  path.resolve(projectRoot, "node_modules"),
-  path.resolve(monorepoRoot, "node_modules"),
+  path.resolve(projectRoot, 'node_modules'),
+  path.resolve(monorepoRoot, 'node_modules'),
 ];
 config.resolver.disableHierarchicalLookup = true;
 
 // 5. nativewind를 사용한다면, 아래와 같이 withNativeWind를 감싸주세요.
-module.exports = withNativeWind(config, { input: "./styles/global.css" });
+module.exports = withNativeWind(config, { input: './styles/global.css' });
 ```
 
 이제 거의 다 왔습니다.

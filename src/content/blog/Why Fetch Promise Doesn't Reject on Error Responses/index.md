@@ -1,8 +1,8 @@
 ---
-title: "[번역] Why Fetch Promise Doesn`t Reject on Error Responses"
-description: "오류 응답에서 fetch가 거부되지 않는 이유"
-date: "01 02 2024"
-image: "https://i.imgur.com/ahP0JC8.png"
+title: '[번역] Why Fetch Promise Doesn`t Reject on Error Responses'
+description: '오류 응답에서 fetch가 거부되지 않는 이유'
+date: '01 02 2024'
+image: 'https://i.imgur.com/ahP0JC8.png'
 tags:
   - 번역
   - JavaScript

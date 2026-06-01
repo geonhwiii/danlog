@@ -1,8 +1,8 @@
 ---
-title: "5분만에 추가하는 Claude Code PR Review Bot"
-description: "Claude Code Github Actions를 활용해 5분만에 PR Review Bot을 설정하는 방법을 소개합니다."
-date: "04 21 2026"
-image: "https://i.imgur.com/DpujWbM.png"
+title: '5분만에 추가하는 Claude Code PR Review Bot'
+description: 'Claude Code Github Actions를 활용해 5분만에 PR Review Bot을 설정하는 방법을 소개합니다.'
+date: '04 21 2026'
+image: 'https://i.imgur.com/DpujWbM.png'
 tags:
   - AI
 ---

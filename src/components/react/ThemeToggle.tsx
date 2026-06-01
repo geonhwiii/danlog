@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-type Theme = "light" | "dark";
+type Theme = 'light' | 'dark';
 
 function getCurrentTheme(): Theme {
-  if (typeof document === "undefined") return "light";
-  return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+  if (typeof document === 'undefined') return 'light';
+  return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
 }
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>('light');
 
   // Sync from the DOM after hydration (the pre-paint script already set it).
   useEffect(() => {
@@ -16,23 +16,23 @@ export default function ThemeToggle() {
   }, []);
 
   function toggle() {
-    const next: Theme = theme === "dark" ? "light" : "dark";
+    const next: Theme = theme === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = next;
     try {
-      localStorage.setItem("danlog-theme", next);
+      localStorage.setItem('danlog-theme', next);
     } catch {
       /* storage unavailable — fine */
     }
     setTheme(next);
   }
 
-  const isDark = theme === "dark";
+  const isDark = theme === 'dark';
 
   return (
     <button
       type="button"
       onClick={toggle}
-      aria-label={isDark ? "라이트 모드로 전환" : "다크 모드로 전환"}
+      aria-label={isDark ? '라이트 모드로 전환' : '다크 모드로 전환'}
       aria-pressed={isDark}
       className="grid h-9 w-9 place-items-center rounded-md text-ink transition-colors hover:bg-surface-strong"
     >

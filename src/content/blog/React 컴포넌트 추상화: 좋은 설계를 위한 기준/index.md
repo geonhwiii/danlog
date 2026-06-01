@@ -1,7 +1,7 @@
 ---
-title: "React 컴포넌트 추상화: 좋은 설계를 위한 기준"
-description: "추상화를 어떻게 설계해야 하는지, 좋은 추상화의 기준과 실용적인 예시를 통해 효과적인 UI 컴포넌트 설계 방법을 안내합니다."
-date: "01 22 2026"
+title: 'React 컴포넌트 추상화: 좋은 설계를 위한 기준'
+description: '추상화를 어떻게 설계해야 하는지, 좋은 추상화의 기준과 실용적인 예시를 통해 효과적인 UI 컴포넌트 설계 방법을 안내합니다.'
+date: '01 22 2026'
 image: https://i.imgur.com/oMNXec3.png
 tags:
   - React
@@ -84,11 +84,7 @@ React로 개발하다 보면 자주 마주치는 고민입니다. 너무 잘게 
 ### ✅ 좋은 예시
 
 ```tsx
-<CartItem
-  item={item}
-  onQuantityChange={handleQuantityChange}
-  onRemove={handleRemove}
-/>
+<CartItem item={item} onQuantityChange={handleQuantityChange} onRemove={handleRemove} />
 ```
 
 props가 컴포넌트의 역할을 설명합니다.
@@ -129,12 +125,7 @@ HTML에서 제공하는 컴포넌트를 보며 한 번 생각을 해볼까요?
 ### ⚠️ 보폭이 넓은 예시 (나쁜 예시)
 
 ```tsx
-<ImageUploader
-  s3Bucket={bucket}
-  presignedUrl={url}
-  maxFileSizeMB={10}
-  allowedMimeTypes={["image/png", "image/jpeg"]}
-/>
+<ImageUploader s3Bucket={bucket} presignedUrl={url} maxFileSizeMB={10} allowedMimeTypes={['image/png', 'image/jpeg']} />
 // "이미지를 올린다"는 개념인데, props는 S3, presigned URL 등 구현 세부사항
 ```
 
@@ -219,9 +210,9 @@ function BookStorePage() {
 ```tsx
 <input
   type="text"
-  value={price ? price.toLocaleString() : ""}
+  value={price ? price.toLocaleString() : ''}
   onChange={(e) => {
-    const numericValue = e.target.value.replace(/[^0-9]/g, "");
+    const numericValue = e.target.value.replace(/[^0-9]/g, '');
     setPrice(numericValue ? Number(numericValue) : 0);
   }}
   placeholder="가격을 입력하세요"

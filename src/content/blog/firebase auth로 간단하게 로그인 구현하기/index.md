@@ -1,8 +1,8 @@
 ---
-title: "firebase auth로 간단하게 로그인 구현하기"
-description: "firebase auth 로그인"
-date: "12 26 2023"
-image: "https://i.imgur.com/8ARBbAx.png"
+title: 'firebase auth로 간단하게 로그인 구현하기'
+description: 'firebase auth 로그인'
+date: '12 26 2023'
+image: 'https://i.imgur.com/8ARBbAx.png'
 tags:
   - React
 ---
@@ -37,8 +37,8 @@ REACT_APP_APP_ID=1:************:web:***********
 
 ```ts
 // @/lib/firebase.ts
-import { initializeApp, FirebaseApp, getApp } from "firebase/app";
-import "firebase/auth";
+import { initializeApp, FirebaseApp, getApp } from 'firebase/app';
+import 'firebase/auth';
 
 export let app: FirebaseApp;
 
@@ -52,9 +52,9 @@ const firebaseConfig = {
 };
 
 try {
-  app = getApp("app");
+  app = getApp('app');
 } catch (err) {
-  app = initializeApp(firebaseConfig, "app");
+  app = initializeApp(firebaseConfig, 'app');
 }
 
 export const firebase = initializeApp(firebaseConfig);
@@ -93,10 +93,10 @@ const onSignUp = async (e: FormEvent<HTMLFormElement>) => {
   try {
     const auth = getAuth(app);
     await createUserWithEmailAndPassword(auth, email, password);
-    toast.success("회원가입에 성공했습니다.");
+    toast.success('회원가입에 성공했습니다.');
   } catch (err) {
     console.log(err);
-    toast.error("회원가입에 실패하였습니다.");
+    toast.error('회원가입에 실패하였습니다.');
   }
 };
 ```
@@ -106,14 +106,14 @@ const onSignUp = async (e: FormEvent<HTMLFormElement>) => {
 `signInWithEmailAndPassword`를 사용해 로그인을 하고, 성공 시 `toast`를 출력해 확인합니다.
 
 ```tsx
-import { app } from "@/lib/firebase";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { app } from '@/lib/firebase';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 // @/pages/login/index.tsx
 const onSignIn = () => {
   const auth = getAuth(app);
   await signInWithEmailAndPassword(auth, email, password);
-  toast.success("로그인에 성공하였습니다.");
+  toast.success('로그인에 성공하였습니다.');
 };
 ```
 
@@ -126,10 +126,10 @@ const onSignOut = async () => {
   try {
     const auth = getAuth(app);
     await signOut(auth);
-    toast.success("로그아웃되었습니다.");
+    toast.success('로그아웃되었습니다.');
   } catch (err) {
     console.log(err);
-    toast.error("로그아웃에 실패하였습니다.");
+    toast.error('로그아웃에 실패하였습니다.');
   }
 };
 ```

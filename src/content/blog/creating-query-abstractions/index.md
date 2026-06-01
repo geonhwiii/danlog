@@ -1,8 +1,8 @@
 ---
-title: "[번역] Creating Query Abstractions"
-description: "React Query에서 커스텀 훅 대신 queryOptions를 활용하여 더 나은 쿼리 추상화를 만드는 방법에 대해 알아봅니다."
-date: "2026-02-24"
-image: "https://tkdodo.eu/blog/og-images/creating-query-abstractions.png"
+title: '[번역] Creating Query Abstractions'
+description: 'React Query에서 커스텀 훅 대신 queryOptions를 활용하여 더 나은 쿼리 추상화를 만드는 방법에 대해 알아봅니다.'
+date: '2026-02-24'
+image: 'https://tkdodo.eu/blog/og-images/creating-query-abstractions.png'
 tags:
   - 번역
   - React
@@ -24,7 +24,7 @@ React에서 추상화를 만드는 것은 대개 커스텀 훅(custom hooks)과 
 ```ts
 function useInvoice(id: number) {
   return useQuery({
-    queryKey: ["invoice", id],
+    queryKey: ['invoice', id],
     queryFn: () => fetchInvoice(id),
   });
 }
@@ -44,7 +44,7 @@ const { data } = useInvoice(1);
 ```ts
 function useInvoice(id: number, staleTime?: number) {
   return useQuery({
-    queryKey: ["invoice", id],
+    queryKey: ['invoice', id],
     queryFn: () => fetchInvoice(id),
     staleTime,
   });
@@ -54,12 +54,9 @@ function useInvoice(id: number, staleTime?: number) {
 이 정도까지는 아직 괜찮아 보입니다. 하지만 그 다음 순간, 누군가 Query를 에러 바운더리(Error Boundaries)와 통합하고 싶어서 `throwOnError`를 전달하고 싶어할지도 모릅니다. 알겠습니다, 하지만 그렇게 매개변수가 많아지는 것은 좋은 인터페이스가 아닙니다. 애초에 그냥 객체로 만들었어야 했나 봅니다.
 
 ```ts
-function useInvoice(
-  id: number,
-  options?: { staleTime?: number; throwOnError?: boolean },
-) {
+function useInvoice(id: number, options?: { staleTime?: number; throwOnError?: boolean }) {
   return useQuery({
-    queryKey: ["invoice", id],
+    queryKey: ['invoice', id],
     queryFn: () => fetchInvoice(id),
     ...options,
   });
@@ -73,11 +70,11 @@ function useInvoice(
 조금 더 깊이 파고들어보면, React Query가 `UseQueryOptions`라는 타입을 노출한다는 것을 알 수 있습니다. 우리가 원하는 것 같네요.
 
 ```ts
-import type { UseQueryOptions } from "@tanstack/react-query";
+import type { UseQueryOptions } from '@tanstack/react-query';
 
 function useInvoice(id: number, options?: Partial<UseQueryOptions>) {
   return useQuery({
-    queryKey: ["invoice", id],
+    queryKey: ['invoice', id],
     queryFn: () => fetchInvoice(id),
     ...options,
   });
@@ -115,7 +112,7 @@ TanStack Query는 제네릭이 4개뿐이라서 어떻게든 다시 만들어볼
 ```ts
 function useInvoice(id: number, options?: Partial<UseQueryOptions<Invoice>>) {
   return useQuery({
-    queryKey: ["invoice", id],
+    queryKey: ['invoice', id],
     queryFn: () => fetchInvoice(id),
     ...options,
   });
@@ -161,11 +158,11 @@ function queryOptions(options) {
 하지만 타입 레벨에서는 진정한 강자로 변모하여, 쿼리 설정들을 공유하는 최고의 방법이 됩니다.
 
 ```ts
-import { queryOptions } from "@tanstack/react-query";
+import { queryOptions } from '@tanstack/react-query';
 
 function invoiceOptions(id: number) {
   return queryOptions({
-    queryKey: ["invoice", id],
+    queryKey: ['invoice', id],
     queryFn: () => fetchInvoice(id),
   });
 }
@@ -184,11 +181,11 @@ const { data: invoice2 } = useSuspenseQuery(invoiceOptions(2));
 다행스러운 소식은, 그럴 필요가 없다는 것입니다. 핵심 아이디어는 `invoiceOptions`가 **모든 사용처 간에 공유하고자 하는 옵션들만 포함**한다는 것입니다. 가장 좋은 추상화는 외부에서 별도로 설정을 주입받지 않는(not configurable) 형태이므로, 우리는 이 상태를 그대로 유지하면 됩니다. 다른 옵션을 설정하고 싶다면, 사용되는 곳에서 `invoiceOptions` 위에 직접 옵션들을 전달하기만 하면 됩니다.
 
 ```ts
-import { queryOptions } from "@tanstack/react-query";
+import { queryOptions } from '@tanstack/react-query';
 
 function invoiceOptions(id: number) {
   return queryOptions({
-    queryKey: ["invoice", id],
+    queryKey: ['invoice', id],
     queryFn: () => fetchInvoice(id),
   });
 }

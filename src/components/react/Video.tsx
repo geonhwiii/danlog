@@ -26,11 +26,7 @@ export default function Video({
         playsInline
         src={src}
       />
-      {caption && (
-        <figcaption className="caption px-4 pb-3 pt-2 text-center text-muted">
-          {caption}
-        </figcaption>
-      )}
+      {caption && <figcaption className="caption px-4 pb-3 pt-2 text-center text-muted">{caption}</figcaption>}
     </figure>
   );
 }
