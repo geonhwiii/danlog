@@ -1,133 +1,350 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 
-const features = [
-  {
-    title: "글쓰기",
-    body: "개발하며 배운 것, 부딪힌 문제와 해결 과정을 기록합니다. 코드와 함께.",
-  },
-  {
-    title: "만든 것",
-    body: "사이드 프로젝트와 작은 실험들. 스토어에서 직접 만든 것들을 공유합니다.",
-  },
-  {
-    title: "생각",
-    body: "기술 너머의 일상과 생각. 천천히, 편집장의 호흡으로 적어 내려갑니다.",
-  },
-];
+// Latest posts — the "Recent highlights" equivalent of Cursor's landing.
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 4);
 
-// In-product agent timeline stages — pastels scoped to this mockup only (DESIGN.md).
-const timeline = [
-  { label: "Thinking", cls: "bg-timeline-thinking text-ink" },
-  { label: "Grep", cls: "bg-timeline-grep text-ink" },
-  { label: "Read", cls: "bg-timeline-read text-ink" },
-  { label: "Edit", cls: "bg-timeline-edit text-ink" },
-  { label: "Done", cls: "bg-timeline-done text-on-primary" },
+const fmt = (d: Date) =>
+  new Intl.DateTimeFormat("ko-KR", { year: "numeric", month: "long", day: "numeric" }).format(d);
+
+// Quiet topics strip — the personal-blog answer to Cursor's logo wall.
+const topics = ["React", "TypeScript", "Astro", "Performance", "Architecture", "Tooling"];
+
+// Hero editor — the latest 5 posts rendered as real, clickable .md files.
+const editorPosts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 5);
+
+const esc = (s: string) =>
+  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const ymd = (d: Date) => d.toISOString().slice(0, 10);
+
+// Light markdown highlight: headings → orange, everything else plain ink/body.
+const highlightBody = (raw: string) => {
+  const lines = (raw ?? "").replace(/\r/g, "").split("\n");
+  let start = 0;
+  while (
+    start < lines.length &&
+    (lines[start].trim() === "" || /^(import|export)\b/.test(lines[start].trim()))
+  )
+    start++;
+  const out: string[] = [];
+  for (let i = start; i < lines.length && out.length < 13; i++) {
+    const line = lines[i];
+    if (/^\s*!\[[^\]]*\]\([^)]*\)\s*$/.test(line)) continue; // drop standalone images
+    if (out.length === 0 && line.trim() === "") continue;
+    const e = esc(line);
+    out.push(
+      /^\s*#{1,6}\s/.test(line)
+        ? `<span style="color: var(--color-primary)">${e}</span>`
+        : e,
+    );
+  }
+  return out.join("\n");
+};
+
+const editorFiles = editorPosts.map((post) => {
+  const tags = post.data.tags.length ? post.data.tags.join(", ") : "post";
+  const frontmatter =
+    `<span class="text-muted">---</span>\n` +
+    `title: <span class="text-success">"${esc(post.data.title)}"</span>\n` +
+    `date: <span class="text-success">${ymd(post.data.date)}</span>\n` +
+    `tags: [<span class="text-success">${esc(tags)}</span>]\n` +
+    `<span class="text-muted">---</span>`;
+  return {
+    id: post.id,
+    name: `${post.id}.md`,
+    href: `/blog/${post.id}`,
+    html: `${frontmatter}\n\n${highlightBody((post as { body?: string }).body ?? "")}`,
+  };
+});
+
+// Alternating editorial sections — Cursor's "Agents turn ideas into code" rhythm.
+const sections = [
+  {
+    eyebrow: "글쓰기",
+    title: "배운 것을 코드와 함께 기록합니다",
+    body: "개발하며 부딪힌 문제와 해결 과정을, 추상적인 요약이 아니라 실제 코드와 함께 남깁니다. 6개월 뒤의 내가 다시 읽어도 이해할 수 있도록.",
+    href: "/blog",
+    cta: "글 둘러보기",
+  },
+  {
+    eyebrow: "만든 것",
+    title: "작은 실험이 쌓여 도구가 됩니다",
+    body: "사이드 프로젝트와 짧은 실험들. 스토어에서 직접 만든 것들을 정리해 공유합니다. 완성도보다 만드는 과정 그 자체를.",
+    href: "/store",
+    cta: "스토어 보기",
+  },
+  {
+    eyebrow: "생각",
+    title: "기술 너머의 일상과 호흡",
+    body: "코드만으로는 담기지 않는 생각들. 천천히, 편집장의 호흡으로 적어 내려갑니다. 빠르게가 아니라 꾸준히.",
+    href: "/profile",
+    cta: "소개 보기",
+  },
 ];
 ---
 
 <Layout>
-  <!-- Hero -->
-  <section class="container-page pt-section pb-12 text-center">
-    <h1 class="display-mega mx-auto max-w-4xl">
+  <!-- ───────────────────────── Hero ───────────────────────── -->
+  <section class="container-page pt-section pb-16 text-center md:pb-20">
+    <span
+      class="caption-uppercase inline-flex items-center gap-2 rounded-full border border-hairline bg-surface-card px-3 py-1.5 text-muted"
+    >
+      <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
       기록하는 개발자의 공간
+    </span>
+
+    <h1 class="display-hero mx-auto mt-8 max-w-4xl text-balance">
+      천천히, 그러나 꾸준히<br class="hidden sm:block" /> 쌓아 올린 개발 기록
     </h1>
-    <p class="body-md mx-auto mt-6 max-w-xl text-body">
-      코드, 생각, 그리고 만든 것들. 단로그는 조용히 쌓아 올린 개발 기록입니다.
+    <p class="body-md mx-auto mt-6 max-w-xl text-balance text-body">
+      코드, 생각, 그리고 직접 만든 것들. 단로그는 조용히 기록을 쌓아 올리는
+      개인 블로그입니다.
     </p>
-    <div class="mt-8 flex items-center justify-center gap-4">
+
+    <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
       <a
         href="/blog"
-        class="inline-flex h-11 items-center rounded-md bg-ink px-5 text-[0.875rem] font-medium text-canvas transition-colors hover:opacity-90"
+        class="inline-flex h-11 items-center rounded-md bg-ink px-6 text-[0.875rem] font-medium text-canvas transition-opacity hover:opacity-90"
       >
         블로그 둘러보기
       </a>
-      <a href="/profile" class="text-[0.875rem] font-medium text-ink transition-colors hover:text-primary">
+      <a
+        href="/profile"
+        class="inline-flex h-11 items-center rounded-md border border-hairline-strong bg-surface-card px-6 text-[0.875rem] font-medium text-ink transition-colors hover:border-ink"
+      >
         소개 보기 →
       </a>
     </div>
   </section>
 
-  <!-- IDE mockup card -->
-  <section class="container-page pb-section">
-    <div class="mx-auto max-w-4xl overflow-hidden rounded-lg border border-hairline bg-surface-card">
+  <!-- IDE mockup showpiece — the one "elevated" element (DESIGN.md). -->
+  <section class="container-page pb-20">
+    <div
+      id="hero-editor"
+      class="mx-auto max-w-5xl overflow-hidden rounded-xl border border-hairline bg-surface-card"
+    >
       <!-- window chrome -->
       <div class="flex items-center gap-2 border-b border-hairline px-4 py-3">
         <span class="h-3 w-3 rounded-full bg-surface-strong"></span>
         <span class="h-3 w-3 rounded-full bg-surface-strong"></span>
         <span class="h-3 w-3 rounded-full bg-surface-strong"></span>
-        <span class="code-type ml-3 text-muted">danlog — hello-world.md</span>
+        <span data-file-name class="code-type ml-3 truncate text-muted">단로그 — {editorFiles[0]?.name}</span>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-[180px_1fr]">
-        <!-- sidebar (hidden on mobile = single-pane collapse) -->
-        <aside class="hidden border-r border-hairline bg-canvas-soft p-4 md:block">
+      <div class="grid grid-cols-1 md:grid-cols-[240px_1fr]">
+        <!-- explorer: latest blog posts as real, clickable files -->
+        <aside class="border-b border-hairline bg-canvas-soft p-4 md:border-r md:border-b-0">
           <p class="caption-uppercase text-muted">Explorer</p>
-          <ul class="code-type mt-3 space-y-2 text-body">
-            <li class="text-ink">📂 posts</li>
-            <li class="pl-4">hello-world.md</li>
-            <li class="pl-4">on-craft.md</li>
-            <li class="pl-4">2026-notes.md</li>
+          <p class="code-type mt-3 text-ink">📂 blog</p>
+          <ul class="mt-1.5 space-y-0.5">
+            {
+              editorFiles.map((f, i) => (
+                <li>
+                  <button
+                    type="button"
+                    data-file-btn={f.id}
+                    data-file-name={f.name}
+                    data-active={i === 0 ? "" : undefined}
+                    title={f.name}
+                    class="code-type block w-full truncate rounded-sm px-2 py-1 text-left text-body transition-colors hover:text-ink"
+                  >
+                    {f.name}
+                  </button>
+                </li>
+              ))
+            }
           </ul>
         </aside>
 
-        <!-- editor + agent timeline -->
-        <div class="bg-canvas-soft p-5">
-          <pre class="code-type overflow-x-auto text-body"><code>---
-title: "안녕하세요, 단로그입니다"
-pubDate: 2026-06-01
-tags: [intro, dev]
----
-
-# 첫 글
-
-천천히, 그러나 꾸준히 기록합니다.</code></pre>
-
-          <div class="mt-5 border-t border-hairline pt-4">
-            <p class="caption-uppercase text-muted">Agent timeline</p>
-            <div class="mt-3 flex flex-wrap gap-2">
-              {
-                timeline.map((t) => (
-                  <span class:list={["caption-uppercase rounded-full px-2.5 py-1", t.cls]}>
-                    {t.label}
-                  </span>
-                ))
-              }
-            </div>
-          </div>
+        <!-- editor: shows the selected post's markdown -->
+        <div class="bg-canvas-soft p-5 md:p-6">
+          {
+            editorFiles.map((f, i) => (
+              <div data-file-pane={f.id} hidden={i !== 0}>
+                <pre class="code-type min-h-[240px] overflow-x-auto text-body"><code set:html={f.html} /></pre>
+                <div class="mt-5 border-t border-hairline pt-4">
+                  <a
+                    href={f.href}
+                    class="text-[0.8125rem] font-medium text-primary transition-colors hover:text-primary-active"
+                  >
+                    이 글 전체 보기 →
+                  </a>
+                </div>
+              </div>
+            ))
+          }
         </div>
+      </div>
+    </div>
+
+    <!-- Quiet topics strip (Cursor's logo wall, blog-dialect). -->
+    <div class="mx-auto mt-12 max-w-5xl">
+      <p class="caption-uppercase text-center text-muted">자주 다루는 주제</p>
+      <div class="mt-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+        {
+          topics.map((t) => (
+            <span class="code-type text-muted-soft transition-colors hover:text-ink">{t}</span>
+          ))
+        }
       </div>
     </div>
   </section>
 
-  <!-- Features -->
+  <!-- ──────────────── Alternating editorial sections ──────────────── -->
   <section class="container-page pb-section">
-    <h2 class="display-lg max-w-2xl">무엇을 기록하나요</h2>
-    <div class="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="flex flex-col gap-24 md:gap-28">
       {
-        features.map((f) => (
-          <article class="rounded-lg border border-hairline bg-surface-card p-6">
-            <h3 class="title-md">{f.title}</h3>
-            <p class="body-md mt-3 text-body">{f.body}</p>
-          </article>
+        sections.map((s, i) => (
+          <div class="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
+            {/* copy */}
+            <div class:list={[i % 2 === 1 && "md:order-2"]}>
+              <span class="caption-uppercase text-primary">{s.eyebrow}</span>
+              <h2 class="display-lg mt-4 text-balance">{s.title}</h2>
+              <p class="body-md mt-4 max-w-md text-body">{s.body}</p>
+              <a
+                href={s.href}
+                class="mt-6 inline-flex text-[0.9375rem] font-medium text-primary transition-colors hover:text-primary-active"
+              >
+                {s.cta} →
+              </a>
+            </div>
+
+            {/* visual */}
+            <div class:list={[i % 2 === 1 && "md:order-1"]}>
+              {i === 0 && (
+                <div class="rounded-lg border border-hairline bg-surface-card p-5">
+                  <p class="caption-uppercase text-muted">on-craft.md</p>
+                  <pre class="code-type mt-3 overflow-x-auto text-body"><code><span style="color: var(--color-primary)">## 추상화의 기준</span>
+
+좋은 추상화는 <span class="text-ink">숨기는 것</span>과
+<span class="text-ink">드러내는 것</span>의 균형에서 나온다.
+
+- 호출부가 읽기 쉬운가
+- 변경의 이유가 하나인가</code></pre>
+                </div>
+              )}
+              {i === 1 && (
+                <div class="grid grid-cols-2 gap-3">
+                  {["타이머", "SVG 프리뷰", "PR 봇", "번들 최적화"].map((name, j) => (
+                    <div class="rounded-lg border border-hairline bg-surface-card p-4">
+                      <div
+                        class:list={[
+                          "grid h-9 w-9 place-items-center rounded-md text-on-primary",
+                          ["bg-timeline-edit", "bg-timeline-read", "bg-timeline-grep", "bg-timeline-thinking"][j],
+                        ]}
+                      >
+                        <span class="code-type text-ink">{name.slice(0, 1)}</span>
+                      </div>
+                      <p class="title-sm mt-3">{name}</p>
+                      <p class="caption mt-1 text-muted">side project</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {i === 2 && (
+                <figure class="rounded-lg border border-hairline bg-surface-card p-6">
+                  <blockquote class="display-sm text-balance text-ink">
+                    “빠르게가 아니라, 멈추지 않고.”
+                  </blockquote>
+                  <figcaption class="body-sm mt-4 text-muted">— 두서없는 생각정리에서</figcaption>
+                </figure>
+              )}
+            </div>
+          </div>
         ))
       }
     </div>
   </section>
 
-  <!-- CTA band -->
-  <section class="container-page pb-section text-center">
-    <div class="rounded-xl border border-hairline bg-surface-card px-6 py-20">
-      <h2 class="display-lg mx-auto max-w-xl">새 글이 올라오면 받아보세요</h2>
-      <p class="body-md mx-auto mt-4 max-w-md text-body">
-        RSS로 구독하면 새로운 기록을 놓치지 않습니다.
-      </p>
-      <a
-        href="/rss.xml"
-        class="mt-8 inline-flex h-10 items-center rounded-md bg-primary px-5 text-[0.875rem] font-medium text-on-primary transition-colors hover:bg-primary-active"
-      >
-        RSS 구독하기
-      </a>
+  <!-- ──────────────────── Recent posts ──────────────────── -->
+  {
+    posts.length > 0 && (
+      <section class="container-page pb-section">
+        <div class="flex items-end justify-between gap-4">
+          <h2 class="display-lg">최근 글</h2>
+          <a
+            href="/blog"
+            class="text-[0.9375rem] font-medium text-primary transition-colors hover:text-primary-active"
+          >
+            모든 글 보기 →
+          </a>
+        </div>
+
+        <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {posts.map((post) => (
+            <a
+              href={`/blog/${post.id}`}
+              class="group flex h-full flex-col rounded-lg border border-hairline bg-surface-card p-5 transition-colors hover:border-hairline-strong"
+            >
+              <div class="caption text-muted">
+                {fmt(post.data.date)}
+                {post.data.tags[0] && <span> · {post.data.tags[0]}</span>}
+              </div>
+              <h3 class="title-sm mt-3 line-clamp-2 transition-colors group-hover:text-primary">
+                {post.data.title}
+              </h3>
+              <p class="body-sm mt-2 line-clamp-3 text-body">{post.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <!-- ──────────────── Closing CTA band ("Try Cursor now.") ──────────────── -->
+  <section class="border-t border-hairline">
+    <div class="container-page py-24 text-center md:py-32">
+      <h2 class="display-hero mx-auto max-w-3xl text-balance">
+        새 글이 올라오면<br class="hidden sm:block" /> 가장 먼저 받아보세요.
+      </h2>
+      <div class="mt-10">
+        <a
+          href="/rss.xml"
+          class="inline-flex h-12 items-center gap-2 rounded-md bg-primary px-7 text-[0.9375rem] font-medium text-on-primary transition-colors hover:bg-primary-active"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"></path>
+            <circle cx="5" cy="19" r="1.6" fill="currentColor"></circle>
+          </svg>
+          RSS 구독하기
+        </a>
+      </div>
     </div>
   </section>
+
+  <!-- Hero editor: clicking a file swaps the visible markdown pane. -->
+  <style>
+    [data-file-btn][data-active] {
+      background-color: var(--color-surface-strong);
+      color: var(--color-ink);
+    }
+  </style>
+  <script is:inline>
+    (() => {
+      const root = document.getElementById("hero-editor");
+      if (!root) return;
+      const btns = root.querySelectorAll("[data-file-btn]");
+      const panes = root.querySelectorAll("[data-file-pane]");
+      const chrome = root.querySelector("[data-file-name]");
+      btns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const id = btn.getAttribute("data-file-btn");
+          btns.forEach((b) => b.toggleAttribute("data-active", b === btn));
+          panes.forEach((p) => {
+            p.hidden = p.getAttribute("data-file-pane") !== id;
+          });
+          if (chrome) chrome.textContent = "단로그 — " + btn.getAttribute("data-file-name");
+        });
+      });
+    })();
+  </script>
 </Layout>

@@ -189,6 +189,15 @@ body {
    Typography scale (DESIGN.md). Display stays weight 400; negative
    letter-spacing on display only. Code surfaces use IoskeleyMono.
    ────────────────────────────────────────────────────────────── */
+/* Hero / closing-CTA scale — Cursor's oversized editorial display
+   ("Try Cursor now."). Weight 400, tight tracking, generous on desktop. */
+@utility display-hero {
+  font-weight: 400;
+  font-size: clamp(2.5rem, 7vw + 1rem, 5.5rem); /* 40px → 88px */
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  color: var(--color-ink);
+}
 @utility display-mega {
   font-weight: 400;
   font-size: clamp(2rem, 6vw + 1rem, 4.5rem); /* 32px → 72px */
