@@ -11,7 +11,7 @@ const fmt = (d: Date) =>
   new Intl.DateTimeFormat("ko-KR", { year: "numeric", month: "long", day: "numeric" }).format(d);
 
 // Quiet topics strip — the personal-blog answer to Cursor's logo wall.
-const topics = ["React", "TypeScript", "Astro", "Performance", "Architecture", "Tooling"];
+const topics = ["React", "TypeScript", "React Query", "Architecture", "Tooling", "Journal"];
 
 // Hero editor — the latest 5 posts rendered as real, clickable .md files.
 const editorPosts = (await getCollection("blog", ({ data }) => !data.draft))
@@ -62,28 +62,26 @@ const editorFiles = editorPosts.map((post) => {
   };
 });
 
-// Alternating editorial sections — Cursor's "Agents turn ideas into code" rhythm.
-const sections = [
+// Colleague testimonials — Cursor's "The new way to build software" grid.
+// 예시 데이터입니다. 실제 동료들의 평가로 자유롭게 교체하세요.
+const testimonials = [
   {
-    eyebrow: "글쓰기",
-    title: "배운 것을 코드와 함께 기록합니다",
-    body: "개발하며 부딪힌 문제와 해결 과정을, 추상적인 요약이 아니라 실제 코드와 함께 남깁니다. 6개월 뒤의 내가 다시 읽어도 이해할 수 있도록.",
-    href: "/blog",
-    cta: "글 둘러보기",
+    quote:
+      "열정적으로 업무에 대해 탐구하고 의견을 제안합니다. 항상 수용적인 태도로 상대방의 의견을 받아주고, 본인의 주장도 상대방을 생각하는 태도로 잘 전달할 줄 아는 장점이 있습니다.",
+    name: "찰리 브라운",
+    role: "프론트엔드 개발자 · 이전 동료",
   },
   {
-    eyebrow: "만든 것",
-    title: "작은 실험이 쌓여 도구가 됩니다",
-    body: "사이드 프로젝트와 짧은 실험들. 스토어에서 직접 만든 것들을 정리해 공유합니다. 완성도보다 만드는 과정 그 자체를.",
-    href: "/store",
-    cta: "스토어 보기",
+    quote:
+      "책임감이 강해서 누구보다 업무 집중도가 뛰어납니다. 본인이 만든 작업물에 큰 애정이 있어서 지치지 않고 즐기며 일하는 모습을 보일 때가 있습니다.",
+    name: "스누피",
+    role: "백엔드 개발자 · 이전 동료",
   },
   {
-    eyebrow: "생각",
-    title: "기술 너머의 일상과 호흡",
-    body: "코드만으로는 담기지 않는 생각들. 천천히, 편집장의 호흡으로 적어 내려갑니다. 빠르게가 아니라 꾸준히.",
-    href: "/profile",
-    cta: "소개 보기",
+    quote:
+      "기술적인 깊이와 커뮤니케이션을 모두 갖춘 드문 동료입니다. 어려운 문제일수록 진가가 드러나요.",
+    name: "우드 스톡",
+    role: "백엔드 엔지니어",
   },
 ];
 ---
@@ -195,67 +193,27 @@ const sections = [
     </div>
   </section>
 
-  <!-- ──────────────── Alternating editorial sections ──────────────── -->
+  <!-- ──────────────── Colleague testimonials ──────────────── -->
   <section class="container-page pb-section">
-    <div class="flex flex-col gap-24 md:gap-28">
+    <h2 class="display-lg mx-auto max-w-3xl text-balance text-center">
+      함께 일한 동료들이 전하는 이야기.
+    </h2>
+
+    <div class="mt-14 grid grid-cols-1 gap-4 md:grid-cols-3">
       {
-        sections.map((s, i) => (
-          <div class="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
-            {/* copy */}
-            <div class:list={[i % 2 === 1 && "md:order-2"]}>
-              <span class="caption-uppercase text-primary">{s.eyebrow}</span>
-              <h2 class="display-lg mt-4 text-balance">{s.title}</h2>
-              <p class="body-md mt-4 max-w-md text-body">{s.body}</p>
-              <a
-                href={s.href}
-                class="mt-6 inline-flex text-[0.9375rem] font-medium text-primary transition-colors hover:text-primary-active"
-              >
-                {s.cta} →
-              </a>
-            </div>
-
-            {/* visual */}
-            <div class:list={[i % 2 === 1 && "md:order-1"]}>
-              {i === 0 && (
-                <div class="rounded-lg border border-hairline bg-surface-card p-5">
-                  <p class="caption-uppercase text-muted">on-craft.md</p>
-                  <pre class="code-type mt-3 overflow-x-auto text-body"><code><span style="color: var(--color-primary)">## 추상화의 기준</span>
-
-좋은 추상화는 <span class="text-ink">숨기는 것</span>과
-<span class="text-ink">드러내는 것</span>의 균형에서 나온다.
-
-- 호출부가 읽기 쉬운가
-- 변경의 이유가 하나인가</code></pre>
-                </div>
-              )}
-              {i === 1 && (
-                <div class="grid grid-cols-2 gap-3">
-                  {["타이머", "SVG 프리뷰", "PR 봇", "번들 최적화"].map((name, j) => (
-                    <div class="rounded-lg border border-hairline bg-surface-card p-4">
-                      <div
-                        class:list={[
-                          "grid h-9 w-9 place-items-center rounded-md text-on-primary",
-                          ["bg-timeline-edit", "bg-timeline-read", "bg-timeline-grep", "bg-timeline-thinking"][j],
-                        ]}
-                      >
-                        <span class="code-type text-ink">{name.slice(0, 1)}</span>
-                      </div>
-                      <p class="title-sm mt-3">{name}</p>
-                      <p class="caption mt-1 text-muted">side project</p>
-                    </div>
-                  ))}
-                </div>
-              )}
-              {i === 2 && (
-                <figure class="rounded-lg border border-hairline bg-surface-card p-6">
-                  <blockquote class="display-sm text-balance text-ink">
-                    “빠르게가 아니라, 멈추지 않고.”
-                  </blockquote>
-                  <figcaption class="body-sm mt-4 text-muted">— 두서없는 생각정리에서</figcaption>
-                </figure>
-              )}
-            </div>
-          </div>
+        testimonials.map((t) => (
+          <figure class="flex flex-col rounded-lg border border-hairline bg-surface-card p-6">
+            <blockquote class="body-md flex-1 text-balance text-ink">“{t.quote}”</blockquote>
+            <figcaption class="mt-6 flex items-center gap-3">
+              <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-surface-strong text-[0.875rem] font-medium text-muted">
+                {t.name.slice(0, 1)}
+              </span>
+              <span class="flex flex-col">
+                <span class="title-sm">{t.name}</span>
+                <span class="caption text-muted">{t.role}</span>
+              </span>
+            </figcaption>
+          </figure>
         ))
       }
     </div>
