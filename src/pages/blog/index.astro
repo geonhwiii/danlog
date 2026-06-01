@@ -1,10 +1,53 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const fmt = (d: Date) =>
+  new Intl.DateTimeFormat("ko-KR", { year: "numeric", month: "long", day: "numeric" }).format(d);
 ---
 
 <Layout title="블로그" description="단로그의 글 모음.">
   <section class="container-page pt-section pb-section">
-    <h1 class="display-lg">블로그</h1>
-    <p class="body-md mt-4 text-body">글 목록은 곧 채워집니다. 첫 글을 준비하고 있어요.</p>
+    <header class="mb-10">
+      <h1 class="display-lg">블로그</h1>
+      <p class="body-md mt-3 text-body">개발하며 배운 것과 기록들.</p>
+    </header>
+
+    {
+      posts.length === 0 ? (
+        <p class="body-md text-muted">아직 글이 없습니다.</p>
+      ) : (
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post) => (
+            <a
+              href={`/blog/${post.id}`}
+              class="group flex flex-col rounded-lg border border-hairline bg-surface-card p-6 transition-colors hover:border-hairline-strong"
+            >
+              <div class="flex flex-wrap items-center gap-2">
+                {post.data.tags.slice(0, 2).map((tag) => (
+                  <span class="caption-uppercase rounded-full bg-surface-strong px-2.5 py-1 text-ink">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <h2 class="title-md mt-4 transition-colors group-hover:text-primary">
+                {post.data.title}
+              </h2>
+              <p class="body-sm mt-2 line-clamp-2 text-body">{post.data.description}</p>
+              <time
+                datetime={post.data.date.toISOString()}
+                class="caption mt-4 text-muted"
+              >
+                {fmt(post.data.date)}
+              </time>
+            </a>
+          ))}
+        </div>
+      )
+    }
   </section>
 </Layout>

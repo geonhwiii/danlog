@@ -218,3 +218,114 @@ body {
   margin-inline: auto;
   padding-inline: 24px;
 }
+
+/* ──────────────────────────────────────────────────────────────
+   Prose — rendered Markdown article body. Token-based, editorial:
+   warm ink headings (weight 400 display), comfortable measure,
+   JetBrains Mono on code surfaces.
+   ────────────────────────────────────────────────────────────── */
+.prose {
+  color: var(--color-body);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+.prose > * + * {
+  margin-top: 1.25em;
+}
+.prose h2 {
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  font-weight: 400;
+  font-size: 1.625rem; /* display-md */
+  line-height: 1.25;
+  letter-spacing: -0.0125em;
+  color: var(--color-ink);
+  scroll-margin-top: 5rem;
+}
+.prose h3 {
+  margin-top: 1.6em;
+  margin-bottom: 0.4em;
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.4;
+  color: var(--color-ink);
+  scroll-margin-top: 5rem;
+}
+.prose p {
+  color: var(--color-body);
+}
+.prose strong {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+.prose a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose a:hover {
+  color: var(--color-primary-active);
+}
+.prose ul,
+.prose ol {
+  padding-left: 1.4em;
+}
+.prose ul {
+  list-style: disc;
+}
+.prose ol {
+  list-style: decimal;
+}
+.prose li + li {
+  margin-top: 0.4em;
+}
+.prose blockquote {
+  border-left: 3px solid var(--color-hairline-strong);
+  padding-left: 1em;
+  color: var(--color-muted);
+}
+.prose blockquote a {
+  color: var(--color-primary);
+}
+/* Inline code (not inside a highlighted block) */
+.prose :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background-color: var(--color-surface-strong);
+  color: var(--color-ink);
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-xs);
+}
+/* Shiki code blocks */
+.prose pre {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  overflow-x: auto;
+}
+.prose pre code {
+  font-family: inherit;
+  background: none;
+  padding: 0;
+}
+.prose img {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-hairline);
+}
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--color-hairline);
+}
+
+/* Shiki dual-theme: swap to the dark palette under [data-theme="dark"]. */
+[data-theme="dark"] .astro-code,
+[data-theme="dark"] .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}

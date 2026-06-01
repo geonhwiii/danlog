@@ -1,0 +1,57 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formattedDate = new Intl.DateTimeFormat("ko-KR", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+}).format(post.data.date);
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+  <article class="container-page pt-section pb-section">
+    <div class="mx-auto max-w-[680px]">
+      <!-- Header -->
+      <header class="mb-10">
+        <div class="flex flex-wrap items-center gap-2">
+          {
+            post.data.tags.map((tag) => (
+              <span class="caption-uppercase rounded-full bg-surface-strong px-2.5 py-1 text-ink">
+                {tag}
+              </span>
+            ))
+          }
+        </div>
+        <h1 class="display-lg mt-5">{post.data.title}</h1>
+        <p class="body-md mt-4 text-muted">{post.data.description}</p>
+        <div class="caption mt-5 flex items-center gap-2 text-muted">
+          <time datetime={post.data.date.toISOString()}>{formattedDate}</time>
+        </div>
+      </header>
+
+      <!-- Body -->
+      <div class="prose">
+        <Content />
+      </div>
+
+      <!-- Footer nav -->
+      <div class="mt-16 border-t border-hairline pt-8">
+        <a href="/blog" class="text-[0.875rem] font-medium text-ink transition-colors hover:text-primary">
+          ← 블로그 목록으로
+        </a>
+      </div>
+    </div>
+  </article>
+</Layout>
