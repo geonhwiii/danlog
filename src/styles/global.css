@@ -1,0 +1,220 @@
+@import "tailwindcss";
+
+/* Self-hosted fonts (CursorGothic substitute → Inter; code → JetBrains Mono) */
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
+
+/* ──────────────────────────────────────────────────────────────
+   Design tokens — values mirror DESIGN.md frontmatter exactly.
+   Light is the default; [data-theme="dark"] derives a warm dark
+   palette (cream↔ink inverted, Cursor Orange preserved).
+   ────────────────────────────────────────────────────────────── */
+:root {
+  /* Brand & accent */
+  --color-primary: #f54e00;
+  --color-primary-active: #d04200;
+  --color-on-primary: #ffffff;
+
+  /* Surfaces */
+  --color-canvas: #f7f7f4;
+  --color-canvas-soft: #fafaf7;
+  --color-surface-card: #ffffff;
+  --color-surface-strong: #e6e5e0;
+
+  /* Hairlines */
+  --color-hairline: #e6e5e0;
+  --color-hairline-soft: #efeee8;
+  --color-hairline-strong: #cfcdc4;
+
+  /* Text */
+  --color-ink: #26251e;
+  --color-body: #5a5852;
+  --color-body-strong: #26251e;
+  --color-muted: #807d72;
+  --color-muted-soft: #a09c92;
+
+  /* Timeline (AI-action signature — product UI only) */
+  --color-timeline-thinking: #dfa88f;
+  --color-timeline-grep: #9fc9a2;
+  --color-timeline-read: #9fbbe0;
+  --color-timeline-edit: #c0a8dd;
+  --color-timeline-done: #c08532;
+
+  /* Semantic */
+  --color-success: #1f8a65;
+  --color-error: #cf2d56;
+
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  /* Warm brown dark tone, matching cursor.com blog:
+     canvas #14120b, card #1b1913 (user-specified anchors). */
+  --color-canvas: #14120b;
+  --color-canvas-soft: #1b1913;
+  --color-surface-card: #1b1913;
+  --color-surface-strong: #2a2619;
+
+  --color-hairline: #2a261a;
+  --color-hairline-soft: #1f1c12;
+  --color-hairline-strong: #3a3424;
+
+  --color-ink: #f3f1e9;
+  --color-body: #b6b2a6;
+  --color-body-strong: #f3f1e9;
+  --color-muted: #8d8a7d;
+  --color-muted-soft: #6a6759;
+
+  color-scheme: dark;
+}
+
+/* Map tokens into Tailwind's theme so utilities like `bg-canvas`,
+   `text-ink`, `border-hairline`, `rounded-md`, `font-mono` resolve.
+   Using @theme inline so the var() references stay live for theming. */
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-primary-active: var(--color-primary-active);
+  --color-on-primary: var(--color-on-primary);
+
+  --color-canvas: var(--color-canvas);
+  --color-canvas-soft: var(--color-canvas-soft);
+  --color-surface-card: var(--color-surface-card);
+  --color-surface-strong: var(--color-surface-strong);
+
+  --color-hairline: var(--color-hairline);
+  --color-hairline-soft: var(--color-hairline-soft);
+  --color-hairline-strong: var(--color-hairline-strong);
+
+  --color-ink: var(--color-ink);
+  --color-body: var(--color-body);
+  --color-body-strong: var(--color-body-strong);
+  --color-muted: var(--color-muted);
+  --color-muted-soft: var(--color-muted-soft);
+
+  --color-timeline-thinking: var(--color-timeline-thinking);
+  --color-timeline-grep: var(--color-timeline-grep);
+  --color-timeline-read: var(--color-timeline-read);
+  --color-timeline-edit: var(--color-timeline-edit);
+  --color-timeline-done: var(--color-timeline-done);
+
+  --color-success: var(--color-success);
+  --color-error: var(--color-error);
+
+  /* Font families */
+  --font-sans:
+    "Inter Variable", system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono Variable", "Fira Code", ui-monospace, monospace;
+
+  /* Border radius scale (DESIGN.md) */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* Spacing: 80px section rhythm */
+  --spacing-section: 80px;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Base
+   ────────────────────────────────────────────────────────────── */
+html {
+  font-family: var(--font-sans);
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-canvas);
+  color: var(--color-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Typography scale (DESIGN.md). Display stays weight 400; negative
+   letter-spacing on display only. Code surfaces use JetBrains Mono.
+   ────────────────────────────────────────────────────────────── */
+@utility display-mega {
+  font-weight: 400;
+  font-size: clamp(2rem, 6vw + 1rem, 4.5rem); /* 32px → 72px */
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--color-ink);
+}
+@utility display-lg {
+  font-weight: 400;
+  font-size: clamp(1.75rem, 3vw + 0.5rem, 2.25rem); /* → 36px */
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+@utility display-md {
+  font-weight: 400;
+  font-size: 1.625rem; /* 26px */
+  line-height: 1.25;
+  letter-spacing: -0.0125em;
+  color: var(--color-ink);
+}
+@utility display-sm {
+  font-weight: 400;
+  font-size: 1.375rem; /* 22px */
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  color: var(--color-ink);
+}
+@utility title-md {
+  font-weight: 600;
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.4;
+  color: var(--color-ink);
+}
+@utility title-sm {
+  font-weight: 600;
+  font-size: 1rem; /* 16px */
+  line-height: 1.4;
+  color: var(--color-ink);
+}
+@utility body-md {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+@utility body-sm {
+  font-weight: 400;
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.5;
+}
+@utility caption {
+  font-weight: 400;
+  font-size: 0.8125rem; /* 13px */
+  line-height: 1.4;
+}
+@utility caption-uppercase {
+  font-weight: 600;
+  font-size: 0.6875rem; /* 11px */
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+@utility code-type {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.8125rem; /* 13px */
+  line-height: 1.5;
+}
+@utility nav-link-type {
+  font-weight: 500;
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.4;
+}
+
+/* Content-width container (max 1200px) */
+@utility container-page {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}

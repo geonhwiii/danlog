@@ -1,0 +1,62 @@
+---
+import ThemeToggle from "./react/ThemeToggle.tsx";
+import SearchButton from "./react/SearchButton.tsx";
+import MobileNav from "./react/MobileNav.tsx";
+
+const navItems = [
+  { label: "홈", href: "/" },
+  { label: "블로그", href: "/blog" },
+  { label: "스토어", href: "/store" },
+  { label: "프로필", href: "/profile" },
+];
+
+const pathname = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/");
+---
+
+<header
+  class="sticky top-0 z-30 h-16 border-b border-hairline bg-canvas/90 backdrop-blur-sm"
+>
+  <div class="container-page flex h-16 items-center justify-between gap-4">
+    <!-- Left: wordmark -->
+    <a href="/" class="flex items-center" aria-label="단로그 홈">
+      <span class="text-[1.25rem] font-medium tracking-tight text-primary">단로그</span>
+    </a>
+
+    <!-- Center: primary nav (desktop) -->
+    <nav class="absolute left-1/2 hidden -translate-x-1/2 md:flex md:items-center md:gap-1">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? "page" : undefined}
+            class:list={[
+              "nav-link-type rounded-md px-3 py-2 transition-colors hover:bg-surface-strong",
+              isActive(item.href) ? "text-ink" : "text-muted",
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Right: actions -->
+    <div class="flex items-center gap-1">
+      <SearchButton client:idle />
+      <a
+        href="/rss.xml"
+        aria-label="RSS 피드"
+        class="grid h-9 w-9 place-items-center rounded-md text-ink transition-colors hover:bg-surface-strong"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+          <circle cx="5" cy="19" r="1.6" fill="currentColor"></circle>
+        </svg>
+      </a>
+      <ThemeToggle client:load />
+      <MobileNav items={navItems} currentPath={pathname} client:idle />
+    </div>
+  </div>
+</header>

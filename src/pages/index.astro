@@ -1,11 +1,133 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const features = [
+  {
+    title: "글쓰기",
+    body: "개발하며 배운 것, 부딪힌 문제와 해결 과정을 기록합니다. 코드와 함께.",
+  },
+  {
+    title: "만든 것",
+    body: "사이드 프로젝트와 작은 실험들. 스토어에서 직접 만든 것들을 공유합니다.",
+  },
+  {
+    title: "생각",
+    body: "기술 너머의 일상과 생각. 천천히, 편집장의 호흡으로 적어 내려갑니다.",
+  },
+];
+
+// In-product agent timeline stages — pastels scoped to this mockup only (DESIGN.md).
+const timeline = [
+  { label: "Thinking", cls: "bg-timeline-thinking text-ink" },
+  { label: "Grep", cls: "bg-timeline-grep text-ink" },
+  { label: "Read", cls: "bg-timeline-read text-ink" },
+  { label: "Edit", cls: "bg-timeline-edit text-ink" },
+  { label: "Done", cls: "bg-timeline-done text-on-primary" },
+];
 ---
 
 <Layout>
-	<Welcome />
+  <!-- Hero -->
+  <section class="container-page pt-section pb-12 text-center">
+    <h1 class="display-mega mx-auto max-w-4xl">
+      기록하는 개발자의 공간
+    </h1>
+    <p class="body-md mx-auto mt-6 max-w-xl text-body">
+      코드, 생각, 그리고 만든 것들. 단로그는 조용히 쌓아 올린 개발 기록입니다.
+    </p>
+    <div class="mt-8 flex items-center justify-center gap-4">
+      <a
+        href="/blog"
+        class="inline-flex h-11 items-center rounded-md bg-ink px-5 text-[0.875rem] font-medium text-canvas transition-colors hover:opacity-90"
+      >
+        블로그 둘러보기
+      </a>
+      <a href="/profile" class="text-[0.875rem] font-medium text-ink transition-colors hover:text-primary">
+        소개 보기 →
+      </a>
+    </div>
+  </section>
+
+  <!-- IDE mockup card -->
+  <section class="container-page pb-section">
+    <div class="mx-auto max-w-4xl overflow-hidden rounded-lg border border-hairline bg-surface-card">
+      <!-- window chrome -->
+      <div class="flex items-center gap-2 border-b border-hairline px-4 py-3">
+        <span class="h-3 w-3 rounded-full bg-surface-strong"></span>
+        <span class="h-3 w-3 rounded-full bg-surface-strong"></span>
+        <span class="h-3 w-3 rounded-full bg-surface-strong"></span>
+        <span class="code-type ml-3 text-muted">danlog — hello-world.md</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-[180px_1fr]">
+        <!-- sidebar (hidden on mobile = single-pane collapse) -->
+        <aside class="hidden border-r border-hairline bg-canvas-soft p-4 md:block">
+          <p class="caption-uppercase text-muted">Explorer</p>
+          <ul class="code-type mt-3 space-y-2 text-body">
+            <li class="text-ink">📂 posts</li>
+            <li class="pl-4">hello-world.md</li>
+            <li class="pl-4">on-craft.md</li>
+            <li class="pl-4">2026-notes.md</li>
+          </ul>
+        </aside>
+
+        <!-- editor + agent timeline -->
+        <div class="bg-canvas-soft p-5">
+          <pre class="code-type overflow-x-auto text-body"><code>---
+title: "안녕하세요, 단로그입니다"
+pubDate: 2026-06-01
+tags: [intro, dev]
+---
+
+# 첫 글
+
+천천히, 그러나 꾸준히 기록합니다.</code></pre>
+
+          <div class="mt-5 border-t border-hairline pt-4">
+            <p class="caption-uppercase text-muted">Agent timeline</p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              {
+                timeline.map((t) => (
+                  <span class:list={["caption-uppercase rounded-full px-2.5 py-1", t.cls]}>
+                    {t.label}
+                  </span>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="container-page pb-section">
+    <h2 class="display-lg max-w-2xl">무엇을 기록하나요</h2>
+    <div class="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        features.map((f) => (
+          <article class="rounded-lg border border-hairline bg-surface-card p-6">
+            <h3 class="title-md">{f.title}</h3>
+            <p class="body-md mt-3 text-body">{f.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- CTA band -->
+  <section class="container-page pb-section text-center">
+    <div class="rounded-xl border border-hairline bg-surface-card px-6 py-20">
+      <h2 class="display-lg mx-auto max-w-xl">새 글이 올라오면 받아보세요</h2>
+      <p class="body-md mx-auto mt-4 max-w-md text-body">
+        RSS로 구독하면 새로운 기록을 놓치지 않습니다.
+      </p>
+      <a
+        href="/rss.xml"
+        class="mt-8 inline-flex h-10 items-center rounded-md bg-primary px-5 text-[0.875rem] font-medium text-on-primary transition-colors hover:bg-primary-active"
+      >
+        RSS 구독하기
+      </a>
+    </div>
+  </section>
 </Layout>
