@@ -1,29 +1,30 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig } from 'astro/config';
+import { unified } from '@astrojs/markdown-remark';
 
-import react from "@astrojs/react";
-import tailwindcss from "@tailwindcss/vite";
-import mdx from "@astrojs/mdx";
-import rehypePrettyCode from "rehype-pretty-code";
+import react from '@astrojs/react';
+import tailwindcss from '@tailwindcss/vite';
+import mdx from '@astrojs/mdx';
+import rehypePrettyCode from 'rehype-pretty-code';
 
 /** @type {import('rehype-pretty-code').Options} */
 const rehypePrettyCodeOptions = {
   theme: {
-    light: "github-light",
-    dark: "ayu-dark",
+    light: 'github-light',
+    dark: 'vesper',
   },
 };
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://danlog.dev",
+  site: 'https://danlog.dev',
   integrations: [react(), mdx()],
 
   markdown: {
-    // Disable Astro's built-in Shiki; rehype-pretty-code handles highlighting,
-    // titles (title="…"), and line highlighting ({1,5-7}).
     syntaxHighlight: false,
-    rehypePlugins: [[rehypePrettyCode, rehypePrettyCodeOptions]],
+    processor: unified({
+      rehypePlugins: [[rehypePrettyCode, rehypePrettyCodeOptions]],
+    }),
   },
 
   vite: {

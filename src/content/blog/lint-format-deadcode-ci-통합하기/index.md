@@ -153,7 +153,7 @@ export default config;
 
 모노레포의 경우 다음과 같이 `workspaces`에 경로 및 설정을 추가해야 합니다.
 
-```ts title="knip.config.ts
+```ts title="knip.config.ts"
 workspaces: {
     '.': {
       entry: ['turbo.json!'],
