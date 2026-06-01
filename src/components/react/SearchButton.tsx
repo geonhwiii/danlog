@@ -49,7 +49,8 @@ export default function SearchButton() {
               />
             </div>
             <p className="caption mt-3 text-muted">
-              검색 기능은 곧 추가됩니다. <kbd className="code-type">Esc</kbd> 로 닫기
+              검색 기능은 곧 추가됩니다. <kbd className="code-type">Esc</kbd> 로
+              닫기
             </p>
           </div>
         </div>
@@ -60,9 +61,20 @@ export default function SearchButton() {
 
 function SearchIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+    >
       <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.6" />
-      <path d="m20 20-3.5-3.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      <path
+        d="m20 20-3.5-3.5"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }
