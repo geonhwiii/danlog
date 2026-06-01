@@ -4,6 +4,15 @@ import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 import mdx from "@astrojs/mdx";
+import rehypePrettyCode from "rehype-pretty-code";
+
+/** @type {import('rehype-pretty-code').Options} */
+const rehypePrettyCodeOptions = {
+  theme: {
+    light: "github-light",
+    dark: "ayu-dark",
+  },
+};
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,15 +20,10 @@ export default defineConfig({
   integrations: [react(), mdx()],
 
   markdown: {
-    shikiConfig: {
-      // Dual theme: light + dark. The dark variant is activated via CSS
-      // (see [data-theme="dark"] .astro-code rules in global.css).
-      themes: {
-        light: "github-light",
-        dark: "github-dark",
-      },
-      wrap: true,
-    },
+    // Disable Astro's built-in Shiki; rehype-pretty-code handles highlighting,
+    // titles (title="…"), and line highlighting ({1,5-7}).
+    syntaxHighlight: false,
+    rehypePlugins: [[rehypePrettyCode, rehypePrettyCodeOptions]],
   },
 
   vite: {

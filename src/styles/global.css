@@ -1,8 +1,60 @@
 @import "tailwindcss";
 
-/* Self-hosted fonts (CursorGothic substitute → Inter; code → JetBrains Mono) */
-@import "@fontsource-variable/inter";
-@import "@fontsource-variable/jetbrains-mono";
+/* ──────────────────────────────────────────────────────────────
+   Self-hosted fonts (files in /public/fonts):
+   - Geist        → English / Latin display + body
+   - Pretendard   → Korean (falls through from Geist via font stack)
+   - IoskeleyMono → code surfaces (Regular only)
+   ────────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/Geist-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/Geist-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/Geist-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Pretendard";
+  src: url("/fonts/Pretendard-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Pretendard";
+  src: url("/fonts/Pretendard-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Pretendard";
+  src: url("/fonts/Pretendard-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IoskeleyMono";
+  src: url("/fonts/IoskeleyMonoNerdFont-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* ──────────────────────────────────────────────────────────────
    Design tokens — values mirror DESIGN.md frontmatter exactly.
@@ -100,10 +152,10 @@
   --color-success: var(--color-success);
   --color-error: var(--color-error);
 
-  /* Font families */
-  --font-sans:
-    "Inter Variable", system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-mono: "JetBrains Mono Variable", "Fira Code", ui-monospace, monospace;
+  /* Font families. Geist carries Latin; Korean glyphs (absent in Geist)
+     fall through to Pretendard automatically. */
+  --font-sans: "Geist", "Pretendard", system-ui, sans-serif;
+  --font-mono: "IoskeleyMono", "Pretendard", ui-monospace, monospace;
 
   /* Border radius scale (DESIGN.md) */
   --radius-xs: 4px;
@@ -135,7 +187,7 @@ body {
 
 /* ──────────────────────────────────────────────────────────────
    Typography scale (DESIGN.md). Display stays weight 400; negative
-   letter-spacing on display only. Code surfaces use JetBrains Mono.
+   letter-spacing on display only. Code surfaces use IoskeleyMono.
    ────────────────────────────────────────────────────────────── */
 @utility display-mega {
   font-weight: 400;
@@ -222,7 +274,7 @@ body {
 /* ──────────────────────────────────────────────────────────────
    Prose — rendered Markdown article body. Token-based, editorial:
    warm ink headings (weight 400 display), comfortable measure,
-   JetBrains Mono on code surfaces.
+   IoskeleyMono on code surfaces.
    ────────────────────────────────────────────────────────────── */
 .prose {
   color: var(--color-body);
@@ -287,7 +339,7 @@ body {
 .prose blockquote a {
   color: var(--color-primary);
 }
-/* Inline code (not inside a highlighted block) */
+/* Inline code (block code is handled by rehype-pretty-code below). */
 .prose :not(pre) > code {
   font-family: var(--font-mono);
   font-size: 0.85em;
@@ -295,21 +347,6 @@ body {
   color: var(--color-ink);
   padding: 0.15em 0.4em;
   border-radius: var(--radius-xs);
-}
-/* Shiki code blocks */
-.prose pre {
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  line-height: 1.6;
-  border: 1px solid var(--color-hairline);
-  border-radius: var(--radius-lg);
-  padding: 20px;
-  overflow-x: auto;
-}
-.prose pre code {
-  font-family: inherit;
-  background: none;
-  padding: 0;
 }
 .prose img {
   border-radius: var(--radius-lg);
@@ -320,12 +357,73 @@ body {
   border-top: 1px solid var(--color-hairline);
 }
 
-/* Shiki dual-theme: swap to the dark palette under [data-theme="dark"]. */
-[data-theme="dark"] .astro-code,
-[data-theme="dark"] .astro-code span {
-  color: var(--shiki-dark) !important;
+/* ──────────────────────────────────────────────────────────────
+   Code blocks — rehype-pretty-code. title="…" → figcaption,
+   {1,5-7} → highlighted lines. Dual theme via --shiki-light /
+   --shiki-dark, swapped under [data-theme="dark"].
+   ────────────────────────────────────────────────────────────── */
+
+/* Title bar (title="…") */
+figcaption[data-rehype-pretty-code-title] {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-hairline);
+  border-bottom: none;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background-color: var(--color-canvas-soft);
+  color: var(--color-muted);
+}
+figure[data-rehype-pretty-code-figure]:has(figcaption) pre {
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+/* Code surface */
+.prose pre {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-lg);
+  padding: 16px 0;
+  overflow-x: auto;
+}
+.prose pre code {
+  display: grid; /* one row per line, enables full-width line highlight */
+  font-family: inherit;
+  background: none;
+}
+.prose pre code [data-line] {
+  padding-inline: 1rem;
+}
+
+/* Light theme colors (default). Background only on the pre — spans get
+   color only, so highlighted-line backgrounds aren't overridden. */
+pre[data-theme] {
+  background-color: var(--shiki-light-bg);
+}
+pre[data-theme],
+pre[data-theme] span {
+  color: var(--shiki-light);
+  font-style: var(--shiki-light-font-style);
+  font-weight: var(--shiki-light-font-weight);
+  text-decoration: var(--shiki-light-text-decoration);
+}
+
+/* Dark theme colors under [data-theme="dark"] */
+[data-theme="dark"] pre[data-theme] {
   background-color: var(--shiki-dark-bg) !important;
+}
+[data-theme="dark"] pre[data-theme],
+[data-theme="dark"] pre[data-theme] span {
+  color: var(--shiki-dark) !important;
   font-style: var(--shiki-dark-font-style) !important;
   font-weight: var(--shiki-dark-font-weight) !important;
   text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+/* Highlighted lines ({1,5-7}) */
+[data-highlighted-line] {
+  background-color: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  box-shadow: inset 2px 0 0 var(--color-primary);
 }
