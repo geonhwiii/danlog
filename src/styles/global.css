@@ -312,6 +312,15 @@ body {
   color: var(--color-ink);
   scroll-margin-top: 5rem;
 }
+.prose h4 {
+  margin-top: 1.4em;
+  margin-bottom: 0.3em;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-ink);
+  scroll-margin-top: 5rem;
+}
 .prose p {
   color: var(--color-body);
 }
@@ -366,25 +375,72 @@ body {
   border-top: 1px solid var(--color-hairline);
 }
 
+/* Tables — rounded, hairline-bordered, soft-canvas header row. */
+.prose table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+.prose th,
+.prose td {
+  padding: 0.625rem 0.875rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--color-hairline-soft);
+}
+.prose th + th,
+.prose td + td {
+  border-left: 1px solid var(--color-hairline-soft);
+}
+.prose thead th {
+  background-color: var(--color-canvas-soft);
+  color: var(--color-ink);
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-hairline);
+}
+.prose tbody tr:last-child td {
+  border-bottom: none;
+}
+.prose td {
+  color: var(--color-body);
+}
+
 /* ──────────────────────────────────────────────────────────────
    Code blocks — rehype-pretty-code. title="…" → figcaption,
    {1,5-7} → highlighted lines. Dual theme via --shiki-light /
    --shiki-dark, swapped under [data-theme="dark"].
    ────────────────────────────────────────────────────────────── */
 
-/* Title bar (title="…") */
-figcaption[data-rehype-pretty-code-title] {
+/* Header bar — the title (title="…") or, for untitled blocks, a header
+   synthesized client-side from the block language. Both share one look and
+   hold the copy button on the right. */
+figcaption[data-rehype-pretty-code-title],
+.code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  padding: 0.5rem 1rem;
+  padding: 0.375rem 0.5rem 0.375rem 1rem;
   border: 1px solid var(--color-hairline);
   border-bottom: none;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   background-color: var(--color-canvas-soft);
   color: var(--color-muted);
 }
-figure[data-rehype-pretty-code-figure]:has(figcaption) pre {
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+.code-header__lang {
+  text-transform: lowercase;
+}
+figure[data-rehype-pretty-code-figure]:has(figcaption) pre,
+figure[data-rehype-pretty-code-figure]:has(.code-header) pre {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 /* Code surface */
@@ -535,4 +591,47 @@ pre[data-theme] span {
   -webkit-line-clamp: 2;
   line-clamp: 2;
   overflow: hidden;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Code-block copy button (injected client-side). Lives on the right
+   of the header bar, so it never overlaps the code.
+   ────────────────────────────────────────────────────────────── */
+.code-copy {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.3125rem 0.5rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-xs);
+  background-color: transparent;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    border-color 0.15s,
+    background-color 0.15s;
+}
+.code-copy:hover {
+  color: var(--color-ink);
+  background-color: var(--color-surface-strong);
+}
+.code-copy.is-copied {
+  color: var(--color-primary);
+}
+.code-copy__icon {
+  display: inline-flex;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Post table of contents (desktop sidebar). Active section is
+   highlighted with an ink left-border + ink text via scroll-spy.
+   ────────────────────────────────────────────────────────────── */
+.post-toc__link.is-active {
+  color: var(--color-ink);
+  border-left-color: var(--color-ink);
 }
