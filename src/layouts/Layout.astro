@@ -55,19 +55,21 @@ const ogImageUrl = new URL("/og-image.png", Astro.site);
 
     <link rel="alternate" type="application/rss+xml" title="단로그" href="/rss.xml" />
     <ClientRouter />
-
-    {/* Set theme before paint to avoid a flash of the wrong palette. */}
     <script is:inline>
       (() => {
-        try {
-          const stored = localStorage.getItem("danlog-theme");
-          const theme =
-            stored ||
-            (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-          document.documentElement.dataset.theme = theme;
-        } catch {
-          document.documentElement.dataset.theme = "light";
-        }
+        const applyTheme = () => {
+          try {
+            const stored = localStorage.getItem("danlog-theme");
+            const theme =
+              stored ||
+              (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+            document.documentElement.dataset.theme = theme;
+          } catch {
+            document.documentElement.dataset.theme = "light";
+          }
+        };
+        applyTheme();
+        document.addEventListener("astro:after-swap", applyTheme);
       })();
     </script>
   </head>

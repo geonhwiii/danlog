@@ -21,18 +21,18 @@ React 공식 문서는 RSC를 이렇게 정의합니다.
 1. **번들링 전에** 렌더링된다 — 즉, 클라이언트 JS 번들에 컴포넌트 코드 자체가 포함되지 않습니다.
 2. **분리된 환경**에서 실행된다 — SSR 서버와도 다른, RSC 전용 환경입니다.
 
-```
+```md
 [3가지 환경 구분]
 
-  빌드/요청 시점            SSR 시점              클라이언트
-┌─────────────┐      ┌─────────────┐      ┌────────────┐
-│     RSC     │  →   │     SSR     │  →   │  Hydration │
-│ Environment │      │ Environment │      │            │
-└─────────────┘      └─────────────┘      └────────────┘
-      ↓                    ↓                    ↓
-  DB/파일 직접           RSC Payload +      Client Component
-   접근 가능           Client Component       만 hydrate
-                        → HTML 생성
+빌드/요청 시점 SSR 시점 클라이언트
+┌─────────────┐ ┌─────────────┐ ┌────────────┐
+│ RSC │ → │ SSR │ → │ Hydration │
+│ Environment │ │ Environment │ │ │
+└─────────────┘ └─────────────┘ └────────────┘
+↓ ↓ ↓
+DB/파일 직접 RSC Payload + Client Component
+접근 가능 Client Component 만 hydrate
+→ HTML 생성
 ```
 
 이 흐름은 [Next.js 공식 문서](https://nextjs.org/docs/app/getting-started/server-and-client-components#how-do-server-and-client-components-work-in-nextjs)에 명시되어 있습니다.
@@ -58,18 +58,18 @@ RSC는 자기만의 출력 포맷을 가지고 있는데, 이걸 **RSC Payload**
 
 RSC가 만들어내는 결과물은 HTML이 아닙니다. **RSC Payload**라는 직렬화된 표현입니다.
 
-```
+```md
 [RSC Payload의 구성]
 
 ① Server Component 렌더 결과
-   └─ JSX가 평가된 결과 (텍스트, props, 자식 등)
+└─ JSX가 평가된 결과 (텍스트, props, 자식 등)
 
 ② Client Component placeholder
-   └─ "여기에 <Counter>가 들어가야 함, JS는 /chunks/counter.js"
-   └─ 컴포넌트 자체가 아니라 "참조"만 들어감
+└─ "여기에 <Counter>가 들어가야 함, JS는 /chunks/counter.js"
+└─ 컴포넌트 자체가 아니라 "참조"만 들어감
 
 ③ Server → Client로 전달되는 props
-   └─ 직렬화 가능한 값만 (함수 ❌, Date ✅, Promise ✅)
+└─ 직렬화 가능한 값만 (함수 ❌, Date ✅, Promise ✅)
 ```
 
 브라우저는 이 Payload를 받아서 두 가지 일을 합니다.
@@ -162,33 +162,33 @@ export default function LikeButton({ likes }: { likes: number }) {
 
 이 페이지가 요청됐을 때의 흐름은 이렇습니다.
 
-```
+```md
 [App Router + RSC 흐름]
 
-브라우저  GET /post/123
-    ↓
-서버  RSC 렌더링 시작
-      ├─ Page (Server Component)
-      │   └─ await getPost(123)  ← DB 직접 호출
-      │
-      ├─ <h1>, <p>는 그대로 평가
-      └─ <LikeButton>은 placeholder + likes prop으로 직렬화
-    ↓
-서버  RSC Payload 생성
-      └─ "Page 트리 = [h1, p, ClientRef('LikeButton', {likes: 42})]"
-    ↓
-서버  RSC Payload + Client Component를 SSR로 합쳐 HTML 생성
-      └─ Suspense boundary 단위로 chunk 스트리밍 (2편 내용)
-    ↓
-브라우저  HTML 즉시 표시 (non-interactive)
-    ↓
-브라우저  Client Component JS 번들 로드
-          └─ LikeButton.js만 로드 (Page.tsx, getPost는 안 옴)
-    ↓
-브라우저  RSC Payload로 트리 재구성 + hydration
-          └─ Server Component 부분: HTML 그대로 인정
-          └─ Client Component 부분: hydrate
-    ↓
+브라우저 GET /post/123
+↓
+서버 RSC 렌더링 시작
+├─ Page (Server Component)
+│ └─ await getPost(123) ← DB 직접 호출
+│
+├─ <h1>, <p>는 그대로 평가
+└─ <LikeButton>은 placeholder + likes prop으로 직렬화
+↓
+서버 RSC Payload 생성
+└─ "Page 트리 = [h1, p, ClientRef('LikeButton', {likes: 42})]"
+↓
+서버 RSC Payload + Client Component를 SSR로 합쳐 HTML 생성
+└─ Suspense boundary 단위로 chunk 스트리밍 (2편 내용)
+↓
+브라우저 HTML 즉시 표시 (non-interactive)
+↓
+브라우저 Client Component JS 번들 로드
+└─ LikeButton.js만 로드 (Page.tsx, getPost는 안 옴)
+↓
+브라우저 RSC Payload로 트리 재구성 + hydration
+└─ Server Component 부분: HTML 그대로 인정
+└─ Client Component 부분: hydrate
+↓
 인터랙션 가능
 ```
 
@@ -200,16 +200,17 @@ export default function LikeButton({ likes }: { likes: number }) {
 
 ## 5. Server / Client / SSR의 관계 정리
 
-```
+```md
 [3가지 개념 비교]
 
                   Server Component   Client Component        SSR
                   ─────────────────  ─────────────────  ─────────────
-실행 시점              서버 (요청 시)       서버 + 브라우저      서버 (요청 시)
-JS 번들 포함              ❌                 ✅              (해당 없음)
-useState 사용            ❌                 ✅              (해당 없음)
-DB 직접 접근              ✅                 ❌              (해당 없음)
-출력                 RSC Payload           JSX                HTML
+
+실행 시점 서버 (요청 시) 서버 + 브라우저 서버 (요청 시)
+JS 번들 포함 ❌ ✅ (해당 없음)
+useState 사용 ❌ ✅ (해당 없음)
+DB 직접 접근 ✅ ❌ (해당 없음)
+출력 RSC Payload JSX HTML
 ```
 
 핵심 포인트:
@@ -264,17 +265,17 @@ export default function Page() {
 
 이 패턴이 동작하는 이유는, `<Cart />`가 **부모 Server Component(`Page`)에서 이미 렌더링되어 RSC Payload의 일부로 들어가기 때문**입니다. Client Component인 `Modal`은 그 결과를 prop으로 받을 뿐, `Cart`의 코드를 import하지 않습니다.
 
-```
+```md
 [children 패턴이 동작하는 이유]
 
 Page (Server)
-  ├─ <Cart /> 평가 → Server Component, RSC Payload에 포함
-  └─ <Modal>  → Client Component placeholder
-       └─ children prop = 위에서 평가된 <Cart /> 결과
+├─ <Cart /> 평가 → Server Component, RSC Payload에 포함
+└─ <Modal> → Client Component placeholder
+└─ children prop = 위에서 평가된 <Cart /> 결과
 
 브라우저:
-  Modal JS만 다운로드
-  Cart 결과는 RSC Payload에서 꺼내서 children 자리에 삽입
+Modal JS만 다운로드
+Cart 결과는 RSC Payload에서 꺼내서 children 자리에 삽입
 ```
 
 ---
@@ -377,29 +378,29 @@ function Comments({ commentsPromise }: { commentsPromise: Promise<Comment[]> }) 
 
 RSC는 다음과 같은 페인 포인트를 정조준하는 도구입니다.
 
-```
+```md
 [RSC가 잘 푸는 문제]
 
 ① 무거운 라이브러리를 클라이언트로 보내고 싶지 않다
-   예: marked, sanitize-html, syntax highlighter
-   → Server Component에서 렌더링하면 번들에 포함 안 됨
+예: marked, sanitize-html, syntax highlighter
+→ Server Component에서 렌더링하면 번들에 포함 안 됨
 
 ② API Route를 만들고 싶지 않다
-   예: 단순히 DB 조회 결과를 보여주는 페이지
-   → 컴포넌트 안에서 직접 await db.query()
+예: 단순히 DB 조회 결과를 보여주는 페이지
+→ 컴포넌트 안에서 직접 await db.query()
 
 ③ 클라이언트-서버 워터폴을 없애고 싶다
-   예: Note 데이터 fetch → render → Author fetch → render
-   → 서버에서 한 번에 처리, 클라이언트로는 결과만
+예: Note 데이터 fetch → render → Author fetch → render
+→ 서버에서 한 번에 처리, 클라이언트로는 결과만
 
 ④ Granular Loading: 인터랙티브한 부분의 JS만 내려보내고 싶다
-   예: 100개 위젯 중 5개만 'use client'
-   → 나머지 95개의 코드는 클라이언트로 안 감
+예: 100개 위젯 중 5개만 'use client'
+→ 나머지 95개의 코드는 클라이언트로 안 감
 ```
 
 반대로, RSC가 큰 이득을 주지 못하는 경우도 분명합니다.
 
-```
+```md
 [RSC가 큰 이득이 없는 경우]
 
 · 정적 마케팅 페이지 (이미 SSG로 충분)
@@ -416,30 +417,30 @@ RSC는 다음과 같은 페인 포인트를 정조준하는 도구입니다.
 
 ## 마치며
 
-```
+```md
 [3편 핵심 요약]
 
 RSC = 번들링 전, SSR과도 분리된 환경에서 미리 렌더링되는 컴포넌트
-       └─ 출력은 HTML이 아닌 RSC Payload (직렬화된 트리)
+└─ 출력은 HTML이 아닌 RSC Payload (직렬화된 트리)
 
-Server Component  →  기본값, JS 번들 X, async/await 가능, useState 불가
-Client Component  →  'use client', JS 번들 O, SSR도 됨, hydration 됨
-SSR               →  RSC Payload + Client Component → HTML
+Server Component → 기본값, JS 번들 X, async/await 가능, useState 불가
+Client Component → 'use client', JS 번들 O, SSR도 됨, hydration 됨
+SSR → RSC Payload + Client Component → HTML
 
 핵심 제약
-  · Client → Server import 불가 (children prop은 OK)
-  · Client에 넘기는 props는 직렬화 가능해야 함
-  · Context Provider는 Client Component로 만들어 layout에서 children으로 감싸기
+· Client → Server import 불가 (children prop은 OK)
+· Client에 넘기는 props는 직렬화 가능해야 함
+· Context Provider는 Client Component로 만들어 layout에서 children으로 감싸기
 
 Server Component를 위한 지시어는 없다
-  · 'use client' = 클라이언트 경계
-  · 'use server' = Server Function (Server Component 아님)
+· 'use client' = 클라이언트 경계
+· 'use server' = Server Function (Server Component 아님)
 
 언제 RSC를 도입할까
-  · 무거운 라이브러리를 서버에 두고 싶을 때
-  · API Route 없이 데이터 레이어 접근하고 싶을 때
-  · 클라이언트-서버 워터폴을 없애고 싶을 때
-  · Granular Loading으로 번들을 더 잘게 쪼개고 싶을 때
+· 무거운 라이브러리를 서버에 두고 싶을 때
+· API Route 없이 데이터 레이어 접근하고 싶을 때
+· 클라이언트-서버 워터폴을 없애고 싶을 때
+· Granular Loading으로 번들을 더 잘게 쪼개고 싶을 때
 ```
 
 1편의 동시성, 2편의 Streaming SSR과 Selective Hydration, 그리고 3편의 RSC까지 — 이 셋은 모두 [`<Suspense>`](https://ko.react.dev/reference/react/Suspense)와 Concurrent Mode 위에서 맞물려 돌아가는 하나의 그림입니다.

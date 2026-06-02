@@ -3,14 +3,25 @@ import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog", ({ data }) => !data.draft);
-  return posts.map((post) => ({
+  // Sorted newest → oldest so each post knows its chronological neighbours.
+  const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+  );
+  const n = posts.length;
+  return posts.map((post, i) => ({
     params: { id: post.id },
-    props: { post },
+    props: {
+      post,
+      // 다음 글 = 더 최신 글, 이전 글 = 더 오래된 글.
+      // 끝에서는 순환(wrap-around)하여 항상 양쪽이 채워지도록 한다.
+      // 글이 1개뿐이면 자기 자신을 가리키지 않도록 null.
+      newer: n > 1 ? posts[(i - 1 + n) % n] : null,
+      older: n > 1 ? posts[(i + 1) % n] : null,
+    },
   }));
 }
 
-const { post } = Astro.props;
+const { post, newer, older } = Astro.props;
 const { Content, headings } = await render(post);
 
 // Table of contents — section headings only (h2/h3).
@@ -52,12 +63,39 @@ const formattedDate = new Intl.DateTimeFormat("en-US", {
         <Content />
       </div>
 
-      <!-- Footer nav -->
-      <div class="mt-16 border-t border-hairline pt-8">
-        <a href="/blog" class="text-[0.875rem] font-medium text-ink transition-colors hover:text-primary">
-          ← 블로그 목록으로
-        </a>
-      </div>
+      <!-- Prev / next navigation -->
+      {
+        (newer || older) && (
+          <nav class="mt-16 border-t border-hairline pt-10" aria-label="이전 글과 다음 글">
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {older && (
+                <a
+                  href={`/blog/${older.id}`}
+                  class="group flex flex-col gap-1 rounded-sm border border-hairline p-5 transition-colors hover:border-hairline-strong"
+                >
+                  <span class="caption-uppercase font-jetbrains text-muted-soft">← 이전 글</span>
+                  <span class="title-sm mt-1 transition-colors group-hover:text-primary">{older.data.title}</span>
+                </a>
+              )}
+              {newer && (
+                <a
+                  href={`/blog/${newer.id}`}
+                  class="group flex flex-col gap-1 rounded-sm border border-hairline p-5 text-right transition-colors hover:border-hairline-strong"
+                >
+                  <span class="caption-uppercase font-jetbrains text-muted-soft">다음 글 →</span>
+                  <span class="title-sm mt-1 transition-colors group-hover:text-primary">{newer.data.title}</span>
+                </a>
+              )}
+            </div>
+
+            <div class="mt-8 flex justify-start">
+              <a href="/blog" class="text-[0.875rem] font-medium text-primary transition-opacity hover:opacity-70">
+                더 많은 글 보기 →
+              </a>
+            </div>
+          </nav>
+        )
+      }
 
       <!-- Table of contents (desktop only, to the right of the article) -->
       {
