@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import SearchProvider from "../components/react/SearchProvider.tsx";
 import { ClientRouter } from "astro:transitions";
 
 interface Props {
@@ -76,5 +77,6 @@ const ogImageUrl = new URL("/og-image.png", Astro.site);
       <slot />
     </main>
     <Footer />
+    <SearchProvider client:idle />
   </body>
 </html>

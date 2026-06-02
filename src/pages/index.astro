@@ -49,19 +49,23 @@ const editorFiles = editorPosts.map((post) => {
       개발과 관련된 코드, 생각 등의 기록을 공유하는 개인 블로그입니다.
     </p>
 
-    <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
-      <a
-        href="/blog"
-        class="inline-flex h-11 items-center rounded-md bg-ink px-6 text-[0.875rem] font-medium text-canvas transition-opacity hover:opacity-90"
+    <div class="mt-9 flex justify-center">
+      <button
+        type="button"
+        data-search-open
+        aria-label="검색 (⌘K)"
+        class="inline-flex h-13 w-full max-w-md items-center gap-3 rounded-lg border border-hairline-strong bg-surface-card px-4 text-muted transition-colors hover:border-ink"
       >
-        블로그 둘러보기
-      </a>
-      <a
-        href="/profile"
-        class="inline-flex h-11 items-center rounded-md border border-hairline-strong bg-surface-card px-6 text-[0.875rem] font-medium text-ink transition-colors hover:border-ink"
-      >
-        소개 보기 →
-      </a>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6"></circle>
+          <path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+        </svg>
+        <span class="body-md flex-1 text-left">글 검색…</span>
+        <kbd
+          class="code-type rounded border border-hairline px-1.5 py-1 text-[0.75rem] text-muted-soft"
+          >⌘K</kbd
+        >
+      </button>
     </div>
   </section>
 
