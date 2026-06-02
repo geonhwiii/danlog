@@ -17,7 +17,7 @@ const rehypePrettyCodeOptions = {
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://danlog.dev',
+  site: 'https://danlog.vercel.app',
   integrations: [react(), mdx()],
 
   markdown: {
