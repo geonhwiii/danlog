@@ -29,7 +29,10 @@ const editorFiles = editorPosts.map((post) => {
     id: post.id,
     name: `${post.id}.md`,
     href: `/blog/${post.id}`,
-    html: `${frontmatter}\n\n${highlightBody((post as { body?: string }).body ?? "")}`,
+    // Frontmatter renders statically; the body is what types in (after the
+    // closing `---`), so we keep the two halves separate.
+    frontmatterHtml: `${frontmatter}\n\n`,
+    bodyHtml: highlightBody((post as { body?: string }).body ?? ""),
   };
 });
 ---
@@ -110,7 +113,7 @@ const editorFiles = editorPosts.map((post) => {
           {
             editorFiles.map((f, i) => (
               <div data-file-pane={f.id} hidden={i !== 0}>
-                <pre class="code-type min-h-[240px] overflow-x-auto text-body"><code set:html={f.html} /></pre>
+                <pre class="code-type min-h-[240px] whitespace-pre-wrap wrap-break-word text-body"><code><Fragment set:html={f.frontmatterHtml} /><span data-typing-body set:html={f.bodyHtml} /></code></pre>
                 <div class="mt-5 border-t border-hairline pt-4">
                   <a
                     href={f.href}
@@ -168,7 +171,7 @@ const editorFiles = editorPosts.map((post) => {
 
       <!-- Bottom fade — cards dissolve into the page background. -->
       <div
-        class="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-canvas"
+        class="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-linear-to-b from-transparent to-canvas"
       >
       </div>
     </div>
@@ -290,6 +293,33 @@ const editorFiles = editorPosts.map((post) => {
       mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
     }
 
+    /* Blinking caret shown at the end of the body while it types in. */
+    [data-typing-body].is-typing::after {
+      content: "";
+      display: inline-block;
+      width: 0.5em;
+      height: 1.05em;
+      margin-left: 1px;
+      transform: translateY(0.18em);
+      background-color: var(--color-primary);
+      animation: hero-caret-blink 1s steps(1) infinite;
+    }
+    @keyframes hero-caret-blink {
+      0%,
+      50% {
+        opacity: 1;
+      }
+      50.01%,
+      100% {
+        opacity: 0;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      [data-typing-body].is-typing::after {
+        animation: none;
+      }
+    }
+
     [data-file-btn][data-active] {
       background-color: var(--color-surface-strong);
       color: var(--color-ink);
@@ -310,16 +340,108 @@ const editorFiles = editorPosts.map((post) => {
       const btns = root.querySelectorAll("[data-file-btn]");
       const panes = root.querySelectorAll("[data-file-pane]");
       const chrome = root.querySelector("[data-file-name]");
+
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // ── Typewriter for the editor body ────────────────────────────
+      // Reveal the body HTML grapheme-by-grapheme while preserving the syntax-
+      // highlight tags: snapshot every text node's full text once, then on each
+      // tick truncate the live text nodes to the first N characters.
+      const infoFor = (pane) => {
+        const body = pane.querySelector("[data-typing-body]");
+        if (!body) return null;
+        if (body.__typing) return body.__typing;
+        const nodes = [];
+        const walker = document.createTreeWalker(body, NodeFilter.SHOW_TEXT);
+        let n;
+        while ((n = walker.nextNode())) nodes.push({ node: n, text: n.textContent });
+        const fullText = nodes.map((it) => it.text).join("");
+        const info = { body, nodes, total: fullText.length, fullText, timer: null };
+        body.__typing = info;
+        return info;
+      };
+
+      const reveal = (info, count) => {
+        let remaining = count;
+        for (const { node, text } of info.nodes) {
+          if (remaining >= text.length) {
+            if (node.textContent !== text) node.textContent = text;
+            remaining -= text.length;
+          } else {
+            node.textContent = text.slice(0, Math.max(0, remaining));
+            remaining = 0;
+          }
+        }
+      };
+
+      const play = (pane) => {
+        const info = infoFor(pane);
+        if (!info) return;
+        clearTimeout(info.timer);
+        if (reduceMotion || info.total === 0) {
+          reveal(info, info.total);
+          info.body.classList.remove("is-typing");
+          return;
+        }
+        // One character per tick with a human-ish cadence: a base keystroke
+        // interval plus jitter, longer pauses after line breaks and at the end
+        // of sentences/clauses.
+        const BASE = 22; // ms per keystroke
+        const delayFor = (ch) => {
+          if (ch === "\n") return 200 + Math.random() * 120;
+          if (".!?。".includes(ch)) return 260 + Math.random() * 140;
+          if (",;:·)".includes(ch)) return 120 + Math.random() * 80;
+          if (ch === " ") return BASE + 30 + Math.random() * 40;
+          return BASE + Math.random() * 45;
+        };
+
+        let count = 0;
+        info.body.classList.add("is-typing");
+        reveal(info, 0);
+        const step = () => {
+          count += 1;
+          reveal(info, count);
+          if (count < info.total) {
+            const ch = info.fullText[count - 1] ?? "";
+            info.timer = setTimeout(step, delayFor(ch));
+          } else {
+            info.body.classList.remove("is-typing");
+          }
+        };
+        info.timer = setTimeout(step, 280);
+      };
+
       btns.forEach((btn) => {
         btn.addEventListener("click", () => {
           const id = btn.getAttribute("data-file-btn");
           btns.forEach((b) => b.toggleAttribute("data-active", b === btn));
           panes.forEach((p) => {
-            p.hidden = p.getAttribute("data-file-pane") !== id;
+            const active = p.getAttribute("data-file-pane") === id;
+            p.hidden = !active;
+            if (active) play(p);
           });
           if (chrome) chrome.textContent = "단로그 — " + btn.getAttribute("data-file-name");
         });
       });
+
+      // Type the initially-active pane once the editor scrolls into view.
+      const firstPane = panes[0];
+      if (firstPane) {
+        if ("IntersectionObserver" in window) {
+          const io = new IntersectionObserver(
+            (entries, obs) => {
+              if (entries.some((e) => e.isIntersecting)) {
+                obs.disconnect();
+                play(firstPane);
+              }
+            },
+            { threshold: 0.25 },
+          );
+          io.observe(root);
+        } else {
+          play(firstPane);
+        }
+      }
     })();
   </script>
 </Layout>
