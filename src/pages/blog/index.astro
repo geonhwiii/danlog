@@ -7,7 +7,9 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 );
 
 const fmt = (d: Date) =>
-  new Intl.DateTimeFormat("ko-KR", { year: "numeric", month: "long", day: "numeric" }).format(d);
+  new Intl.DateTimeFormat("en-US", { year: "numeric", month: "short", day: "numeric" })
+    .format(d)
+    .toUpperCase();
 ---
 
 <Layout title="블로그" description="단로그의 글 모음.">
@@ -27,11 +29,12 @@ const fmt = (d: Date) =>
               href={`/blog/${post.id}`}
               class="group flex flex-col rounded-lg border border-hairline bg-surface-card p-6 transition-colors hover:border-hairline-strong"
             >
-              <div class="flex flex-wrap items-center gap-2">
-                {post.data.tags.slice(0, 2).map((tag) => (
-                  <span class="caption-uppercase rounded-full bg-surface-strong px-2.5 py-1 text-ink">
-                    {tag}
-                  </span>
+              <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+                {post.data.tags.slice(0, 2).map((tag, i) => (
+                  <>
+                    {i > 0 && <span class="caption-uppercase font-jetbrains text-muted-soft">·</span>}
+                    <span class="caption-uppercase font-jetbrains text-primary">{tag}</span>
+                  </>
                 ))}
               </div>
               <h2 class="title-md mt-4 transition-colors group-hover:text-primary">
@@ -40,7 +43,7 @@ const fmt = (d: Date) =>
               <p class="body-sm mt-2 line-clamp-2 text-body">{post.data.description}</p>
               <time
                 datetime={post.data.date.toISOString()}
-                class="caption mt-4 text-muted"
+                class="caption font-jetbrains mt-4 text-muted"
               >
                 {fmt(post.data.date)}
               </time>

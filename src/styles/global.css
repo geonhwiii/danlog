@@ -55,6 +55,13 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'JetBrainsMono';
+  src: url('/fonts/JetBrainsMonoNerdFont-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* ──────────────────────────────────────────────────────────────
    Design tokens — values mirror DESIGN.md frontmatter exactly.
@@ -156,6 +163,8 @@
      fall through to Pretendard automatically. */
   --font-sans: 'Geist', 'Pretendard', system-ui, sans-serif;
   --font-mono: 'IoskeleyMono', 'Pretendard', ui-monospace, monospace;
+  /* JetBrains Mono — reserved for blog badges + date labels. */
+  --font-jetbrains: 'JetBrainsMono', 'Pretendard', ui-monospace, monospace;
 
   /* Border radius scale (DESIGN.md) */
   --radius-xs: 4px;
@@ -265,6 +274,9 @@ body {
   font-weight: 400;
   font-size: 0.8125rem; /* 13px */
   line-height: 1.5;
+}
+@utility font-jetbrains {
+  font-family: var(--font-jetbrains);
 }
 @utility nav-link-type {
   font-weight: 500;

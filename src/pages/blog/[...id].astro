@@ -16,11 +16,13 @@ const { Content, headings } = await render(post);
 // Table of contents — section headings only (h2/h3).
 const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
 
-const formattedDate = new Intl.DateTimeFormat("ko-KR", {
+const formattedDate = new Intl.DateTimeFormat("en-US", {
   year: "numeric",
-  month: "long",
+  month: "short",
   day: "numeric",
-}).format(post.data.date);
+})
+  .format(post.data.date)
+  .toUpperCase();
 ---
 
 <Layout title={post.data.title} description={post.data.description}>
@@ -28,18 +30,19 @@ const formattedDate = new Intl.DateTimeFormat("ko-KR", {
     <div class="relative mx-auto max-w-[680px]">
       <!-- Header -->
       <header class="mb-10">
-        <div class="flex flex-wrap items-center gap-2">
+        <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
           {
-            post.data.tags.map((tag) => (
-              <span class="caption-uppercase rounded-full bg-surface-strong px-2.5 py-1 text-ink">
-                {tag}
-              </span>
+            post.data.tags.map((tag, i) => (
+              <>
+                {i > 0 && <span class="caption-uppercase font-jetbrains text-muted-soft">·</span>}
+                <span class="caption-uppercase font-jetbrains text-primary">{tag}</span>
+              </>
             ))
           }
         </div>
         <h1 class="display-lg mt-5">{post.data.title}</h1>
         <p class="body-md mt-4 text-muted">{post.data.description}</p>
-        <div class="caption mt-5 flex items-center gap-2 text-muted">
+        <div class="caption font-jetbrains mt-5 flex items-center gap-2 text-muted">
           <time datetime={post.data.date.toISOString()}>{formattedDate}</time>
         </div>
       </header>
