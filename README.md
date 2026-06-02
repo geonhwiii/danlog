@@ -4,6 +4,10 @@
 
 🔗 https://danlog.vercel.app
 
+## Lighthouse
+
+<img src="docs/lighthouse-score.png" alt="Lighthouse 점수 — Performance 100, Accessibility 100, Best Practices 100, SEO 100" width="600" />
+
 ## 기술 스택
 
 - **Astro** — 정적 사이트 생성, 콘텐츠 컬렉션 기반 블로그

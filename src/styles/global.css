@@ -71,8 +71,8 @@
   --color-ink: #26251e;
   --color-body: #5a5852;
   --color-body-strong: #26251e;
-  --color-muted: #807d72;
-  --color-muted-soft: #a09c92;
+  --color-muted: #6a6759;
+  --color-muted-soft: #736f63;
 
   /* Timeline (AI-action signature — product UI only) */
   --color-timeline-thinking: #dfa88f;
@@ -108,7 +108,7 @@
   --color-body: #b6b2a6;
   --color-body-strong: #f3f1e9;
   --color-muted: #8d8a7d;
-  --color-muted-soft: #6a6759;
+  --color-muted-soft: #868376;
 
   color-scheme: dark;
 }
