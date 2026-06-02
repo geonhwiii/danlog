@@ -117,7 +117,7 @@ const editorFiles = editorPosts.map((post) => {
                 <div class="mt-5 border-t border-hairline pt-4">
                   <a
                     href={f.href}
-                    class="text-[0.8125rem] font-medium text-primary transition-colors hover:text-primary-active"
+                    class="text-[0.8125rem] font-medium text-primary-text transition-colors hover:text-primary-active"
                   >
                     이 글 전체 보기 →
                   </a>
@@ -185,7 +185,7 @@ const editorFiles = editorPosts.map((post) => {
           <h2 class="display-lg">최근 글</h2>
           <a
             href="/blog"
-            class="text-[0.9375rem] font-medium text-primary transition-colors hover:text-primary-active"
+            class="text-[0.9375rem] font-medium text-primary-text transition-colors hover:text-primary-active"
           >
             모든 글 보기 →
           </a>
@@ -202,11 +202,11 @@ const editorFiles = editorPosts.map((post) => {
                 {post.data.tags[0] && (
                   <>
                     <span class="text-muted-soft">·</span>
-                    <span class="text-primary">{post.data.tags[0]}</span>
+                    <span class="text-primary-text">{post.data.tags[0]}</span>
                   </>
                 )}
               </div>
-              <h3 class="title-sm mt-3 line-clamp-2 transition-colors group-hover:text-primary">
+              <h3 class="title-sm mt-3 line-clamp-2 transition-colors group-hover:text-primary-text">
                 {post.data.title}
               </h3>
               <p class="body-sm mt-2 line-clamp-3 text-body">{post.data.description}</p>

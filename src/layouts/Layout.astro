@@ -30,6 +30,7 @@ const ogImageUrl = new URL("/og-image.png", Astro.site);
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="generator" content={Astro.generator} />
 
+    {/* Preload the above-the-fold Latin display font (self-hosted). */}
     <link
       rel="preload"
       href="/fonts/Geist-Regular.woff2"
@@ -37,12 +38,14 @@ const ogImageUrl = new URL("/og-image.png", Astro.site);
       type="font/woff2"
       crossorigin
     />
+    {/* Pretendard (Korean) via jsDelivr dynamic subset — the CDN serves
+        unicode-range woff2 chunks, so only glyphs used on the page download
+        (~tens of KB instead of ~785KB per weight). Preconnect warms the TLS
+        handshake before the stylesheet requests its woff2 chunks. */}
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <link
-      rel="preload"
-      href="/fonts/Pretendard-Regular.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/pretendard-dynamic-subset.css"
     />
 
     <title>{fullTitle}</title>

@@ -28,27 +28,6 @@
   font-display: swap;
 }
 @font-face {
-  font-family: 'Pretendard';
-  src: url('/fonts/Pretendard-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Pretendard';
-  src: url('/fonts/Pretendard-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Pretendard';
-  src: url('/fonts/Pretendard-SemiBold.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
   font-family: 'IoskeleyMono';
   src: url('/fonts/IoskeleyMonoNerdFont-Regular.woff2') format('woff2');
   font-weight: 400;
@@ -73,6 +52,9 @@
   --color-primary: #f54e00;
   --color-primary-active: #d04200;
   --color-on-primary: #ffffff;
+  /* Darker orange reserved for orange TEXT on light surfaces (wordmark,
+     links, tags) — #f54e00 is only 3.28:1 on canvas, this is 4.85:1 (AA). */
+  --color-primary-text: #c43e00;
 
   /* Surfaces */
   --color-canvas: #f7f7f4;
@@ -118,6 +100,10 @@
   --color-hairline-soft: #1f1c12;
   --color-hairline-strong: #3a3424;
 
+  /* On the dark canvas the vivid orange already clears AA (5.33:1), so orange
+     text keeps the brand hue here. */
+  --color-primary-text: #f54e00;
+
   --color-ink: #f3f1e9;
   --color-body: #b6b2a6;
   --color-body-strong: #f3f1e9;
@@ -133,6 +119,7 @@
 @theme inline {
   --color-primary: var(--color-primary);
   --color-primary-active: var(--color-primary-active);
+  --color-primary-text: var(--color-primary-text);
   --color-on-primary: var(--color-on-primary);
 
   --color-canvas: var(--color-canvas);
@@ -361,7 +348,7 @@ body {
   font-weight: 600;
 }
 .prose a {
-  color: var(--color-primary);
+  color: var(--color-primary-text);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -387,7 +374,7 @@ body {
   color: var(--color-muted);
 }
 .prose blockquote a {
-  color: var(--color-primary);
+  color: var(--color-primary-text);
 }
 /* Inline code (block code is handled by rehype-pretty-code below). */
 .prose :not(pre) > code {
@@ -653,7 +640,7 @@ pre[data-theme] span {
   background-color: var(--color-surface-strong);
 }
 .code-copy.is-copied {
-  color: var(--color-primary);
+  color: var(--color-primary-text);
 }
 .code-copy__icon {
   display: inline-flex;

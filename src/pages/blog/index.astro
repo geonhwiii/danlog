@@ -52,11 +52,11 @@ const listPosts = posts.slice(5);
                   {hero.data.tags[0] && (
                     <>
                       <span class="caption-uppercase font-jetbrains text-muted-soft">·</span>
-                      <span class="caption-uppercase font-jetbrains text-primary">{hero.data.tags[0]}</span>
+                      <span class="caption-uppercase font-jetbrains text-primary-text">{hero.data.tags[0]}</span>
                     </>
                   )}
                 </div>
-                <h2 class="title-md mt-2 transition-colors group-hover:text-primary">{hero.data.title}</h2>
+                <h2 class="title-md mt-2 transition-colors group-hover:text-primary-text">{hero.data.title}</h2>
                 <p class="body-sm mt-1 line-clamp-2 text-body">{hero.data.description}</p>
               </div>
             </a>
@@ -83,11 +83,11 @@ const listPosts = posts.slice(5);
                       {post.data.tags[0] && (
                         <>
                           <span class="caption-uppercase font-jetbrains text-muted-soft">·</span>
-                          <span class="caption-uppercase font-jetbrains text-primary">{post.data.tags[0]}</span>
+                          <span class="caption-uppercase font-jetbrains text-primary-text">{post.data.tags[0]}</span>
                         </>
                       )}
                     </div>
-                    <h3 class="title-md mt-2 transition-colors group-hover:text-primary">{post.data.title}</h3>
+                    <h3 class="title-md mt-2 transition-colors group-hover:text-primary-text">{post.data.title}</h3>
                     <p class="body-sm mt-1 line-clamp-2 text-body">{post.data.description}</p>
                   </div>
                 </a>
@@ -109,11 +109,11 @@ const listPosts = posts.slice(5);
                       {post.data.tags[0] && (
                         <>
                           <span class="caption-uppercase font-jetbrains text-muted-soft">·</span>
-                          <span class="caption-uppercase font-jetbrains text-primary">{post.data.tags[0]}</span>
+                          <span class="caption-uppercase font-jetbrains text-primary-text">{post.data.tags[0]}</span>
                         </>
                       )}
                     </div>
-                    <h3 class="title-sm flex-1 transition-colors group-hover:text-primary">{post.data.title}</h3>
+                    <h3 class="title-sm flex-1 transition-colors group-hover:text-primary-text">{post.data.title}</h3>
                   </a>
                 </li>
               ))}

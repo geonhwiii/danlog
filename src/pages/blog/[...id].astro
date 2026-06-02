@@ -46,7 +46,7 @@ const formattedDate = new Intl.DateTimeFormat("en-US", {
             post.data.tags.map((tag, i) => (
               <>
                 {i > 0 && <span class="caption-uppercase font-jetbrains text-muted-soft">·</span>}
-                <span class="caption-uppercase font-jetbrains text-primary">{tag}</span>
+                <span class="caption-uppercase font-jetbrains text-primary-text">{tag}</span>
               </>
             ))
           }
@@ -74,7 +74,7 @@ const formattedDate = new Intl.DateTimeFormat("en-US", {
                   class="group flex flex-col gap-1 rounded-sm border border-hairline p-5 transition-colors hover:border-hairline-strong"
                 >
                   <span class="caption-uppercase font-jetbrains text-muted-soft">← 이전 글</span>
-                  <span class="title-sm mt-1 transition-colors group-hover:text-primary">{older.data.title}</span>
+                  <span class="title-sm mt-1 transition-colors group-hover:text-primary-text">{older.data.title}</span>
                 </a>
               )}
               {newer && (
@@ -83,13 +83,13 @@ const formattedDate = new Intl.DateTimeFormat("en-US", {
                   class="group flex flex-col gap-1 rounded-sm border border-hairline p-5 text-right transition-colors hover:border-hairline-strong"
                 >
                   <span class="caption-uppercase font-jetbrains text-muted-soft">다음 글 →</span>
-                  <span class="title-sm mt-1 transition-colors group-hover:text-primary">{newer.data.title}</span>
+                  <span class="title-sm mt-1 transition-colors group-hover:text-primary-text">{newer.data.title}</span>
                 </a>
               )}
             </div>
 
             <div class="mt-8 flex justify-start">
-              <a href="/blog" class="text-[0.875rem] font-medium text-primary transition-opacity hover:opacity-70">
+              <a href="/blog" class="text-[0.875rem] font-medium text-primary-text transition-opacity hover:opacity-70">
                 더 많은 글 보기 →
               </a>
             </div>
