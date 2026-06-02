@@ -2,7 +2,6 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import SearchProvider from "../components/react/SearchProvider.tsx";
 import { ClientRouter } from "astro:transitions";
 
 interface Props {
@@ -17,7 +16,6 @@ const {
 
 const fullTitle = title === "단로그" ? "단로그" : `${title} · 단로그`;
 
-// Absolute URLs for social/SEO meta (Astro.site = https://danlog.dev).
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const ogImageUrl = new URL("/og-image.png", Astro.site);
 ---
@@ -31,6 +29,21 @@ const ogImageUrl = new URL("/og-image.png", Astro.site);
     <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="generator" content={Astro.generator} />
+
+    <link
+      rel="preload"
+      href="/fonts/Geist-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/Pretendard-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
@@ -79,6 +92,28 @@ const ogImageUrl = new URL("/og-image.png", Astro.site);
       <slot />
     </main>
     <Footer />
-    <SearchProvider client:idle />
+
+    <script>
+      // React + overlay-kit + cmdk live behind this dynamic import, so they're
+      // only fetched the first time search is invoked — keeping them out of the
+      // initial page bundle entirely.
+      function openSearch() {
+        import("../components/react/mountSearch.ts").then((m) => m.openSearch());
+      }
+
+      function onKey(e: KeyboardEvent) {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+          e.preventDefault();
+          openSearch();
+        }
+      }
+      function onClick(e: MouseEvent) {
+        const target = e.target as Element | null;
+        if (target?.closest("[data-search-open]")) openSearch();
+      }
+
+      window.addEventListener("keydown", onKey);
+      document.addEventListener("click", onClick);
+    </script>
   </body>
 </html>
