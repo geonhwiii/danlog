@@ -29,35 +29,35 @@
 }
 @font-face {
   font-family: 'Pretendard';
-  src: url('/fonts/Pretendard-Regular.otf') format('opentype');
+  src: url('/fonts/Pretendard-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Pretendard';
-  src: url('/fonts/Pretendard-Medium.otf') format('opentype');
+  src: url('/fonts/Pretendard-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Pretendard';
-  src: url('/fonts/Pretendard-SemiBold.otf') format('opentype');
+  src: url('/fonts/Pretendard-SemiBold.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'IoskeleyMono';
-  src: url('/fonts/IoskeleyMonoNerdFont-Regular.ttf') format('truetype');
+  src: url('/fonts/IoskeleyMonoNerdFont-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'JetBrainsMono';
-  src: url('/fonts/JetBrainsMonoNerdFont-Regular.ttf') format('truetype');
+  src: url('/fonts/JetBrainsMonoNerdFont-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
