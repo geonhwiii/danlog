@@ -10,6 +10,12 @@ const fmt = (d: Date) =>
   new Intl.DateTimeFormat("en-US", { year: "numeric", month: "short", day: "numeric" })
     .format(d)
     .toUpperCase();
+
+// Newest post headlines a 1-big-card hero; the next four fill the scrollable
+// side column; everything older drops into a compact list.
+const hero = posts[0];
+const sidePosts = posts.slice(1, 5);
+const listPosts = posts.slice(5);
 ---
 
 <Layout title="블로그" description="단로그의 글 모음.">
@@ -23,34 +29,123 @@ const fmt = (d: Date) =>
       posts.length === 0 ? (
         <p class="body-md text-muted">아직 글이 없습니다.</p>
       ) : (
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => (
+        <>
+          {/* Featured: sticky big card on the left, naturally scrolling column on the right */}
+          <div class="grid grid-cols-1 items-start gap-4 lg:grid-cols-3">
             <a
-              href={`/blog/${post.id}`}
-              class="group flex flex-col rounded-lg border border-hairline bg-surface-card p-6 transition-colors hover:border-hairline-strong"
+              href={`/blog/${hero.id}`}
+              class="group flex flex-col overflow-hidden rounded-sm border border-hairline bg-surface-card transition-colors hover:border-hairline-strong lg:sticky lg:top-28 lg:col-span-2"
             >
-              <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
-                {post.data.tags.slice(0, 2).map((tag, i) => (
-                  <>
-                    {i > 0 && <span class="caption-uppercase font-jetbrains text-muted-soft">·</span>}
-                    <span class="caption-uppercase font-jetbrains text-primary">{tag}</span>
-                  </>
-                ))}
+              <div class="aspect-video w-full overflow-hidden bg-surface-strong">
+                {hero.data.image && (
+                  <img
+                    src={hero.data.image}
+                    alt=""
+                    loading="lazy"
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                )}
               </div>
-              <h2 class="title-md mt-4 transition-colors group-hover:text-primary">
-                {post.data.title}
-              </h2>
-              <p class="body-sm mt-2 line-clamp-2 text-body">{post.data.description}</p>
-              <time
-                datetime={post.data.date.toISOString()}
-                class="caption font-jetbrains mt-4 text-muted"
-              >
-                {fmt(post.data.date)}
-              </time>
+              <div class="flex flex-1 flex-col p-6">
+                <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+                  <span class="caption-uppercase font-jetbrains text-muted">{fmt(hero.data.date)}</span>
+                  {hero.data.tags[0] && (
+                    <>
+                      <span class="caption-uppercase font-jetbrains text-muted-soft">·</span>
+                      <span class="caption-uppercase font-jetbrains text-primary">{hero.data.tags[0]}</span>
+                    </>
+                  )}
+                </div>
+                <h2 class="title-md mt-2 transition-colors group-hover:text-primary">{hero.data.title}</h2>
+                <p class="body-sm mt-1 line-clamp-2 text-body">{hero.data.description}</p>
+              </div>
             </a>
-          ))}
-        </div>
+
+            <div class="flex flex-col gap-4">
+              {sidePosts.map((post) => (
+                <a
+                  href={`/blog/${post.id}`}
+                  class="group flex flex-col overflow-hidden rounded-sm border border-hairline bg-surface-card transition-colors hover:border-hairline-strong"
+                >
+                  <div class="aspect-video w-full overflow-hidden bg-surface-strong">
+                    {post.data.image && (
+                      <img
+                        src={post.data.image}
+                        alt=""
+                        loading="lazy"
+                        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                    )}
+                  </div>
+                  <div class="flex flex-1 flex-col p-6">
+                    <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+                      <span class="caption-uppercase font-jetbrains text-muted">{fmt(post.data.date)}</span>
+                      {post.data.tags[0] && (
+                        <>
+                          <span class="caption-uppercase font-jetbrains text-muted-soft">·</span>
+                          <span class="caption-uppercase font-jetbrains text-primary">{post.data.tags[0]}</span>
+                        </>
+                      )}
+                    </div>
+                    <h3 class="title-md mt-2 transition-colors group-hover:text-primary">{post.data.title}</h3>
+                    <p class="body-sm mt-1 line-clamp-2 text-body">{post.data.description}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* The rest as a compact list — first 10 shown, rest behind 더보기 */}
+          {listPosts.length > 0 && (
+            <ul class="mt-12 border-t border-hairline" data-post-list>
+              {listPosts.map((post, i) => (
+                <li class:list={[i >= 10 && "hidden"]} data-list-item>
+                  <a
+                    href={`/blog/${post.id}`}
+                    class="group flex flex-col gap-1 border-b border-hairline py-5 sm:flex-row sm:items-baseline sm:gap-6"
+                  >
+                    <div class="flex shrink-0 flex-wrap items-center gap-x-2 sm:w-56">
+                      <span class="caption-uppercase font-jetbrains text-muted">{fmt(post.data.date)}</span>
+                      {post.data.tags[0] && (
+                        <>
+                          <span class="caption-uppercase font-jetbrains text-muted-soft">·</span>
+                          <span class="caption-uppercase font-jetbrains text-primary">{post.data.tags[0]}</span>
+                        </>
+                      )}
+                    </div>
+                    <h3 class="title-sm flex-1 transition-colors group-hover:text-primary">{post.data.title}</h3>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+          {listPosts.length > 10 && (
+            <div class="mt-8 flex justify-center">
+              <button
+                type="button"
+                data-show-more
+                class="caption-uppercase font-jetbrains rounded-sm border border-hairline px-6 py-3 text-muted transition-colors hover:border-hairline-strong hover:text-ink"
+              >
+                더보기 ↓
+              </button>
+            </div>
+          )}
+        </>
       )
     }
   </section>
 </Layout>
+
+<script>
+  function initShowMore() {
+    const btn = document.querySelector<HTMLButtonElement>("[data-show-more]");
+    if (!btn) return;
+    btn.addEventListener("click", () => {
+      document
+        .querySelectorAll<HTMLElement>("[data-list-item].hidden")
+        .forEach((el) => el.classList.remove("hidden"));
+      btn.remove();
+    });
+  }
+  document.addEventListener("astro:page-load", initShowMore);
+</script>
