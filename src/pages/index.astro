@@ -1,8 +1,9 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
+import { contactEmail, linkedInUrl, skills, testimonials, topics } from "@shared/constants";
+import { escapeHtml, highlightBody, toYmd } from "@lib/markdown";
 
-// Latest posts — the "Recent highlights" equivalent of Cursor's landing.
 const posts = (await getCollection("blog", ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 4);
@@ -10,64 +11,17 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
 const fmt = (d: Date) =>
   new Intl.DateTimeFormat("ko-KR", { year: "numeric", month: "long", day: "numeric" }).format(d);
 
-// Quiet topics strip — the personal-blog answer to Cursor's logo wall.
-const topics = ["React", "TypeScript", "React Query", "Architecture", "Tooling", "Journal"];
-
-// Closing band — skills stacked as oversized display type that fades in from
-// near-invisible at the top to solid ink at the bottom (opacity ramp below).
-const skills = [
-  "React",
-  "TypeScript",
-  "Next.js",
-  "React Query",
-  "zod",
-  "tailwindcss",
-];
-
-// Contact targets for the closing band.
-const contactEmail = "gunw.dan@gmail.com";
-const linkedInUrl = "https://www.linkedin.com/in/gunwww";
-
-// Hero editor — the latest 5 posts rendered as real, clickable .md files.
 const editorPosts = (await getCollection("blog", ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 5);
-
-const esc = (s: string) =>
-  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-const ymd = (d: Date) => d.toISOString().slice(0, 10);
-
-// Light markdown highlight: headings → orange, everything else plain ink/body.
-const highlightBody = (raw: string) => {
-  const lines = (raw ?? "").replace(/\r/g, "").split("\n");
-  let start = 0;
-  while (
-    start < lines.length &&
-    (lines[start].trim() === "" || /^(import|export)\b/.test(lines[start].trim()))
-  )
-    start++;
-  const out: string[] = [];
-  for (let i = start; i < lines.length && out.length < 13; i++) {
-    const line = lines[i];
-    if (/^\s*!\[[^\]]*\]\([^)]*\)\s*$/.test(line)) continue; // drop standalone images
-    if (out.length === 0 && line.trim() === "") continue;
-    const e = esc(line);
-    out.push(
-      /^\s*#{1,6}\s/.test(line)
-        ? `<span style="color: var(--color-primary)">${e}</span>`
-        : e,
-    );
-  }
-  return out.join("\n");
-};
 
 const editorFiles = editorPosts.map((post) => {
   const tags = post.data.tags.length ? post.data.tags.join(", ") : "post";
   const frontmatter =
     `<span class="text-muted">---</span>\n` +
-    `title: <span class="text-success">"${esc(post.data.title)}"</span>\n` +
-    `date: <span class="text-success">${ymd(post.data.date)}</span>\n` +
-    `tags: [<span class="text-success">${esc(tags)}</span>]\n` +
+    `title: <span class="text-success">"${escapeHtml(post.data.title)}"</span>\n` +
+    `date: <span class="text-success">${toYmd(post.data.date)}</span>\n` +
+    `tags: [<span class="text-success">${escapeHtml(tags)}</span>]\n` +
     `<span class="text-muted">---</span>`;
   return {
     id: post.id,
@@ -76,47 +30,6 @@ const editorFiles = editorPosts.map((post) => {
     html: `${frontmatter}\n\n${highlightBody((post as { body?: string }).body ?? "")}`,
   };
 });
-
-// Colleague testimonials — Cursor's "The new way to build software" grid.
-// 예시 데이터입니다. 실제 동료들의 평가로 자유롭게 교체하세요.
-const testimonials = [
-  {
-    quote:
-      "열정적으로 업무에 대해 탐구하고 의견을 제안합니다. 항상 수용적인 태도로 상대방의 의견을 받아주고, 본인의 주장도 상대방을 생각하는 태도로 잘 전달할 줄 아는 장점이 있습니다.",
-    name: "찰리 브라운",
-    role: "프론트엔드 개발자 · 이전 동료",
-  },
-  {
-    quote:
-      "디스코드에 생각을 공유해 주시는 걸 보면, 지속적으로 본인만의 고민을 이어나가고 그걸 해결하고자 하는 의지가 뛰어난 분이라고 생각했어요.",
-    name: "마시",
-    role: "프론트엔드 교육 동료",
-  },
-  {
-    quote:
-      "책임감이 강해서 누구보다 업무 집중도가 뛰어납니다. 본인이 만든 작업물에 큰 애정이 있어서 지치지 않고 즐기며 일하는 모습을 보일 때가 있습니다.",
-    name: "스누피",
-    role: "백엔드 개발자 · 이전 동료",
-  },
-  {
-    quote:
-      "배운 것들을 금방 업무에 적용해보고, 그게 좋은 방법이든 안좋은 방법이든 스스로 근거를 세워보고, 피드백 받고, 반영하고 이런 과정들이 빠르게 진행되는 모습이 좋았던 것 같아요.",
-    name: "페퍼민트 패티",
-    role: "프론트엔드 교육 동료",
-  },
-  {
-    quote:
-      "꾸준히 최선을 다해 작성하신 코드를 들고 와서 깨지고, 그러고 나서 다시 들고와서 깨지고를 반복하시는 모습이 인상적이었습니다",
-    name: "슈로더",
-    role: "프론트엔드 교육 코치",
-  },
-  {
-    quote:
-      "본인의 감정 상태를 가감없이 드러내고 늘 질문을 이끌어가는 건휘님 보면서 많이 배웠습니다! 어디 가서도 좋은 리더가 되실 거에요",
-    name: "샐리 브라운",
-    role: "프론트엔드 교육 동료",
-  },
-];
 ---
 
 <Layout>
@@ -130,11 +43,10 @@ const testimonials = [
     </span>
 
     <h1 class="display-hero mx-auto mt-8 max-w-4xl text-balance">
-      천천히, 그러나 꾸준히<br class="hidden sm:block" /> 쌓아 올린 개발 기록
+      천천히, 꾸준히<br class="hidden sm:block" /> 기록하는 개발 블로그
     </h1>
     <p class="body-md mx-auto mt-6 max-w-xl text-balance text-body">
-      코드, 생각, 그리고 직접 만든 것들. 단로그는 조용히 기록을 쌓아 올리는
-      개인 블로그입니다.
+      개발과 관련된 코드, 생각 등의 기록을 공유하는 개인 블로그입니다.
     </p>
 
     <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
