@@ -20,7 +20,7 @@ Tailwind CSS v4는 기존 버전과는 다르게 `tailwind.config.js` 파일 없
 
 모노레포에서 `tailwindcss v4`를 사용할 때는 다음과 같은 구조로 디자인 시스템을 구성할 수 있습니다.
 
-```
+```bash
 packages/
 ├── tailwind-config/          # 공유 Tailwind 설정 패키지
 │   ├── package.json

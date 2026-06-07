@@ -171,10 +171,7 @@ corner-l-scoop
 - ✅ Chrome
 - ❌ Safari, Firefox
 
-```
-
 ## 참고
 
 - [MDN: corner-shape](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/corner-shape)
 - [GitHub: @toolwind/corner-shape](https://github.com/toolwind/corner-shape)
-```

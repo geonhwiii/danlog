@@ -32,7 +32,7 @@ FSD의 핵심은 각 레이어가 명확한 책임을 가지는 것입니다.
 
 여기서 modules는 widgets로 대체할 수 있습니다.
 
-```
+```md
 shared → entities → features → modules → pages → app
 ```
 
@@ -215,7 +215,7 @@ export const useMutationCreatePost = () => {
 
 일관성 있는 네이밍이 정말 중요했습니다.
 
-```
+```bash
 features/
   post/
     api/
