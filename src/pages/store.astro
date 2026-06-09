@@ -1,10 +1,127 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { projects } from "@shared/constants";
+
+// The first project is the "featured" pick — it spans the full row on large
+// screens with a bigger thumbnail, Steam-store style. The rest tile beneath it.
+const [featured, ...rest] = projects;
 ---
 
-<Layout title="스토어" description="단로그에서 만든 것들.">
+<Layout title="스토어" description="단로그에서 만든 작은 것들.">
   <section class="container-page pt-section pb-section">
-    <h1 class="display-lg">스토어</h1>
-    <p class="body-md mt-4 text-body">직접 만든 작은 것들을 여기 모을 예정입니다. 준비 중이에요.</p>
+    <header class="mb-10">
+      <h1 class="display-lg">스토어</h1>
+      <p class="body-md mt-3 text-body">카드를 누르면 새 탭에서 열려요.</p>
+    </header>
+
+    {
+      projects.length === 0 ? (
+        <p class="body-md text-muted">아직 공개한 것이 없습니다. 준비 중이에요.</p>
+      ) : (
+        <div class="flex flex-col gap-4">
+          {/* Featured — full-width, side-by-side image + copy on desktop. */}
+          <a
+            href={featured.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group grid grid-cols-1 overflow-hidden rounded-lg border border-hairline bg-surface-card transition-colors hover:border-hairline-strong lg:grid-cols-2"
+          >
+            <div class="relative aspect-video w-full overflow-hidden bg-surface-strong">
+              {featured.image ? (
+                <img
+                  src={featured.image}
+                  alt={featured.title}
+                  loading="eager"
+                  class="h-full w-full object-cover"
+                />
+              ) : (
+                <div class="grid h-full w-full place-items-center">
+                  <span class="code-type text-2xl text-muted-soft">{`<${featured.title} />`}</span>
+                </div>
+              )}
+            </div>
+
+            <div class="flex flex-col justify-center p-6 md:p-8">
+              <div class="caption-uppercase font-jetbrains flex items-center gap-x-2 text-muted">
+                <span class="text-primary-text">Featured</span>
+                {featured.year && (
+                  <>
+                    <span class="text-muted-soft">·</span>
+                    <span>{featured.year}</span>
+                  </>
+                )}
+              </div>
+              <h2 class="display-md mt-2 transition-colors group-hover:text-primary-text">
+                {featured.title}
+              </h2>
+              <p class="body-md mt-3 text-body">{featured.description}</p>
+
+              {featured.tags && featured.tags.length > 0 && (
+                <ul class="mt-5 flex flex-wrap gap-2">
+                  {featured.tags.map((tag) => (
+                    <li class="caption-uppercase font-jetbrains rounded-pill bg-surface-strong px-2.5 py-1 text-muted">
+                      {tag}
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              <span class="mt-6 inline-flex items-center gap-1.5 text-[0.9375rem] font-medium text-primary-text transition-colors group-hover:text-primary-active">
+                방문하기
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          {/* Grid — the rest, Steam-capsule cards 3-up on desktop. */}
+          {rest.length > 0 && (
+            <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {rest.map((p) => (
+                <li>
+                  <a
+                    href={p.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group flex h-full flex-col overflow-hidden rounded-lg border border-hairline bg-surface-card transition-colors hover:border-hairline-strong"
+                  >
+                    <div class="relative aspect-video w-full overflow-hidden bg-surface-strong">
+                      {p.image ? (
+                        <img
+                          src={p.image}
+                          alt={p.title}
+                          loading="lazy"
+                          class="h-full w-full object-cover"
+                        />
+                      ) : (
+                        <div class="grid h-full w-full place-items-center">
+                          <span class="code-type text-muted-soft">{`<${p.title} />`}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div class="flex flex-1 flex-col p-5">
+                      <h3 class="title-md transition-colors group-hover:text-primary-text">{p.title}</h3>
+                      <p class="body-sm mt-1.5 line-clamp-2 flex-1 text-body">{p.description}</p>
+
+                      {p.tags && p.tags.length > 0 && (
+                        <ul class="mt-4 flex flex-wrap gap-1.5">
+                          {p.tags.map((tag) => (
+                            <li class="caption-uppercase font-jetbrains rounded-pill bg-surface-strong px-2 py-0.5 text-muted">
+                              {tag}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )
+    }
   </section>
 </Layout>
