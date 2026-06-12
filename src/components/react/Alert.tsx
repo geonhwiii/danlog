@@ -1,13 +1,14 @@
 import { cn } from '@lib/utils';
-import { AlertCircleIcon } from 'lucide-react';
+import { AlertOctagonIcon, CircleQuestionMarkIcon, ShieldAlertIcon } from 'lucide-react';
 
 type Props = {
   className?: string;
   title: string;
   description: string;
+  type?: 'info' | 'warning' | 'error';
 };
 
-export default function Alert({ title, description, className }: Props) {
+export default function Alert({ title, description, className, type = 'warning' }: Props) {
   return (
     <div
       className={cn(
@@ -16,7 +17,9 @@ export default function Alert({ title, description, className }: Props) {
       )}
     >
       <div className="flex items-center gap-2">
-        <AlertCircleIcon className="size-4 shrink-0 text-muted" />
+        {type === 'warning' && <AlertOctagonIcon className="size-4 shrink-0 text-muted" />}
+        {type === 'error' && <ShieldAlertIcon className="size-4 shrink-0 text-muted" />}
+        {type === 'info' && <CircleQuestionMarkIcon className="size-4 shrink-0 text-muted" />}
         <span className="title-sm text-ink">{title}</span>
       </div>
       <p className="caption ml-6 text-body">{description}</p>
