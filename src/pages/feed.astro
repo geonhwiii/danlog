@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BskyFeed from "@components/react/BskyFeed";
+
+// 메인테이너들을 묶은 Bluesky Curation list.
+const LIST_URI = "at://did:plc:zfxssfolw7jna227fdcdjcrz/app.bsky.graph.list/3mo3ikbvyuk2j";
+---
+
+<Layout title="피드" description="내가 따라 읽는 개발 메인테이너들의 Bluesky 소식.">
+  <section class="container-page pt-section pb-section">
+    <header class="mb-10">
+      <span class="caption-uppercase text-muted">Bluesky</span>
+      <h1 class="display-lg mt-4">피드</h1>
+      <p class="body-md mt-3 max-w-2xl text-body">
+        내가 따라 읽는 개발 메인테이너들의 Bluesky 소식을 모아 봅니다. 글을 누르면 새 탭에서 원본이 열려요.
+      </p>
+    </header>
+
+    <BskyFeed client:visible listUri={LIST_URI} limit={30} class="max-w-2xl" />
+  </section>
+</Layout>
